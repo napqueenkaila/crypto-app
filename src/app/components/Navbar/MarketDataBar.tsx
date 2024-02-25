@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ReactSVG } from "react-svg";
+import Image from "next/image";
 import {
   DataBarContainer,
   DataDiv,
@@ -72,16 +72,16 @@ const MarketDataBar = () => {
     <StoreProvider>
       <DataBarContainer>
         <DataDiv>
-          <ReactSVG src="Flash.svg" />
+          <Image alt="" src="Flash.svg" width={25} height={25} />
           Coins {marketData.activeCryptos}
         </DataDiv>
 
         <DataDiv>
-          <ReactSVG src="ExchangeIcon.svg" />
+          <Image alt="" src="ExchangeIcon.svg" width={25} height={25} />
           Exchange {marketData.exchange}
         </DataDiv>
         <DataDiv>
-          <ReactSVG src="GreenArrow.svg" />
+          <Image alt="" src="GreenArrow.svg" width={25} height={25} />
           {compactFormatter.format(marketData.totalMarketCap)}
           {marketData.totalMarketCap}
         </DataDiv>
@@ -92,7 +92,7 @@ const MarketDataBar = () => {
           </PercentageBarDiv>
         </DataDiv>
         <DataDiv>
-          <ReactSVG src="BTCIcon.svg" />
+          <Image alt="" src="BTCIcon.svg" width={25} height={25} />
           {marketData.btcMarketCapPercent}%
           <PercentageBarDiv>
             <Percent
@@ -102,7 +102,7 @@ const MarketDataBar = () => {
           </PercentageBarDiv>
         </DataDiv>
         <DataDiv>
-          <ReactSVG src="ETHIcon.svg" />
+          <Image alt="" src="ETHIcon.svg" width={25} height={25} />
           {marketData.ethMarketCapPercent}%
           <PercentageBarDiv>
             <Percent

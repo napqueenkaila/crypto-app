@@ -1,4 +1,4 @@
-import { ReactSVG } from "react-svg";
+import Image from "next/image";
 import { NavContainer,LinkContainer, StyledLink, SearchInput, CurrencyDiv, StyledSelect, StyledModeBtn } from "@/app/styling/components/styled.navbar";
 
 type NavbarProps = {
@@ -17,21 +17,31 @@ const Navbar = (props: NavbarProps) => {
   };
   return (
     <NavContainer>
-      <ReactSVG src="NavLogoDark.svg" />
+      <Image alt="logo" src="NavLogoDark.svg" width={25} height={25} />
       <LinkContainer>
         <StyledLink href={"/"}>
-          <ReactSVG src="HomeIcon.svg" />
+          <Image alt="home button" src="HomeIcon.svg" width={25} height={25} />
           Home
         </StyledLink>
         <StyledLink href={"/portfolio"}>
-          <ReactSVG src="PortfolioIcon.svg" />
+          <Image
+            alt="portfolio button"
+            src="PortfolioIcon.svg"
+            width={25}
+            height={25}
+          />
           Portfolio
         </StyledLink>
       </LinkContainer>
       <SearchInput type="text" placeholder="&#128270;  Search..." />
       <CurrencyDiv>
         <label>
-          <ReactSVG src="DollarIcon.svg" />
+          <Image
+            alt="currency button"
+            src="DollarIcon.svg"
+            width={25}
+            height={25}
+          />
         </label>
         <StyledSelect>
           <option value={"USD"}>USD</option>
@@ -42,7 +52,12 @@ const Navbar = (props: NavbarProps) => {
         </StyledSelect>
       </CurrencyDiv>
       <StyledModeBtn onClick={toggleDisplayMode}>
-        <ReactSVG src="ModeIcon.svg" />
+        <Image
+          alt="dark mode button"
+          src="ModeIcon.svg"
+          width={25}
+          height={25}
+        />
       </StyledModeBtn>
     </NavContainer>
   );
