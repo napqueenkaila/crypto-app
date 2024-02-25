@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { NavContainer,LinkContainer, StyledLink, SearchInput, CurrencyDiv, StyledSelect, StyledModeBtn } from "@/app/styling/components/styled.navbar";
+import {
+  NavContainer,
+  LinkContainer,
+  StyledLink,
+  SearchInput,
+  CurrencyDiv,
+  StyledSelect,
+  StyledModeBtn,
+} from "@/app/styling/components/styled.navbar";
 
 type NavbarProps = {
   setDisplayMode: (val: string) => void;
@@ -15,6 +23,11 @@ const Navbar = (props: NavbarProps) => {
       props.setDisplayMode("dark");
     }
   };
+
+  const handleCurrencyChange = (e) => {
+    localStorage.setItem("selectedCurrency", e.target.value);
+  };
+
   return (
     <NavContainer>
       <Image alt="logo" src="NavLogoDark.svg" width={25} height={25} />
@@ -43,7 +56,7 @@ const Navbar = (props: NavbarProps) => {
             height={25}
           />
         </label>
-        <StyledSelect>
+        <StyledSelect onChange={handleCurrencyChange}>
           <option value={"USD"}>USD</option>
           <option value={"GBP"}>GBP</option>
           <option value={"EUR"}>EUR</option>
