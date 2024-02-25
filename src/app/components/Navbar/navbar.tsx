@@ -24,7 +24,7 @@ const Navbar = (props: NavbarProps) => {
     }
   };
 
-  const handleCurrencyChange = (e) => {
+  const handleCurrencyChange = (e: { target: { value: string; }; }) => {
     localStorage.setItem("selectedCurrency", e.target.value);
   };
 
