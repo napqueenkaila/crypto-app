@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
@@ -25,6 +26,7 @@
     "eslint-config-next": "14.1.0",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^9.0.11",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^7.0.2"
   }
 }
