@@ -6,6 +6,7 @@ import Providers from "./styling/theme/Providers";
 
 import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
+import StoreProvider from "./StoreProvider";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -24,11 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
-        <Providers displayMode={displayMode}>
-          <MarketDataBar />
-          <Navbar setDisplayMode={setDisplayMode} />
-          {children}
-        </Providers>
+        <StoreProvider>
+          <Providers displayMode={displayMode}>
+            <MarketDataBar />
+            <Navbar setDisplayMode={setDisplayMode} />
+            {children}
+          </Providers>
+        </StoreProvider>
       </body>
     </html>
   );
