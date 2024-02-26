@@ -27,6 +27,19 @@ const SearchInput = styled.input`
   color: ${({ theme }) => theme.navbar.inputTextColor};
   border: 1px #ffffff0d solid;
   padding-left: 10px;
+  position: relative;
+`;
+
+const DropdownDiv = styled.div`
+  position: absolute;
+  background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
+  color: ${({ theme }) => theme.navbar.inputTextColor};
+  border: red solid 1px;
+  width: 356px;
+`;
+
+const DropdownItem = styled.div`
+  padding: 10px 5px;
 `;
 
 const CurrencyDiv = styled.div`
@@ -54,4 +67,14 @@ const StyledModeBtn = styled.button`
   justify-content: center;
 `;
 
-export { NavContainer, LinkContainer, StyledLink, SearchInput, CurrencyDiv, StyledSelect, StyledModeBtn };
+export {
+  NavContainer,
+  LinkContainer,
+  StyledLink,
+  SearchInput,
+  DropdownDiv,
+  DropdownItem,
+  CurrencyDiv,
+  StyledSelect,
+  StyledModeBtn,
+};
