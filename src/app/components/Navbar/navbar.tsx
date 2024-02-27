@@ -4,16 +4,23 @@ import {
   LinkContainer,
   StyledLink,
   SearchInput,
+  DropdownDiv,
+  DropdownItem,
   CurrencyDiv,
   StyledSelect,
   StyledModeBtn,
 } from "@/app/styling/components/styled.navbar";
+import { useGetSearchDataQuery } from "@/app/redux/features/api";
+import { useState } from "react";
 
 type NavbarProps = {
   setDisplayMode: (val: string) => void;
 };
 
 const Navbar = (props: NavbarProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const { data } = useGetSearchDataQuery(searchQuery);
+  const dropdownCoins = data?.coins.slice(0, 5);
   const toggleDisplayMode = () => {
     if (localStorage.getItem("displayMode") === "dark") {
       localStorage.setItem("displayMode", "light");
@@ -28,6 +35,10 @@ const Navbar = (props: NavbarProps) => {
     localStorage.setItem("selectedCurrency", e.target.value);
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+  // console.log(dropdownCoins);
   return (
     <NavContainer>
       <Image alt="logo" src="NavLogoDark.svg" width={25} height={25} />
@@ -46,7 +57,18 @@ const Navbar = (props: NavbarProps) => {
           Portfolio
         </StyledLink>
       </LinkContainer>
-      <SearchInput type="text" placeholder="&#128270;  Search..." />
+      <div>
+        <SearchInput
+          type="text"
+          placeholder="&#128270;  Search..."
+          onChange={handleSearch}
+        />
+        <DropdownDiv>
+          {dropdownCoins?.map((coin) => {
+            return <DropdownItem key={coin.id}>{coin.name}</DropdownItem>;
+          })}
+        </DropdownDiv>
+      </div>
       <CurrencyDiv>
         <label>
           <Image

@@ -18,7 +18,10 @@ export const api = createApi({
         };
       },
     }),
+    getSearchData: builder.query({
+      query: (searchQuery) => `search?query=${searchQuery}`,
+    })
   }),
 });
 
-export const { useGetMarketDataQuery } = api;
+export const { useGetMarketDataQuery, useGetSearchDataQuery } = api;
