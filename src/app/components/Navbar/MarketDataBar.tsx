@@ -39,10 +39,10 @@ const MarketDataBar = () => {
       </DataDiv>
       <DataDiv>
         <Image alt="" src="GreenArrow.svg" width={25} height={25} />
-        {compactCurrencyFormatter.format(data?.totalMarketCap)}
+        {compactCurrencyFormatter.format(data?.totalMarketCap.usd)}
       </DataDiv>
       <DataDiv>
-        {compactCurrencyFormatter.format(data?.totalVolume)}
+        {compactCurrencyFormatter.format(data?.totalVolume.usd)}
         <PercentageBarDiv>
           <Percent color="#fff" $percent={100} />
         </PercentageBarDiv>
