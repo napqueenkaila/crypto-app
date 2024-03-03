@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { options } from "./options";
 import { formatDateLabel } from "./utils";
 
 ChartJS.register(
@@ -23,32 +24,6 @@ ChartJS.register(
   Filler,
   Legend
 );
-
-const options = {
-  scales: {
-    y: {
-      display: false,
-    },
-    x: {
-      display: true,
-      ticks: {
-        maxTicksLimit: 8,
-        color: "#9b9ab6",
-      },
-      grid: {
-        display: false,
-      },
-    },
-  },
-  elements: {
-    point: {
-      radius: 0,
-    },
-    line: {
-      tension: 1,
-    },
-  },
-};
 
 const BarChart = () => {
   const { data } = useGetBarChartDataQuery("");
