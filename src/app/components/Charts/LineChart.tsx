@@ -65,7 +65,7 @@ const LineChart = () => {
     ],
   };
 
-  return <div><Line options={options} data={lineChartData} /></div>;
+  return <Line options={options} data={lineChartData} />;
 };
 
 export default LineChart;
