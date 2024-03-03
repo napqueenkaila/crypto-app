@@ -9,11 +9,11 @@ interface MarketData {
 }
 
 interface LineData {
-  prices: number[];
+  prices: number[][];
 }
 
 interface BarData {
-  total_volumes: number[];
+  total_volumes: number[][];
 }
 
 export const api = createApi({
