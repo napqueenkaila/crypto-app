@@ -53,6 +53,9 @@ export const api = createApi({
         };
       },
     }),
+    getTableData: builder.query({
+      query: () => "coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1hr"
+    })
   }),
 });
 
@@ -60,5 +63,6 @@ export const {
   useGetMarketDataQuery,
   useGetSearchDataQuery,
   useGetLineChartDataQuery,
-  useGetBarChartDataQuery
+  useGetBarChartDataQuery,
+  useGetTableDataQuery
 } = api;
