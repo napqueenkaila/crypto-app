@@ -1,9 +1,9 @@
 const Table = () => {
 
   return (
-    <div>
-      <table>
-        <thead>
+    <table>
+      <thead>
+        <tr>
           <th>#</th>
           <th>Name</th>
           <th>Price</th>
@@ -13,10 +13,10 @@ const Table = () => {
           <th>24h Volume / Market Cap</th>
           <th>Circulating / Total Supply</th>
           <th>Last 7d</th>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   );
 };
 
