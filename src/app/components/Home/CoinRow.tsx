@@ -32,13 +32,13 @@ const PercentageBarDiv = styled.div`
 `;
 
 interface PercentProps {
-    $percent?: number | string;
+  $percent?: number | string;
 }
 
 const Percent = styled.div<PercentProps>`
-height: 100%;
-width: ${(props) => `${props.$percent}%`};
-background-color: black;
+  height: 100%;
+  width: ${(props) => `${props.$percent}%`};
+  background-color: black;
 `;
 
 const CoinRow = ({ coinData }: Props) => {
@@ -58,12 +58,6 @@ const CoinRow = ({ coinData }: Props) => {
     // sparkline,
   } = coinData;
 
-    const compactCurrencyFormatter = new Intl.NumberFormat("en-US", {
-      notation: "compact",
-      style: "currency",
-      currency: "USD",
-    });
-    console.log(totalSupply, name)
   return (
     <StyledRow>
       <td>{rank}</td>
@@ -84,8 +78,16 @@ const CoinRow = ({ coinData }: Props) => {
         <Image src="GreenArrow.svg" alt="" width={25} height={25} />
         {weekPriceChangePercent}
       </td>
-          <td><PercentageBarDiv><Percent $percent={(totalVolume/marketCap) * 100} /></PercentageBarDiv></td>
-      <td><PercentageBarDiv><Percent $percent={(circulatingSupply/totalSupply) * 100}/></PercentageBarDiv></td>
+      <td>
+        <PercentageBarDiv>
+          <Percent $percent={(totalVolume / marketCap) * 100} />
+        </PercentageBarDiv>
+      </td>
+      <td>
+        <PercentageBarDiv>
+          <Percent $percent={(circulatingSupply / totalSupply) * 100} />
+        </PercentageBarDiv>
+      </td>
       <td>Line chart here</td>
     </StyledRow>
   );
