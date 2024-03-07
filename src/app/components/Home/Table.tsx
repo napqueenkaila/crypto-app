@@ -1,5 +1,8 @@
-const Table = () => {
+import { useGetTableDataQuery } from "@/app/redux/features/api";
+import CoinRow from "./CoinRow";
 
+const Table = () => {
+  const { data } = useGetTableDataQuery("");
   return (
     <table>
       <thead>
@@ -15,7 +18,11 @@ const Table = () => {
           <th>Last 7d</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        {data?.map((coin) => (
+          <CoinRow key={coin.id} coinData={coin} />
+        ))}
+      </tbody>
     </table>
   );
 };
