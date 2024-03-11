@@ -54,6 +54,7 @@ const BarChart = () => {
     <Wrapper>
       <Legend chartType="bar" />
       <Bar
+        style={{ backgroundColor: "rgba(30, 25, 50, 1)", borderRadius: "12px" }}
         options={options}
         data={barChartData}
       />

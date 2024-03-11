@@ -55,7 +55,11 @@ const LineChart = () => {
   return (
     <Wrapper>
       <Legend chartType="line" />
-      <Line options={options} data={lineChartData} />
+      <Line
+        style={{ backgroundColor: "rgba(25, 25, 50, 1)", borderRadius: "12px", }}
+        options={options}
+        data={lineChartData}
+      />
     </Wrapper>
   );
 };
