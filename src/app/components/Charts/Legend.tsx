@@ -7,7 +7,7 @@ const LegendWrapper = styled.div`
 `;
 
 const Title = styled.p`
-  color: rgba(209, 209, 209, 1);
+  color: ${({ theme }) => theme.charts.legendTitleColor};
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -15,14 +15,14 @@ const Title = styled.p`
 `;
 
 const Value = styled.p`
-  color: rgba(255, 255, 255, 1);
+  color: ${({theme}) => theme.charts.legendValueColor};
   font-weight: 700;
   font-size: 28px;
   line-height: 28px;
 `;
 
 const Date = styled.p`
-  color: rgba(185, 185, 186, 1);
+  color: ${({ theme }) => theme.charts.legendDateColor};
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;

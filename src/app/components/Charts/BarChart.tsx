@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,7 +14,6 @@ import { options } from "./options";
 import { formatDateLabel } from "./utils";
 import { useGetBarChartDataQuery } from "@/app/redux/features/api";
 import Legend from "./Legend";
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -30,6 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const BarChart = () => {
+  const theme = useTheme();
   const { data } = useGetBarChartDataQuery("");
   const barChartLabels = data?.volume.map((el) => formatDateLabel(el[0]));
   const barChartData = {
@@ -50,12 +50,13 @@ const BarChart = () => {
       },
     ],
   };
+
   return (
     <Wrapper>
       <Legend chartType="bar" />
       <Bar
         style={{
-          backgroundColor: "rgba(30, 25, 50, 1)",
+          backgroundColor: theme.charts.barBackgroundColor,
           borderRadius: "12px",
           padding: "24px",
         }}

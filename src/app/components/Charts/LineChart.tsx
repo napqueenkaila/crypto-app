@@ -1,3 +1,4 @@
+import styled, { useTheme } from "styled-components";
 import { useGetLineChartDataQuery } from "@/app/redux/features/api";
 import {
   Chart as ChartJS,
@@ -12,7 +13,6 @@ import {
 import { formatDateLabel } from "./utils";
 import { options } from "./options";
 import { Line } from "react-chartjs-2";
-import styled from "styled-components";
 import Legend from "./Legend";
 
 ChartJS.register(
@@ -30,6 +30,7 @@ const Wrapper = styled.div`
 `;
 
 const LineChart = () => {
+  const theme = useTheme();
   const { data } = useGetLineChartDataQuery("");
   const lineChartLabels = data?.prices.map((el) => formatDateLabel(el[0]));
 
@@ -57,7 +58,7 @@ const LineChart = () => {
     <Wrapper>
       <Legend chartType="line" />
       <Line
-        style={{ backgroundColor: "rgba(25, 25, 50, 1)", borderRadius: "12px", padding: "24px" }}
+        style={{ backgroundColor: theme.charts.lineBackgroundColor, borderRadius: "12px", padding: "24px" }}
         options={options}
         data={lineChartData}
       />
