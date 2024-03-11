@@ -71,8 +71,17 @@ export const api = createApi({
       },
     }),
     getTableData: builder.query({
-      query: () =>
-        "coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en",
+      query: (page) =>
+        `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.push(...newItems);
+      },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg !== previousArg;
+      },
       transformResponse: (response: []) => {
         const tableData: any[] = response.map((coin: CoinData) => {
           return {
@@ -82,18 +91,21 @@ export const api = createApi({
             image: coin.image,
             rank: coin.market_cap_rank,
             currentPrice: coin.current_price.toFixed(0),
-            hourPriceChangePercent: coin.price_change_percentage_1h_in_currency.toFixed(2),
-            dayPriceChangePercent: coin.price_change_percentage_24h_in_currency.toFixed(2),
-            weekPriceChangePercent: coin.price_change_percentage_7d_in_currency.toFixed(2),
+            hourPriceChangePercent:
+              coin.price_change_percentage_1h_in_currency.toFixed(2),
+            dayPriceChangePercent:
+              coin.price_change_percentage_24h_in_currency.toFixed(2),
+            weekPriceChangePercent:
+              coin.price_change_percentage_7d_in_currency.toFixed(2),
             marketCap: coin.market_cap,
             totalVolume: coin.total_volume,
             circulatingSupply: coin.circulating_supply,
             totalSupply: coin.total_supply,
-            sparkline: coin.sparkline_in_7d
+            sparkline: coin.sparkline_in_7d,
           };
         });
         return tableData;
-      }
+      },
     }),
   }),
 });

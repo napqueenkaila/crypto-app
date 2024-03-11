@@ -1,8 +1,16 @@
 import { useGetTableDataQuery } from "@/app/redux/features/api";
 import CoinRow from "./CoinRow";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useState } from "react";
 
 const Table = () => {
-  const { data } = useGetTableDataQuery("");
+  const [page, setPage] = useState(1);
+  const { data } = useGetTableDataQuery(page);
+
+  const fetchMoreData = () => {
+    setPage((prev) => prev + 1);
+  };
+
   return (
     <table>
       <thead>
@@ -19,9 +27,16 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {data?.map((coin) => (
-          <CoinRow key={coin.id} coinData={coin} />
-        ))}
+        <InfiniteScroll
+          dataLength={data.length}
+          loader={<h4>Loading...</h4>}
+          hasMore={true}
+          next={fetchMoreData}
+        >
+          {data?.map((coin) => (
+            <CoinRow key={coin.id} coinData={coin} />
+          ))}
+        </InfiniteScroll>
       </tbody>
     </table>
   );
