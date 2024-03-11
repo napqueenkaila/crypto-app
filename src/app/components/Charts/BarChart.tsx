@@ -1,4 +1,5 @@
 import { useGetBarChartDataQuery } from "@/app/redux/features/api";
+import styled from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +26,10 @@ ChartJS.register(
   Legend
 );
 
+const Wrapper = styled.div`
+  width: 100%;
+`;
+
 const BarChart = () => {
   const { data } = useGetBarChartDataQuery("");
   const barChartLabels = data?.volume.map((el) => formatDateLabel(el[0]));
@@ -34,12 +39,23 @@ const BarChart = () => {
       {
         label: "",
         data: data?.volume.map((el) => el[1]),
-        borderColor: "#aaa",
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+          gradient.addColorStop(0, "rgba(157,98,217,1)");
+          gradient.addColorStop(1, "rgba(179,116,242,0.01)");
+          return gradient;
+        },
         barThickness: 2,
+        borderRadius: 4
       },
     ],
   };
-  return <Bar options={options} data={barChartData}/>;
+  return (
+    <Wrapper>
+      <Bar options={options} data={barChartData} />
+    </Wrapper>
+  );
 };
 
 export default BarChart;
