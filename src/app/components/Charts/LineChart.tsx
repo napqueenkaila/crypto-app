@@ -8,12 +8,12 @@ import {
   Title,
   Tooltip,
   Filler,
-  Legend,
 } from "chart.js";
 import { formatDateLabel } from "./utils";
 import { options } from "./options";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
+import Legend from "./Legend";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +23,6 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  Legend
 );
 
 const Wrapper = styled.div`
@@ -55,6 +54,7 @@ const LineChart = () => {
 
   return (
     <Wrapper>
+      <Legend chartType="line" />
       <Line options={options} data={lineChartData} />
     </Wrapper>
   );

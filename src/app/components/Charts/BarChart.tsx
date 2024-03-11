@@ -1,4 +1,3 @@
-import { useGetBarChartDataQuery } from "@/app/redux/features/api";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -9,11 +8,12 @@ import {
   Title,
   Tooltip,
   Filler,
-  Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { options } from "./options";
 import { formatDateLabel } from "./utils";
+import { useGetBarChartDataQuery } from "@/app/redux/features/api";
+import Legend from "./Legend";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +23,6 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  Legend
 );
 
 const Wrapper = styled.div`
@@ -53,7 +52,11 @@ const BarChart = () => {
   };
   return (
     <Wrapper>
-      <Bar options={options} data={barChartData} />
+      <Legend chartType="bar" />
+      <Bar
+        options={options}
+        data={barChartData}
+      />
     </Wrapper>
   );
 };
