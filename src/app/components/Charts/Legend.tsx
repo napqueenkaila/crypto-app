@@ -3,6 +3,7 @@ import styled from "styled-components";
 const LegendWrapper = styled.div`
   position: absolute;
   padding-left: 35px;
+  padding-top: 20px;
 `;
 
 const Title = styled.p`

@@ -22,7 +22,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Filler,
+  Filler
 );
 
 const Wrapper = styled.div`
@@ -46,7 +46,7 @@ const BarChart = () => {
           return gradient;
         },
         barThickness: 2,
-        borderRadius: 4
+        borderRadius: 4,
       },
     ],
   };
@@ -54,7 +54,11 @@ const BarChart = () => {
     <Wrapper>
       <Legend chartType="bar" />
       <Bar
-        style={{ backgroundColor: "rgba(30, 25, 50, 1)", borderRadius: "12px" }}
+        style={{
+          backgroundColor: "rgba(30, 25, 50, 1)",
+          borderRadius: "12px",
+          padding: "24px",
+        }}
         options={options}
         data={barChartData}
       />

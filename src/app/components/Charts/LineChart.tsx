@@ -22,11 +22,12 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Filler,
+  Filler
 );
 
 const Wrapper = styled.div`
-width: 100%`;
+  width: 100%;
+`;
 
 const LineChart = () => {
   const { data } = useGetLineChartDataQuery("");
@@ -56,7 +57,7 @@ const LineChart = () => {
     <Wrapper>
       <Legend chartType="line" />
       <Line
-        style={{ backgroundColor: "rgba(25, 25, 50, 1)", borderRadius: "12px", }}
+        style={{ backgroundColor: "rgba(25, 25, 50, 1)", borderRadius: "12px", padding: "24px" }}
         options={options}
         data={lineChartData}
       />
