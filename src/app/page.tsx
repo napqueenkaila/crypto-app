@@ -10,6 +10,7 @@ const HomeDiv = styled.div`
 const ChartDiv = styled.div`
   display: flex;
   justify-content: center;
+  gap: 20px;
 `;
 
 export default function Home() {
