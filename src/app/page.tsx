@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import LineChart from "./components/Charts/LineChart";
 import BarChart from "./components/Charts/BarChart";
+import Carousel from "./components/Carousel/Carousel";
 const HomeDiv = styled.div`
   margin: 50px auto;
   max-width: 80vw;
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <main>
       <HomeDiv>
+        <Carousel/>
         <ChartDiv>
           <LineChart />
           <BarChart />
