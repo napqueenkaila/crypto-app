@@ -12,16 +12,16 @@ interface CoinData {
   name: string;
   symbol: string;
   image: string;
-  rank: number;
-  currentPrice: number;
-  hourPriceChangePercent: number;
-  dayPriceChangePercent: number;
-  weekPriceChangePercent: number;
-  marketCap: number;
-  totalVolume: number;
-  circulatingSupply: number;
-  totalSupply: number;
-  sparkline: { prices: [] };
+  market_cap_rank: number;
+  current_price: number;
+  price_change_percentage_1h_in_currency: number;
+  price_change_percentage_24h_in_currency: number;
+  price_change_percentage_7d_in_currency: number;
+  market_cap: number;
+  total_volume: number;
+  circulating_supply: number;
+  total_supply: number;
+  sparkline_in_7d: { price: number[] };
 }
 
 const PercentageBarDiv = styled.div`
@@ -46,46 +46,46 @@ const CoinRow = ({ coinData }: Props) => {
     name,
     symbol,
     image,
-    rank,
-    currentPrice,
-    hourPriceChangePercent,
-    dayPriceChangePercent,
-    weekPriceChangePercent,
-    marketCap,
-    totalVolume,
-    circulatingSupply,
-    totalSupply,
-    // sparkline,
+    market_cap_rank,
+    current_price,
+    price_change_percentage_1h_in_currency,
+    price_change_percentage_24h_in_currency,
+    price_change_percentage_7d_in_currency,
+    market_cap,
+    total_volume,
+    circulating_supply,
+    total_supply,
+    // sparkline_in_7d,
   } = coinData;
 
   return (
     <StyledRow>
-      <td>{rank}</td>
+      <td>{market_cap_rank}</td>
       <td>
         <Image src={image} alt="" width={25} height={25} />
         {name} ({symbol.toUpperCase()})
       </td>
-      <td>${currentPrice}</td>
+      <td>${current_price}</td>
       <td>
         <Image src="GreenArrow.svg" alt="" width={25} height={25} />
-        {hourPriceChangePercent}
+        {price_change_percentage_1h_in_currency}
       </td>
       <td>
         <Image src="GreenArrow.svg" alt="" width={25} height={25} />
-        {dayPriceChangePercent}
+        {price_change_percentage_24h_in_currency}
       </td>
       <td>
         <Image src="GreenArrow.svg" alt="" width={25} height={25} />
-        {weekPriceChangePercent}
+        {price_change_percentage_7d_in_currency}
       </td>
       <td>
         <PercentageBarDiv>
-          <Percent $percent={(totalVolume / marketCap) * 100} />
+          <Percent $percent={(total_volume / market_cap) * 100} />
         </PercentageBarDiv>
       </td>
       <td>
         <PercentageBarDiv>
-          <Percent $percent={(circulatingSupply / totalSupply) * 100} />
+          <Percent $percent={(circulating_supply / total_supply) * 100} />
         </PercentageBarDiv>
       </td>
       <td>Line chart here</td>

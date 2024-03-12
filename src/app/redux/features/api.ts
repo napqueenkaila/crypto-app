@@ -83,25 +83,25 @@ export const api = createApi({
         return currentArg !== previousArg;
       },
       transformResponse: (response: []) => {
-        const tableData: any[] = response.map((coin: CoinData) => {
+        const tableData: CoinData[] = response.map((coin: CoinData) => {
           return {
             id: coin.id,
             name: coin.name,
             symbol: coin.symbol,
             image: coin.image,
-            rank: coin.market_cap_rank,
-            currentPrice: coin.current_price.toFixed(0),
-            hourPriceChangePercent:
-              coin.price_change_percentage_1h_in_currency.toFixed(2),
-            dayPriceChangePercent:
-              coin.price_change_percentage_24h_in_currency.toFixed(2),
-            weekPriceChangePercent:
-              coin.price_change_percentage_7d_in_currency.toFixed(2),
-            marketCap: coin.market_cap,
-            totalVolume: coin.total_volume,
-            circulatingSupply: coin.circulating_supply,
-            totalSupply: coin.total_supply,
-            sparkline: coin.sparkline_in_7d,
+            market_cap_rank: coin.market_cap_rank,
+            current_price: Number(coin.current_price.toFixed(0)),
+            price_change_percentage_1h_in_currency:
+              Number(coin.price_change_percentage_1h_in_currency.toFixed(2)),
+            price_change_percentage_24h_in_currency:
+              Number(coin.price_change_percentage_24h_in_currency.toFixed(2)),
+            price_change_percentage_7d_in_currency:
+              Number(coin.price_change_percentage_7d_in_currency.toFixed(2)),
+            market_cap: coin.market_cap,
+            total_volume: coin.total_volume,
+            circulating_supply: coin.circulating_supply,
+            total_supply: coin.total_supply,
+            sparkline_in_7d: coin.sparkline_in_7d,
           };
         });
         return tableData;
