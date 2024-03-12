@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import CoinCard from "./CoinCard";
 
-const CarouselContainer = styled.div``;
+const Wrapper = styled.div`
+  margin: 20px auto;
+`;
+
+const CarouselContainer = styled.div`
+display: flex;
+gap: 15px;
+overflow: auto;
+white-space: nowrap;
+`;
 
 const HeaderDiv = styled.div``;
 
@@ -13,14 +22,21 @@ const StyledText = styled.div`
 
 const Carousel = () => {
   return (
-    <div>
+    <Wrapper>
       <HeaderDiv>
         <StyledText>Select the currency to view statistics</StyledText>
       </HeaderDiv>
       <CarouselContainer>
         <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
       </CarouselContainer>
-    </div>
+    </Wrapper>
   );
 };
 
