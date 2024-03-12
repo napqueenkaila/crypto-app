@@ -47,12 +47,3 @@ const Table = () => {
 };
 
 export default Table;
-
-{
-  /* <InfiniteScroll
-            dataLength={data.length}
-            loader={<h4>Loading...</h4>}
-            hasMore={true}
-            next={fetchMoreData}
-          ></InfiniteScroll> */
-}
