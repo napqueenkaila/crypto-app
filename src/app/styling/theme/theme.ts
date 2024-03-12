@@ -14,6 +14,13 @@ export const darkTheme = {
     backgroundColor: "#1E1932",
     textColor: "#D1d1d1",
   },
+  charts: {
+    legendTitleColor: "#D1D1D1",
+    legendValueColor: "#FFFFFF",
+    legendDateColor: "#B9B9BA",
+    lineBackgroundColor: "#191932",
+    barBackgroundColor: "#1E1932",
+  },
 };
 
 export const lightTheme: ThemeType = {
@@ -29,6 +36,13 @@ export const lightTheme: ThemeType = {
   marketDataBar: {
     backgroundColor: "#353570",
     textColor: "#D1D1D1",
+  },
+  charts: {
+    legendTitleColor: "#191932",
+    legendValueColor: "#181825",
+    legendDateColor: "#424286",
+    lineBackgroundColor: "#ffffff",
+    barBackgroundColor: "#ffffff",
   },
 };
 

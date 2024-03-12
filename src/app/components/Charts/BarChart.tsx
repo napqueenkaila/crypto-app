@@ -1,4 +1,4 @@
-import { useGetBarChartDataQuery } from "@/app/redux/features/api";
+import styled, { useTheme } from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,12 +8,12 @@ import {
   Title,
   Tooltip,
   Filler,
-  Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { options } from "./options";
 import { formatDateLabel } from "./utils";
-
+import { useGetBarChartDataQuery } from "@/app/redux/features/api";
+import Legend from "./Legend";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,11 +21,15 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Filler,
-  Legend
+  Filler
 );
 
+const Wrapper = styled.div`
+  width: 100%;
+`;
+
 const BarChart = () => {
+  const theme = useTheme();
   const { data } = useGetBarChartDataQuery("");
   const barChartLabels = data?.volume.map((el) => formatDateLabel(el[0]));
   const barChartData = {
@@ -34,12 +38,33 @@ const BarChart = () => {
       {
         label: "",
         data: data?.volume.map((el) => el[1]),
-        borderColor: "#aaa",
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+          gradient.addColorStop(0, "rgba(157,98,217,1)");
+          gradient.addColorStop(1, "rgba(179,116,242,0.01)");
+          return gradient;
+        },
         barThickness: 2,
+        borderRadius: 4,
       },
     ],
   };
-  return <Bar options={options} data={barChartData}/>;
+
+  return (
+    <Wrapper>
+      <Legend chartType="bar" />
+      <Bar
+        style={{
+          backgroundColor: theme.charts.barBackgroundColor,
+          borderRadius: "12px",
+          padding: "24px",
+        }}
+        options={options}
+        data={barChartData}
+      />
+    </Wrapper>
+  );
 };
 
 export default BarChart;
