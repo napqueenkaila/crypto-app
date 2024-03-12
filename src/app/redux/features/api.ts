@@ -77,6 +77,7 @@ export const api = createApi({
         return endpointName;
       },
       merge: (currentCache, newItems) => {
+        // to do - set state to stop fetching coins if new items is empty
         currentCache.push(...newItems);
       },
       forceRefetch: ({ currentArg, previousArg }) => {
