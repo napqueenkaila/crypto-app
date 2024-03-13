@@ -16,6 +16,23 @@ interface BarData {
   total_volumes: number[][];
 }
 
+interface CoinData {
+  id: string;
+  name: string;
+  symbol: string;
+  image: string;
+  market_cap_rank: number;
+  current_price: number;
+  price_change_percentage_1h_in_currency: number;
+  price_change_percentage_24h_in_currency: number;
+  price_change_percentage_7d_in_currency: number;
+  market_cap: number;
+  total_volume: number;
+  circulating_supply: number;
+  total_supply: number;
+  sparkline_in_7d: { price: number[] };
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/" }),
   endpoints: (builder) => ({
@@ -53,6 +70,44 @@ export const api = createApi({
         };
       },
     }),
+    getTableData: builder.query({
+      query: (page) =>
+        `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        // to do - set state to stop fetching coins if new items is empty
+        currentCache.push(...newItems);
+      },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg !== previousArg;
+      },
+      transformResponse: (response: []) => {
+        const tableData: CoinData[] = response.map((coin: CoinData) => {
+          return {
+            id: coin.id,
+            name: coin.name,
+            symbol: coin.symbol,
+            image: coin.image,
+            market_cap_rank: coin.market_cap_rank,
+            current_price: Number(coin.current_price.toFixed(0)),
+            price_change_percentage_1h_in_currency:
+              Number(coin.price_change_percentage_1h_in_currency.toFixed(2)),
+            price_change_percentage_24h_in_currency:
+              Number(coin.price_change_percentage_24h_in_currency.toFixed(2)),
+            price_change_percentage_7d_in_currency:
+              Number(coin.price_change_percentage_7d_in_currency.toFixed(2)),
+            market_cap: coin.market_cap,
+            total_volume: coin.total_volume,
+            circulating_supply: coin.circulating_supply,
+            total_supply: coin.total_supply,
+            sparkline_in_7d: coin.sparkline_in_7d,
+          };
+        });
+        return tableData;
+      },
+    }),
   }),
 });
 
@@ -60,5 +115,6 @@ export const {
   useGetMarketDataQuery,
   useGetSearchDataQuery,
   useGetLineChartDataQuery,
-  useGetBarChartDataQuery
+  useGetBarChartDataQuery,
+  useGetTableDataQuery,
 } = api;
