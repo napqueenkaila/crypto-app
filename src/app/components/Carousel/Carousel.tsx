@@ -1,18 +1,13 @@
 import styled from "styled-components";
-import CoinCard from "./CoinCard";
+import CoinSlider from "./CoinSlider";
 
 const Wrapper = styled.div`
   margin: 20px auto;
 `;
 
-const CarouselContainer = styled.div`
-display: flex;
-gap: 15px;
-overflow: auto;
-white-space: nowrap;
+const HeaderDiv = styled.div`
+margin-bottom: 15px;
 `;
-
-const HeaderDiv = styled.div``;
 
 const StyledText = styled.div`
   color: #d1d1d1;
@@ -26,16 +21,7 @@ const Carousel = () => {
       <HeaderDiv>
         <StyledText>Select the currency to view statistics</StyledText>
       </HeaderDiv>
-      <CarouselContainer>
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-      </CarouselContainer>
+      <CoinSlider />
     </Wrapper>
   );
 };
