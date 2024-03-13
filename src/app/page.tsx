@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import LineChart from "./components/Charts/LineChart";
 import BarChart from "./components/Charts/BarChart";
-import Table from "./components/Home/Table";
+import Table from "./components/Table/Table";
 const HomeDiv = styled.div`
   margin: 50px auto;
   max-width: 80vw;
@@ -22,6 +22,7 @@ export default function Home() {
           <LineChart />
           <BarChart />
         </ChartDiv>
+        <Table/>
       </HomeDiv>
     </main>
   );
