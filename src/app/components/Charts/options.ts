@@ -1,4 +1,10 @@
 export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false
+    },
+  },
   scales: {
     y: {
       display: false,
@@ -6,7 +12,6 @@ export const options = {
     x: {
       display: true,
       ticks: {
-        maxTicksLimit: 8,
         color: "#9b9ab6",
       },
       grid: {
@@ -19,7 +24,7 @@ export const options = {
       radius: 0,
     },
     line: {
-      tension: 1,
+      tension: .5,
     },
   },
 };

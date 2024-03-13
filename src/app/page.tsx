@@ -5,18 +5,23 @@ import BarChart from "./components/Charts/BarChart";
 import Table from "./components/Home/Table";
 const HomeDiv = styled.div`
   margin: 50px auto;
-  width: 500px;
+  max-width: 80vw;
+`;
+
+const ChartDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 `;
 
 export default function Home() {
   return (
     <main>
       <HomeDiv>
-        <LineChart />
-        <BarChart />
-        <div>
-          <Table />
-        </div>
+        <ChartDiv>
+          <LineChart />
+          <BarChart />
+        </ChartDiv>
       </HomeDiv>
     </main>
   );
