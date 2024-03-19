@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "chart.js": "^4.4.1",
     "next": "14.1.0",
@@ -19,6 +20,8 @@
     "react-dom": "^18",
     "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^9.1.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
