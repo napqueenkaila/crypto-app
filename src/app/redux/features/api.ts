@@ -33,8 +33,19 @@ interface CoinData {
   sparkline_in_7d: { price: number[] };
 }
 
+const API_KEY = "CG-4LunbVbJni3EsSKP3QiVtvFu";
+
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://api.coingecko.com/api/v3/",
+    mode: "cors",
+    prepareHeaders(headers) {
+      headers.set("x-cg-demo-api-key", API_KEY);
+      headers.set("Access-Control-Allow-Origin", "*");
+      return headers;
+    },
+    credentials: "same-origin",
+  }),
   endpoints: (builder) => ({
     getMarketData: builder.query({
       query: () => "global",
@@ -92,12 +103,15 @@ export const api = createApi({
             image: coin.image,
             market_cap_rank: coin.market_cap_rank,
             current_price: Number(coin.current_price.toFixed(0)),
-            price_change_percentage_1h_in_currency:
-              Number(coin.price_change_percentage_1h_in_currency.toFixed(2)),
-            price_change_percentage_24h_in_currency:
-              Number(coin.price_change_percentage_24h_in_currency.toFixed(2)),
-            price_change_percentage_7d_in_currency:
-              Number(coin.price_change_percentage_7d_in_currency.toFixed(2)),
+            price_change_percentage_1h_in_currency: Number(
+              coin.price_change_percentage_1h_in_currency.toFixed(2)
+            ),
+            price_change_percentage_24h_in_currency: Number(
+              coin.price_change_percentage_24h_in_currency.toFixed(2)
+            ),
+            price_change_percentage_7d_in_currency: Number(
+              coin.price_change_percentage_7d_in_currency.toFixed(2)
+            ),
             market_cap: coin.market_cap,
             total_volume: coin.total_volume,
             circulating_supply: coin.circulating_supply,
