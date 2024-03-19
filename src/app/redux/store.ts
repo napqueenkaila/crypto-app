@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todosReducer from "./features/todo";
 import { api } from "./features/api";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      todos: todosReducer,
       [api.reducerPath]: api.reducer,
     },
     middleware: (getDefaultMiddleware) =>
