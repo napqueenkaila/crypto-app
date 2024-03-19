@@ -1,8 +1,10 @@
 "use client";
 import styled from "styled-components";
+import Carousel from "./components/Carousel/Carousel";
 import LineChart from "./components/Charts/LineChart";
 import BarChart from "./components/Charts/BarChart";
-import Carousel from "./components/Carousel/Carousel";
+import Table from "./components/Table/Table";
+
 const HomeDiv = styled.div`
   margin: 50px auto;
   max-width: 80vw;
@@ -23,6 +25,7 @@ export default function Home() {
           <LineChart />
           <BarChart />
         </ChartDiv>
+        <Table/>
       </HomeDiv>
     </main>
   );
