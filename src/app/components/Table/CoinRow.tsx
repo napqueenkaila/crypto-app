@@ -1,8 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const StyledRow = styled.tr``;
-
 interface Props {
   coinData: CoinData;
 }
@@ -23,6 +21,10 @@ interface CoinData {
   total_supply: number;
   sparkline_in_7d: { price: number[] };
 }
+
+const StyledRow = styled.tr`
+  padding: 20px;
+`;
 
 const PercentageBarDiv = styled.div`
   width: 200px;
@@ -62,20 +64,20 @@ const CoinRow = ({ coinData }: Props) => {
     <StyledRow>
       <td>{market_cap_rank}</td>
       <td>
-        <Image src={image} alt="" width={25} height={25} />
+        <Image src={image} alt="" width={32} height={32} />
         {name} ({symbol.toUpperCase()})
       </td>
       <td>${current_price}</td>
       <td>
-        <Image src="GreenArrow.svg" alt="" width={25} height={25} />
+        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
         {price_change_percentage_1h_in_currency}
       </td>
       <td>
-        <Image src="GreenArrow.svg" alt="" width={25} height={25} />
+        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
         {price_change_percentage_24h_in_currency}
       </td>
       <td>
-        <Image src="GreenArrow.svg" alt="" width={25} height={25} />
+        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
         {price_change_percentage_7d_in_currency}
       </td>
       <td>
