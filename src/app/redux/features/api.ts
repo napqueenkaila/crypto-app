@@ -33,15 +33,14 @@ interface CoinData {
   total_supply: number;
   sparkline_in_7d: { price: number[] };
 }
-
-const API_KEY = "CG-4LunbVbJni3EsSKP3QiVtvFu";
+const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.coingecko.com/api/v3/",
     mode: "cors",
     prepareHeaders(headers) {
-      headers.set("x-cg-demo-api-key", API_KEY);
+      headers.set("x-cg-demo-api-key", apiKey);
       headers.set("Access-Control-Allow-Origin", "*");
       return headers;
     },
