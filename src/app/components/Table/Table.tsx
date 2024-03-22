@@ -3,6 +3,7 @@ import CoinRow from "./CoinRow";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import styled from "styled-components";
+import { useAppSelector } from "@/app/redux/hooks";
 
 const StyledTable = styled.table`
 margin: 30px auto;
@@ -15,6 +16,7 @@ font-weight: 400;
 `;
 
 const Table = () => {
+  const hasMore = useAppSelector((state) => state.hasMore.hasMore);
   const [page, setPage] = useState(1);
   const { data } = useGetTableDataQuery(page);
 
@@ -28,8 +30,9 @@ const Table = () => {
         <InfiniteScroll
           dataLength={data.length}
           loader={<h4>Loading...</h4>}
-          hasMore={true}
+          hasMore={hasMore}
           next={fetchMoreData}
+          endMessage={<h4>No more coins.</h4>}
         >
           <StyledTable>
             <TableHead>
