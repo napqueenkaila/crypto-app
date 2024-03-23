@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import PercentBar from "./PercentBar";
+import SmallChart from "./SmallChart";
 
 interface Props {
   coinData: CoinData;
@@ -88,8 +89,8 @@ const CoinRow = ({ coinData }: Props) => {
 
       <PercentBar value1={total_volume} value2={market_cap} />
       <PercentBar value1={circulating_supply} value2={total_supply} />
-     
-      <div>Line chart here</div>
+      <SmallChart />
+      
     </StyledRow>
   );
 };
