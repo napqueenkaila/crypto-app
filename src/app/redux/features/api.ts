@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { toggleHasMore } from "./hasMoreSlice";
 
 interface MarketData {
   active_cryptocurrencies: number;
@@ -32,9 +33,19 @@ interface CoinData {
   total_supply: number;
   sparkline_in_7d: { price: number[] };
 }
+const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.coingecko.com/api/v3/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://api.coingecko.com/api/v3/",
+    mode: "cors",
+    prepareHeaders(headers) {
+      headers.set("x-cg-demo-api-key", apiKey);
+      headers.set("Access-Control-Allow-Origin", "*");
+      return headers;
+    },
+    credentials: "same-origin",
+  }),
   endpoints: (builder) => ({
     getMarketData: builder.query({
       query: () => "global",
@@ -73,11 +84,18 @@ export const api = createApi({
     getTableData: builder.query({
       query: (page) =>
         `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
+      async onQueryStarted(page, { dispatch, queryFulfilled }) {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { data } = await queryFulfilled;
+        } catch (err) {
+          dispatch(toggleHasMore());
+        }
+      },
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
       merge: (currentCache, newItems) => {
-        // to do - set state to stop fetching coins if new items is empty
         currentCache.push(...newItems);
       },
       forceRefetch: ({ currentArg, previousArg }) => {
@@ -92,12 +110,13 @@ export const api = createApi({
             image: coin.image,
             market_cap_rank: coin.market_cap_rank,
             current_price: Number(coin.current_price.toFixed(0)),
-            price_change_percentage_1h_in_currency:
-              Number(coin.price_change_percentage_1h_in_currency.toFixed(2)),
-            price_change_percentage_24h_in_currency:
-              Number(coin.price_change_percentage_24h_in_currency.toFixed(2)),
-            price_change_percentage_7d_in_currency:
-              Number(coin.price_change_percentage_7d_in_currency.toFixed(2)),
+            price_change_percentage_1h_in_currency: 
+              coin.price_change_percentage_1h_in_currency
+            ,
+            price_change_percentage_24h_in_currency: 
+              coin.price_change_percentage_24h_in_currency,
+            price_change_percentage_7d_in_currency: 
+              coin.price_change_percentage_7d_in_currency,
             market_cap: coin.market_cap,
             total_volume: coin.total_volume,
             circulating_supply: coin.circulating_supply,
