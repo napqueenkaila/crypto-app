@@ -5,14 +5,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useAppSelector } from "@/app/redux/hooks";
 
-const StyledTable = styled.table`
-margin: 30px auto;
+const TableHead = styled.div`
+  color: #d1d1d1;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
 `;
 
-const TableHead = styled.thead`
-color: #d1d1d1;
-font-size: 14px;
-font-weight: 400;
+const CoinsTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const Table = () => {
@@ -26,6 +29,17 @@ const Table = () => {
 
   return (
     <div>
+      <TableHead>
+        <div>#</div>
+        <div>Name</div>
+        <div>Price</div>
+        <div>1h%</div>
+        <div>24h%</div>
+        <div>7d%</div>
+        <div>24h Volume / Market Cap</div>
+        <div>Circulating / Total Supply</div>
+        <div>Last 7d</div>
+      </TableHead>
       {data ? (
         <InfiniteScroll
           dataLength={data.length}
@@ -34,26 +48,11 @@ const Table = () => {
           next={fetchMoreData}
           endMessage={<h4>No more coins.</h4>}
         >
-          <StyledTable>
-            <TableHead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>1h%</th>
-                <th>24h%</th>
-                <th>7d%</th>
-                <th>24h Volume / Market Cap</th>
-                <th>Circulating / Total Supply</th>
-                <th>Last 7d</th>
-              </tr>
-            </TableHead>
-            <tbody>
-              {data?.map((coin) => (
-                <CoinRow key={coin.id} coinData={coin} />
-              ))}
-            </tbody>
-          </StyledTable>
+          <CoinsTable>
+            {data?.map((coin) => (
+              <CoinRow key={coin.id} coinData={coin} />
+            ))}
+          </CoinsTable>
         </InfiniteScroll>
       ) : null}
     </div>
