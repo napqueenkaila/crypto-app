@@ -7,16 +7,11 @@ import {
   Percent,
 } from "@/app/styling/components/styled.marketDataBar";
 import { useGetMarketDataQuery } from "@/app/redux/features/api";
+import { compactCurrencyFormatter } from "@/app/utils";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized } =
     useGetMarketDataQuery("");
-
-  const compactCurrencyFormatter = new Intl.NumberFormat("en-US", {
-    notation: "compact",
-    style: "currency",
-    currency: "USD",
-  });
 
   if (isLoading || isUninitialized) {
     return <div>Loading...</div>;
