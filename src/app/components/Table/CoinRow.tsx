@@ -33,12 +33,31 @@ const StyledRow = styled.div`
   gap: 5px;
 `;
 
-const RankDiv = styled.div`
+const FlexGrowOne = styled.div`
+  flex-grow: 1;
+`;
+const FlexGrowTwo = styled.div`
+  flex-grow: 2;
+`;
+const FlexGrowThree = styled.div`
+  flex-grow: 3;
+`;
+const FlexGrowFour = styled.div`
+  flex-grow: 4;
+`;
+
+const RankDiv = styled(FlexGrowOne)`
   color: #d1d1d1;
   font-weight: 500;
 `;
 
-const PercentChangeDiv = styled.div`
+const NameDiv = styled(FlexGrowFour)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const PercentChangeDiv = styled(FlexGrowTwo)`
   color: #01f1e3;
   font-size: 14px;
   display: flex;
@@ -59,19 +78,19 @@ const CoinRow = ({ coinData }: Props) => {
     total_volume,
     circulating_supply,
     total_supply,
-    // sparkline_in_7d,
+    sparkline_in_7d,
   } = coinData;
 
   return (
     <StyledRow>
       <RankDiv>{market_cap_rank}</RankDiv>
-      <div>
+      <NameDiv>
         <Image src={image} alt="" width={32} height={32} />
-      </div>
-      <div>
-        {name} ({symbol.toUpperCase()})
-      </div>
-      <div>${current_price}</div>
+        <div>
+          {name} ({symbol.toUpperCase()})
+        </div>
+      </NameDiv>
+      <FlexGrowTwo>${current_price}</FlexGrowTwo>
       <PercentChangeDiv>
         <Image src="GreenArrow.svg" alt="" width={10} height={16} />
         {price_change_percentage_1h_in_currency.toFixed(2)}%
@@ -82,15 +101,13 @@ const CoinRow = ({ coinData }: Props) => {
       </PercentChangeDiv>
       <PercentChangeDiv>
         <Image src="GreenArrow.svg" alt="" width={10} height={16} />
-        <div>
         {price_change_percentage_7d_in_currency.toFixed(2)}%
-        </div>
       </PercentChangeDiv>
-
       <PercentBar value1={total_volume} value2={market_cap} />
       <PercentBar value1={circulating_supply} value2={total_supply} />
-      <SmallChart />
-      
+      <FlexGrowThree>
+        <SmallChart smallChartData={sparkline_in_7d.price} />
+      </FlexGrowThree>
     </StyledRow>
   );
 };
