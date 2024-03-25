@@ -9,7 +9,24 @@ const TableHead = styled.div`
   color: #d1d1d1;
   font-size: 14px;
   font-weight: 400;
+  padding: 16px 20px;
   display: flex;
+`;
+
+const FlexGrowOne = styled.div`
+  flex-grow: 1;
+`;
+
+const FlexGrowTwo = styled.div`
+  flex-grow: 2;
+`;
+
+const FlexGrowThree = styled.div`
+  flex-grow: 3;
+`;
+
+const FlexGrowFour = styled.div`
+  flex-grow: 4;
 `;
 
 const CoinsTable = styled.div`
@@ -30,15 +47,15 @@ const Table = () => {
   return (
     <div>
       <TableHead>
-        <div>#</div>
-        <div>Name</div>
-        <div>Price</div>
-        <div>1h%</div>
-        <div>24h%</div>
-        <div>7d%</div>
-        <div>24h Volume / Market Cap</div>
-        <div>Circulating / Total Supply</div>
-        <div>Last 7d</div>
+        <FlexGrowOne>#</FlexGrowOne>
+        <FlexGrowFour>Name</FlexGrowFour>
+        <FlexGrowTwo>Price</FlexGrowTwo>
+        <FlexGrowTwo>1h%</FlexGrowTwo>
+        <FlexGrowTwo>24h%</FlexGrowTwo>
+        <FlexGrowTwo>7d%</FlexGrowTwo>
+        <FlexGrowFour>24h Volume / Market Cap</FlexGrowFour>
+        <FlexGrowFour>Circulating / Total Supply</FlexGrowFour>
+        <FlexGrowThree>Last 7d</FlexGrowThree>
       </TableHead>
       {data ? (
         <InfiniteScroll
