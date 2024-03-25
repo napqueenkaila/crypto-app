@@ -2,6 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import PercentBar from "./PercentBar";
 import SmallChart from "./SmallChart";
+import PercentChange from "./PercentChange";
 
 interface Props {
   coinData: CoinData;
@@ -55,13 +56,10 @@ const NameDiv = styled(FlexGrowFour)`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
-
-const PercentChangeDiv = styled(FlexGrowTwo)`
-  color: #01f1e3;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
+  max-width: 200px;
+  .name {
+    overflow-wrap: break-word;
+  }
 `;
 
 const CoinRow = ({ coinData }: Props) => {
@@ -86,23 +84,14 @@ const CoinRow = ({ coinData }: Props) => {
       <RankDiv>{market_cap_rank}</RankDiv>
       <NameDiv>
         <Image src={image} alt="" width={32} height={32} />
-        <div>
+        <div className="name">
           {name} ({symbol.toUpperCase()})
         </div>
       </NameDiv>
       <FlexGrowTwo>${current_price}</FlexGrowTwo>
-      <PercentChangeDiv>
-        <Image src="GreenArrow.svg" alt="" width={10} height={16} />
-        {price_change_percentage_1h_in_currency.toFixed(2)}%
-      </PercentChangeDiv>
-      <PercentChangeDiv>
-        <Image src="GreenArrow.svg" alt="" width={10} height={16} />
-        {price_change_percentage_24h_in_currency.toFixed(2)}%
-      </PercentChangeDiv>
-      <PercentChangeDiv>
-        <Image src="GreenArrow.svg" alt="" width={10} height={16} />
-        {price_change_percentage_7d_in_currency.toFixed(2)}%
-      </PercentChangeDiv>
+      <PercentChange percentChange={price_change_percentage_1h_in_currency}/>
+      <PercentChange percentChange={price_change_percentage_24h_in_currency}/>
+      <PercentChange percentChange={price_change_percentage_7d_in_currency}/>
       <PercentBar value1={total_volume} value2={market_cap} />
       <PercentBar value1={circulating_supply} value2={total_supply} />
       <FlexGrowThree>
