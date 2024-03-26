@@ -1,29 +1,9 @@
-import { useGetTableDataQuery } from "@/app/redux/features/api";
-import CoinRow from "./CoinRow";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
-import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroll-component";
+import CoinRow from "./CoinRow";
+import { TableWrapper, TableHead, CoinsTable } from "@/app/styling/components/Table/styled.Table";
 import { useAppSelector } from "@/app/redux/hooks";
-
-const TableWrapper = styled.div`
-  max-width: 80vw;
-`;
-
-const TableHead = styled.div`
-  color: #d1d1d1;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 2fr) repeat(2, 4fr) 2fr;
-  place-items: start;
-`;
-
-const CoinsTable = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
+import { useGetTableDataQuery } from "@/app/redux/features/api";
 
 const Table = () => {
   const hasMore = useAppSelector((state) => state.hasMore.hasMore);

@@ -5,7 +5,7 @@ import {
   DataDiv,
   PercentageBarDiv,
   Percent,
-} from "@/app/styling/components/styled.marketDataBar";
+} from "@/app/styling/components/Navbar/styled.marketDataBar";
 import { useGetMarketDataQuery } from "@/app/redux/features/api";
 import { compactCurrencyFormatter } from "@/app/utils";
 

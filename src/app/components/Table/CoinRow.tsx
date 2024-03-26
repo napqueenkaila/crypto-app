@@ -1,8 +1,8 @@
 import Image from "next/image";
-import styled from "styled-components";
 import PercentBar from "./PercentBar";
 import SmallChart from "./SmallChart";
 import PercentChange from "./PercentChange";
+import { StyledRow, RankDiv, NameDiv } from "@/app/styling/components/Table/styled.CoinRow";
 
 interface Props {
   coinData: CoinData;
@@ -24,31 +24,6 @@ interface CoinData {
   total_supply: number;
   sparkline_in_7d: { price: number[] };
 }
-
-const StyledRow = styled.div`
-  padding: 20px;
-  background-color: #191925;
-  border-radius: 12px;
-  display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 2fr) repeat(2, 4fr) 2fr;
-  gap: 10px;
-  align-items: center;
-`;
-
-const RankDiv = styled.div`
-  color: #d1d1d1;
-  font-weight: 500;
-`;
-
-const NameDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  max-width: 200px;
-  .name {
-    overflow-wrap: break-word;
-  }
-`;
 
 const CoinRow = ({ coinData }: Props) => {
   const {

@@ -1,15 +1,5 @@
-import styled from "styled-components";
 import Image from "next/image";
-
-const FlexGrowTwo = styled.div`
-  flex-grow: 2;
-`;
-const PercentChangeDiv = styled(FlexGrowTwo)<{ $isPositive: boolean }>`
-  color: ${(props) => (props.$isPositive ? "#01F1E3" : "#FE2264")};
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-`;
+import { PercentChangeDiv } from "@/app/styling/components/Table/styled.PercentChange";
 
 interface Props {
     percentChange: number;
