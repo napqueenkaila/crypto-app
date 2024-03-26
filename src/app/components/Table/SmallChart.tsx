@@ -26,7 +26,6 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  max-width: 200px;
   height: 37px;
 `;
 

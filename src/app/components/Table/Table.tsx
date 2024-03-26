@@ -5,28 +5,18 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useAppSelector } from "@/app/redux/hooks";
 
+const TableWrapper = styled.div`
+  max-width: 80vw;
+`;
+
 const TableHead = styled.div`
   color: #d1d1d1;
   font-size: 14px;
   font-weight: 400;
-  padding: 16px 20px;
-  display: flex;
-`;
-
-const FlexGrowOne = styled.div`
-  flex-grow: 1;
-`;
-
-const FlexGrowTwo = styled.div`
-  flex-grow: 2;
-`;
-
-const FlexGrowThree = styled.div`
-  flex-grow: 3;
-`;
-
-const FlexGrowFour = styled.div`
-  flex-grow: 4;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(4, 2fr) repeat(2, 4fr) 2fr;
+  place-items: start;
 `;
 
 const CoinsTable = styled.div`
@@ -45,17 +35,17 @@ const Table = () => {
   };
 
   return (
-    <div>
+    <TableWrapper>
       <TableHead>
-        <FlexGrowOne>#</FlexGrowOne>
-        <FlexGrowFour>Name</FlexGrowFour>
-        <FlexGrowTwo>Price</FlexGrowTwo>
-        <FlexGrowTwo>1h%</FlexGrowTwo>
-        <FlexGrowTwo>24h%</FlexGrowTwo>
-        <FlexGrowTwo>7d%</FlexGrowTwo>
-        <FlexGrowFour>24h Volume / Market Cap</FlexGrowFour>
-        <FlexGrowFour>Circulating / Total Supply</FlexGrowFour>
-        <FlexGrowThree>Last 7d</FlexGrowThree>
+        <div>#</div>
+        <div>Name</div>
+        <div>Price</div>
+        <div>1h%</div>
+        <div>24h%</div>
+        <div>7d%</div>
+        <div>24h Volume / Market Cap</div>
+        <div>Circulating / Total Supply</div>
+        <div>Last 7d</div>
       </TableHead>
       {data ? (
         <InfiniteScroll
@@ -72,7 +62,7 @@ const Table = () => {
           </CoinsTable>
         </InfiniteScroll>
       ) : null}
-    </div>
+    </TableWrapper>
   );
 };
 

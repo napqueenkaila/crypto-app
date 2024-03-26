@@ -27,35 +27,23 @@ interface CoinData {
 
 const StyledRow = styled.div`
   padding: 20px;
-  display: flex;
-  align-items: center;
   background-color: #191925;
   border-radius: 12px;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(4, 2fr) repeat(2, 4fr) 2fr;
+  gap: 10px;
+  align-items: center;
 `;
 
-const FlexGrowOne = styled.div`
-  flex-grow: 1;
-`;
-const FlexGrowTwo = styled.div`
-  flex-grow: 2;
-`;
-const FlexGrowThree = styled.div`
-  flex-grow: 3;
-`;
-const FlexGrowFour = styled.div`
-  flex-grow: 4;
-`;
-
-const RankDiv = styled(FlexGrowOne)`
+const RankDiv = styled.div`
   color: #d1d1d1;
   font-weight: 500;
 `;
 
-const NameDiv = styled(FlexGrowFour)`
+const NameDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   max-width: 200px;
   .name {
     overflow-wrap: break-word;
@@ -88,15 +76,13 @@ const CoinRow = ({ coinData }: Props) => {
           {name} ({symbol.toUpperCase()})
         </div>
       </NameDiv>
-      <FlexGrowTwo>${current_price}</FlexGrowTwo>
-      <PercentChange percentChange={price_change_percentage_1h_in_currency}/>
-      <PercentChange percentChange={price_change_percentage_24h_in_currency}/>
-      <PercentChange percentChange={price_change_percentage_7d_in_currency}/>
+      <div>${current_price}</div>
+      <PercentChange percentChange={price_change_percentage_1h_in_currency} />
+      <PercentChange percentChange={price_change_percentage_24h_in_currency} />
+      <PercentChange percentChange={price_change_percentage_7d_in_currency} />
       <PercentBar value1={total_volume} value2={market_cap} />
       <PercentBar value1={circulating_supply} value2={total_supply} />
-      <FlexGrowThree>
-        <SmallChart smallChartData={sparkline_in_7d.price} />
-      </FlexGrowThree>
+      <SmallChart smallChartData={sparkline_in_7d.price} />
     </StyledRow>
   );
 };

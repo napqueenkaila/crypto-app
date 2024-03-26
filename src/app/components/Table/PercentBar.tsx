@@ -7,7 +7,7 @@ interface Props {
 }
 
 const PercentageBarDiv = styled.div`
-  width: 200px;
+  max-width: 200px;
   height: 6px;
   border-radius: 2px;
   background-color: #c2772180;
