@@ -17,7 +17,7 @@ interface BarData {
   total_volumes: number[][];
 }
 
-interface CoinData {
+interface TableData {
   id: string;
   name: string;
   symbol: string;
@@ -33,6 +33,28 @@ interface CoinData {
   total_supply: number;
   sparkline_in_7d: { price: number[] };
 }
+
+interface CoinData {
+  id: string;
+  name: string;
+  symbol: string;
+  image: { thumb: string };
+  links: { homepage: string[]; blockchain_site: string[] };
+  description: { en: string };
+  market_data: {
+    ath: {};
+    ath_date: {};
+    atl: {};
+    atl_date: {};
+    market_cap: {};
+    fully_diluted_valuation: {};
+    total_volume: {};
+    total_supply: {};
+    circulating_supply: {};
+    max_supply: {};
+  };
+}
+
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
@@ -102,7 +124,7 @@ export const api = createApi({
         return currentArg !== previousArg;
       },
       transformResponse: (response: []) => {
-        const tableData: CoinData[] = response.map((coin: CoinData) => {
+        const tableData: TableData[] = response.map((coin: TableData) => {
           return {
             id: coin.id,
             name: coin.name,
@@ -127,8 +149,19 @@ export const api = createApi({
       },
     }),
     getCoinData: builder.query({
-      query: () =>
-        "coins/shiba-inu?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false",
+      query: (coinId) =>
+        `coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`,
+      transformResponse: (response: CoinData) => {
+        return {
+          id: response.id,
+          name: response.name,
+          symbol: response.symbol,
+          image: response.image.thumb,
+          links: response.links,
+          description: response.description,
+          market_data: response.market_data,
+        };
+      },
     }),
   }),
 });
@@ -139,5 +172,5 @@ export const {
   useGetLineChartDataQuery,
   useGetBarChartDataQuery,
   useGetTableDataQuery,
-  useGetCoinDataQuery
+  useGetCoinDataQuery,
 } = api;
