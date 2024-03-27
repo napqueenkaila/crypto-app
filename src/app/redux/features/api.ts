@@ -110,12 +110,11 @@ export const api = createApi({
             image: coin.image,
             market_cap_rank: coin.market_cap_rank,
             current_price: Number(coin.current_price.toFixed(0)),
-            price_change_percentage_1h_in_currency: 
-              coin.price_change_percentage_1h_in_currency
-            ,
-            price_change_percentage_24h_in_currency: 
+            price_change_percentage_1h_in_currency:
+              coin.price_change_percentage_1h_in_currency,
+            price_change_percentage_24h_in_currency:
               coin.price_change_percentage_24h_in_currency,
-            price_change_percentage_7d_in_currency: 
+            price_change_percentage_7d_in_currency:
               coin.price_change_percentage_7d_in_currency,
             market_cap: coin.market_cap,
             total_volume: coin.total_volume,
@@ -127,6 +126,10 @@ export const api = createApi({
         return tableData;
       },
     }),
+    getCoinData: builder.query({
+      query: () =>
+        "coins/shiba-inu?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false",
+    }),
   }),
 });
 
@@ -136,4 +139,5 @@ export const {
   useGetLineChartDataQuery,
   useGetBarChartDataQuery,
   useGetTableDataQuery,
+  useGetCoinDataQuery
 } = api;
