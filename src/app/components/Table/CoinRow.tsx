@@ -1,5 +1,8 @@
 import Image from "next/image";
-import styled from "styled-components";
+import PercentBar from "./PercentBar";
+import SmallChart from "./SmallChart";
+import PercentChange from "./PercentChange";
+import { StyledRow, RankDiv, NameDiv } from "@/app/styling/components/Table/styled.CoinRow";
 
 interface Props {
   coinData: CoinData;
@@ -22,27 +25,6 @@ interface CoinData {
   sparkline_in_7d: { price: number[] };
 }
 
-const StyledRow = styled.tr`
-  padding: 20px;
-`;
-
-const PercentageBarDiv = styled.div`
-  width: 200px;
-  height: 6px;
-  border-radius: 2px;
-  background-color: #c2772180;
-`;
-
-interface PercentProps {
-  $percent?: number | string;
-}
-
-const Percent = styled.div<PercentProps>`
-  height: 100%;
-  width: ${(props) => `${props.$percent}%`};
-  background-color: black;
-`;
-
 const CoinRow = ({ coinData }: Props) => {
   const {
     name,
@@ -57,40 +39,25 @@ const CoinRow = ({ coinData }: Props) => {
     total_volume,
     circulating_supply,
     total_supply,
-    // sparkline_in_7d,
+    sparkline_in_7d,
   } = coinData;
 
   return (
     <StyledRow>
-      <td>{market_cap_rank}</td>
-      <td>
+      <RankDiv>{market_cap_rank}</RankDiv>
+      <NameDiv>
         <Image src={image} alt="" width={32} height={32} />
-        {name} ({symbol.toUpperCase()})
-      </td>
-      <td>${current_price}</td>
-      <td>
-        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
-        {price_change_percentage_1h_in_currency}
-      </td>
-      <td>
-        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
-        {price_change_percentage_24h_in_currency}
-      </td>
-      <td>
-        <Image src="GreenArrow.svg" alt="" width={16} height={16} />
-        {price_change_percentage_7d_in_currency}
-      </td>
-      <td>
-        <PercentageBarDiv>
-          <Percent $percent={(total_volume / market_cap) * 100} />
-        </PercentageBarDiv>
-      </td>
-      <td>
-        <PercentageBarDiv>
-          <Percent $percent={(circulating_supply / total_supply) * 100} />
-        </PercentageBarDiv>
-      </td>
-      <td>Line chart here</td>
+        <div className="name">
+          {name} ({symbol.toUpperCase()})
+        </div>
+      </NameDiv>
+      <div>${current_price}</div>
+      <PercentChange percentChange={price_change_percentage_1h_in_currency} />
+      <PercentChange percentChange={price_change_percentage_24h_in_currency} />
+      <PercentChange percentChange={price_change_percentage_7d_in_currency} />
+      <PercentBar value1={total_volume} value2={market_cap} />
+      <PercentBar value1={circulating_supply} value2={total_supply} />
+      <SmallChart smallChartData={sparkline_in_7d.price} />
     </StyledRow>
   );
 };

@@ -9,7 +9,7 @@ import {
   CurrencyDiv,
   StyledSelect,
   StyledModeBtn,
-} from "@/app/styling/components/styled.navbar";
+} from "@/app/styling/components/Navbar/styled.navbar";
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { SetStateAction, useState } from "react";
 

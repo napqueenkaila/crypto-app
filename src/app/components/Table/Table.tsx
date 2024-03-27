@@ -1,19 +1,9 @@
-import { useGetTableDataQuery } from "@/app/redux/features/api";
-import CoinRow from "./CoinRow";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
-import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroll-component";
+import CoinRow from "./CoinRow";
+import { TableWrapper, TableHead, CoinsTable } from "@/app/styling/components/Table/styled.Table";
 import { useAppSelector } from "@/app/redux/hooks";
-
-const StyledTable = styled.table`
-margin: 30px auto;
-`;
-
-const TableHead = styled.thead`
-color: #d1d1d1;
-font-size: 14px;
-font-weight: 400;
-`;
+import { useGetTableDataQuery } from "@/app/redux/features/api";
 
 const Table = () => {
   const hasMore = useAppSelector((state) => state.hasMore.hasMore);
@@ -25,7 +15,18 @@ const Table = () => {
   };
 
   return (
-    <div>
+    <TableWrapper>
+      <TableHead>
+        <div>#</div>
+        <div>Name</div>
+        <div>Price</div>
+        <div>1h%</div>
+        <div>24h%</div>
+        <div>7d%</div>
+        <div>24h Volume / Market Cap</div>
+        <div>Circulating / Total Supply</div>
+        <div>Last 7d</div>
+      </TableHead>
       {data ? (
         <InfiniteScroll
           dataLength={data.length}
@@ -34,29 +35,14 @@ const Table = () => {
           next={fetchMoreData}
           endMessage={<h4>No more coins.</h4>}
         >
-          <StyledTable>
-            <TableHead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>1h%</th>
-                <th>24h%</th>
-                <th>7d%</th>
-                <th>24h Volume / Market Cap</th>
-                <th>Circulating / Total Supply</th>
-                <th>Last 7d</th>
-              </tr>
-            </TableHead>
-            <tbody>
-              {data?.map((coin) => (
-                <CoinRow key={coin.id} coinData={coin} />
-              ))}
-            </tbody>
-          </StyledTable>
+          <CoinsTable>
+            {data?.map((coin) => (
+              <CoinRow key={coin.id} coinData={coin} />
+            ))}
+          </CoinsTable>
         </InfiniteScroll>
       ) : null}
-    </div>
+    </TableWrapper>
   );
 };
 
