@@ -5,10 +5,10 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectDarkMode } from "@/app/redux/features/darkModeSlice";
 
 const Providers = ({children}: {children: React.ReactNode}) => {
-  const darkMode = useAppSelector(selectDarkMode);
+  const {darkMode} = useAppSelector(selectDarkMode);
 
   return (
-    <ThemeProvider theme={!darkMode ? lightTheme : darkTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       {children}
     </ThemeProvider>
