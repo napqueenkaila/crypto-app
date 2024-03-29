@@ -12,27 +12,19 @@ import {
 } from "@/app/styling/components/styled.navbar";
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { SetStateAction, useState } from "react";
-import { useAppDispatch } from "@/app/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setCurrency } from "@/app/redux/features/currencySlice";
+import { selectDarkMode, toggle } from "@/app/redux/features/darkModeSlice";
 
-type NavbarProps = {
-  setDisplayMode: (val: string) => void;
-};
-
-const Navbar = (props: NavbarProps) => {
+const Navbar = () => {
   const dispatch = useAppDispatch();
+  const darkMode = useAppSelector(selectDarkMode);
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
 
-  const toggleDisplayMode = () => {
-    if (localStorage.getItem("displayMode") === "dark") {
-      localStorage.setItem("displayMode", "light");
-      props.setDisplayMode("light");
-    } else {
-      localStorage.setItem("displayMode", "dark");
-      props.setDisplayMode("dark");
-    }
+  const toggleDarkMode = () => {
+    dispatch(toggle(darkMode));
   };
 
   const handleCurrencyChange = (e: { target: { value: string } }) => {
@@ -90,7 +82,7 @@ const Navbar = (props: NavbarProps) => {
           <option value={"ETH"}>ETH</option>
         </StyledSelect>
       </CurrencyDiv>
-      <StyledModeBtn onClick={toggleDisplayMode}>
+      <StyledModeBtn onClick={toggleDarkMode}>
         <Image
           alt="dark mode button"
           src="ModeIcon.svg"
