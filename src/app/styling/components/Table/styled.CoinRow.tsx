@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledRow = styled.div`
@@ -15,11 +16,13 @@ export const RankDiv = styled.div`
   font-weight: 500;
 `;
 
-export const NameDiv = styled.div`
+export const NameDiv = styled(Link)`
   display: flex;
   align-items: center;
   gap: 15px;
   max-width: 200px;
+  color: #FFFFFF;
+  text-decoration: none;
   .name {
     overflow-wrap: break-word;
   }
