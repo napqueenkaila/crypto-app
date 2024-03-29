@@ -27,6 +27,7 @@ interface CoinData {
 
 const CoinRow = ({ coinData }: Props) => {
   const {
+    id,
     name,
     symbol,
     image,
@@ -45,7 +46,7 @@ const CoinRow = ({ coinData }: Props) => {
   return (
     <StyledRow>
       <RankDiv>{market_cap_rank}</RankDiv>
-      <NameDiv>
+      <NameDiv href={`/coin/${id}`}>
         <Image src={image} alt="" width={32} height={32} />
         <div className="name">
           {name} ({symbol.toUpperCase()})
