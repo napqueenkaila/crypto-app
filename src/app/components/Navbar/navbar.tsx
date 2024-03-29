@@ -12,12 +12,15 @@ import {
 } from "@/app/styling/components/styled.navbar";
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { SetStateAction, useState } from "react";
+import { useAppDispatch } from "@/app/redux/hooks";
+import { setCurrency } from "@/app/redux/features/currencySlice";
 
 type NavbarProps = {
   setDisplayMode: (val: string) => void;
 };
 
 const Navbar = (props: NavbarProps) => {
+  const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
@@ -32,11 +35,11 @@ const Navbar = (props: NavbarProps) => {
     }
   };
 
-  const handleCurrencyChange = (e: { target: { value: string; }; }) => {
-    localStorage.setItem("selectedCurrency", e.target.value);
+  const handleCurrencyChange = (e: { target: { value: string } }) => {
+    dispatch(setCurrency(e.target.value));
   };
 
-  const handleSearch = (e: { target: { value: SetStateAction<string>; }; } ) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setSearchQuery(e.target.value);
   };
 
@@ -65,7 +68,7 @@ const Navbar = (props: NavbarProps) => {
           onChange={handleSearch}
         />
         <DropdownDiv>
-          {dropdownCoins?.map((coin: {id: string, name: string}) => {
+          {dropdownCoins?.map((coin: { id: string; name: string }) => {
             return <DropdownItem key={coin.id}>{coin.name}</DropdownItem>;
           })}
         </DropdownDiv>
@@ -79,7 +82,7 @@ const Navbar = (props: NavbarProps) => {
             height={25}
           />
         </label>
-        <StyledSelect onChange={handleCurrencyChange}>
+        <StyledSelect onChange={(e) => handleCurrencyChange(e)}>
           <option value={"USD"}>USD</option>
           <option value={"GBP"}>GBP</option>
           <option value={"EUR"}>EUR</option>
