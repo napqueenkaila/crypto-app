@@ -30,35 +30,35 @@ const MarketDataBar = () => {
         <>
           <DataDiv>
             <Image alt="" src="Flash.svg" width={25} height={25} />
-            Coins {data?.activeCryptos}
+            Coins {data.activeCryptos}
           </DataDiv>
 
           <DataDiv>
             <Image alt="" src="ExchangeIcon.svg" width={25} height={25} />
-            Exchange {data?.exchange}
+            Exchange {data.exchange}
           </DataDiv>
           <DataDiv>
             <Image alt="" src="GreenArrow.svg" width={25} height={25} />
-            {compactCurrencyFormatter.format(data?.totalMarketCap[currency])}
+            {compactCurrencyFormatter.format(data.totalMarketCap[currency])}
           </DataDiv>
           <DataDiv>
-            {compactCurrencyFormatter.format(data?.totalVolume[currency])}
+            {compactCurrencyFormatter.format(data.totalVolume[currency])}
             <PercentageBarDiv>
               <Percent color="#fff" $percent={100} />
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
             <Image alt="" src="BTCIcon.svg" width={25} height={25} />
-            {data?.btcMarketCapPercent.toFixed(0)}%
+            {data.btcMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
-              <Percent color="#f7931a" $percent={data?.btcMarketCapPercent} />
+              <Percent color="#f7931a" $percent={data.btcMarketCapPercent} />
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
             <Image alt="" src="ETHIcon.svg" width={25} height={25} />
-            {data?.ethMarketCapPercent.toFixed(0)}%
+            {data.ethMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
-              <Percent color="#849dff" $percent={data?.ethMarketCapPercent} />
+              <Percent color="#849dff" $percent={data.ethMarketCapPercent} />
             </PercentageBarDiv>
           </DataDiv>
         </>
