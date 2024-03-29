@@ -14,6 +14,8 @@ import { formatDateLabel } from "./utils";
 import { options } from "./options";
 import { Line } from "react-chartjs-2";
 import Legend from "./Legend";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +33,8 @@ const Wrapper = styled.div`
 
 const LineChart = () => {
   const theme = useTheme();
-  const { data } = useGetLineChartDataQuery("");
+  const { currency } = useAppSelector(selectCurrency);
+  const { data } = useGetLineChartDataQuery(currency);
   const lineChartLabels = data?.prices.map((el) => formatDateLabel(el[0]));
 
   const lineChartData = {

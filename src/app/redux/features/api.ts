@@ -86,8 +86,8 @@ export const api = createApi({
       query: (searchQuery) => `search?query=${searchQuery}`,
     }),
     getLineChartData: builder.query({
-      query: () =>
-        "coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily",
+      query: (currency: string) =>
+        `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: LineData) => {
         return {
           prices: response.prices,
@@ -95,8 +95,8 @@ export const api = createApi({
       },
     }),
     getBarChartData: builder.query({
-      query: () =>
-        "coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily",
+      query: (currency:string) =>
+        `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: BarData) => {
         return {
           volume: response.total_volumes,

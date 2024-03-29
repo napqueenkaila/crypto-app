@@ -14,6 +14,8 @@ import { options } from "./options";
 import { formatDateLabel } from "./utils";
 import { useGetBarChartDataQuery } from "@/app/redux/features/api";
 import Legend from "./Legend";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -30,7 +32,8 @@ const Wrapper = styled.div`
 
 const BarChart = () => {
   const theme = useTheme();
-  const { data } = useGetBarChartDataQuery("");
+  const { currency } = useAppSelector(selectCurrency);
+  const { data } = useGetBarChartDataQuery(currency);
   const barChartLabels = data?.volume.map((el) => formatDateLabel(el[0]));
   const barChartData = {
     labels: barChartLabels,
