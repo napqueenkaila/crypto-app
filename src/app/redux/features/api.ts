@@ -86,8 +86,8 @@ export const api = createApi({
       query: (searchQuery) => `search?query=${searchQuery}`,
     }),
     getLineChartData: builder.query({
-      query: () =>
-        "coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily",
+      query: (currency: string) =>
+        `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: LineData) => {
         return {
           prices: response.prices,
@@ -95,8 +95,8 @@ export const api = createApi({
       },
     }),
     getBarChartData: builder.query({
-      query: () =>
-        "coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily",
+      query: (currency:string) =>
+        `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: BarData) => {
         return {
           volume: response.total_volumes,
@@ -104,8 +104,8 @@ export const api = createApi({
       },
     }),
     getTableData: builder.query({
-      query: (page) =>
-        `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
+      query: ({page, currency}) =>
+        `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
       async onQueryStarted(page, { dispatch, queryFulfilled }) {
         try {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
