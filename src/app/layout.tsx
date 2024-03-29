@@ -1,9 +1,7 @@
 "use client";
 // import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { useState } from "react";
 import Providers from "./styling/theme/Providers";
-
 import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
 import StoreProvider from "./StoreProvider";
@@ -20,15 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [displayMode, setDisplayMode] = useState<string>("dark");
-
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <StoreProvider>
-          <Providers displayMode={displayMode}>
+          <Providers>
             <MarketDataBar />
-            <Navbar setDisplayMode={setDisplayMode} />
+            <Navbar />
             {children}
           </Providers>
         </StoreProvider>
