@@ -12,13 +12,13 @@ const darkModeSlice = createSlice({
     name: "darkMode",
     initialState,
     reducers: {
-        setDarkMode: (state, action) => {
-            state.darkMode = action.payload;
+        toggle: (state) => {
+            state.darkMode = !state.darkMode;
         }
     }
 });
 
-export const { setDarkMode } = darkModeSlice.actions;
+export const { toggle } = darkModeSlice.actions;
 
 export const selectDarkMode = (state: any) => state.darkMode;
 export default darkModeSlice.reducer;
