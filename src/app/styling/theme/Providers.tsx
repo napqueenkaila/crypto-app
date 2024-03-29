@@ -1,18 +1,16 @@
 "use client";
 import { ThemeProvider } from "styled-components";
-
 import { GlobalStyles, lightTheme, darkTheme } from "./theme";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectDarkMode } from "@/app/redux/features/darkModeSlice";
 
-type Props = {
-    displayMode: string;
-    children: React.ReactNode;
-};
+const Providers = ({children}: {children: React.ReactNode}) => {
+  const {darkMode} = useAppSelector(selectDarkMode);
 
-const Providers = (props: Props) => {
   return (
-    <ThemeProvider theme={props.displayMode === "dark" ? darkTheme : lightTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
-      {props.children}
+      {children}
     </ThemeProvider>
   );
 };

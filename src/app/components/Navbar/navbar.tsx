@@ -12,31 +12,26 @@ import {
 } from "@/app/styling/components/Navbar/styled.navbar";
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { SetStateAction, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { setCurrency } from "@/app/redux/features/currencySlice";
+import { selectDarkMode, toggle } from "@/app/redux/features/darkModeSlice";
 
-type NavbarProps = {
-  setDisplayMode: (val: string) => void;
-};
-
-const Navbar = (props: NavbarProps) => {
+const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const darkMode = useAppSelector(selectDarkMode);
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
 
-  const toggleDisplayMode = () => {
-    if (localStorage.getItem("displayMode") === "dark") {
-      localStorage.setItem("displayMode", "light");
-      props.setDisplayMode("light");
-    } else {
-      localStorage.setItem("displayMode", "dark");
-      props.setDisplayMode("dark");
-    }
+  const toggleDarkMode = () => {
+    dispatch(toggle(darkMode));
   };
 
-  const handleCurrencyChange = (e: { target: { value: string; }; }) => {
-    localStorage.setItem("selectedCurrency", e.target.value);
+  const handleCurrencyChange = (e: { target: { value: string } }) => {
+    dispatch(setCurrency(e.target.value));
   };
 
-  const handleSearch = (e: { target: { value: SetStateAction<string>; }; } ) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setSearchQuery(e.target.value);
   };
 
@@ -65,7 +60,7 @@ const Navbar = (props: NavbarProps) => {
           onChange={handleSearch}
         />
         <DropdownDiv>
-          {dropdownCoins?.map((coin: {id: string, name: string}) => {
+          {dropdownCoins?.map((coin: { id: string; name: string }) => {
             return <DropdownItem key={coin.id}>{coin.name}</DropdownItem>;
           })}
         </DropdownDiv>
@@ -87,7 +82,7 @@ const Navbar = (props: NavbarProps) => {
           <option value={"ETH"}>ETH</option>
         </StyledSelect>
       </CurrencyDiv>
-      <StyledModeBtn onClick={toggleDisplayMode}>
+      <StyledModeBtn onClick={toggleDarkMode}>
         <Image
           alt="dark mode button"
           src="ModeIcon.svg"
