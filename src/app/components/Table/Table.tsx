@@ -4,11 +4,13 @@ import CoinRow from "./CoinRow";
 import { TableWrapper, TableHead, CoinsTable } from "@/app/styling/components/Table/styled.Table";
 import { useAppSelector } from "@/app/redux/hooks";
 import { useGetTableDataQuery } from "@/app/redux/features/api";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 
 const Table = () => {
   const hasMore = useAppSelector((state) => state.hasMore.hasMore);
+  const { currency } = useAppSelector(selectCurrency);
   const [page, setPage] = useState(1);
-  const { data } = useGetTableDataQuery(page);
+  const { data } = useGetTableDataQuery({page, currency});
 
   const fetchMoreData = () => {
     setPage((prev) => prev + 1);
