@@ -74,7 +74,7 @@ const Navbar = () => {
             height={25}
           />
         </label>
-        <StyledSelect onChange={(e) => handleCurrencyChange(e)}>
+        <StyledSelect onChange={handleCurrencyChange}>
           <option value={"USD"}>USD</option>
           <option value={"GBP"}>GBP</option>
           <option value={"EUR"}>EUR</option>
