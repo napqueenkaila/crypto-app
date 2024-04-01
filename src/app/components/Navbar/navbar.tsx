@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <NavContainer>
-      <Logo />
+      <Logo darkMode={ darkMode} />
       <LinkContainer>
         <StyledLink href={"/"}>
           <HomeIcon darkMode={darkMode} />
