@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import {
   DataBarContainer,
   DataDiv,
@@ -12,6 +11,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import { FlashIcon, ExchangeIcon } from "../SVGs/NavIcons/MarketDataIcons";
 import { BtcIcon, EthIcon } from "../SVGs/NavIcons/CoinIcons";
+import { ArrowIcon } from "../SVGs/ArrowIcon";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized, isSuccess } =
@@ -34,14 +34,15 @@ const MarketDataBar = () => {
             <FlashIcon />
             Coins {data.activeCryptos}
           </DataDiv>
-
           <DataDiv>
             <ExchangeIcon />
             Exchange {data.exchange}
           </DataDiv>
-          
+
           <DataDiv>
-            <Image alt="" src="GreenArrow.svg" width={25} height={25} />
+            <ArrowIcon
+              isPositive={data.totalMarketCap[currency] >= 0 ? true : false}
+            />
             {compactCurrencyFormatter.format(data.totalMarketCap[currency])}
           </DataDiv>
           <DataDiv>
