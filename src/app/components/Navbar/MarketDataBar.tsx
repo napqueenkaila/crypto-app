@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import {
   DataBarContainer,
   DataDiv,
@@ -10,6 +9,7 @@ import { useGetMarketDataQuery } from "@/app/redux/features/api";
 import { compactCurrencyFormatter } from "@/app/utils";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { FlashIcon, ExchangeIcon, BtcIcon, EthIcon, ArrowIcon } from "../SVGs/index";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized, isSuccess } =
@@ -29,16 +29,18 @@ const MarketDataBar = () => {
       {isSuccess ? (
         <>
           <DataDiv>
-            <Image alt="" src="Flash.svg" width={25} height={25} />
+            <FlashIcon />
             Coins {data.activeCryptos}
+          </DataDiv>
+          <DataDiv>
+            <ExchangeIcon />
+            Exchange {data.exchange}
           </DataDiv>
 
           <DataDiv>
-            <Image alt="" src="ExchangeIcon.svg" width={25} height={25} />
-            Exchange {data.exchange}
-          </DataDiv>
-          <DataDiv>
-            <Image alt="" src="GreenArrow.svg" width={25} height={25} />
+            <ArrowIcon
+              isPositive={data.totalMarketCap[currency] >= 0 ? true : false}
+            />
             {compactCurrencyFormatter.format(data.totalMarketCap[currency])}
           </DataDiv>
           <DataDiv>
@@ -48,14 +50,14 @@ const MarketDataBar = () => {
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
-            <Image alt="" src="BTCIcon.svg" width={25} height={25} />
+            <BtcIcon />
             {data.btcMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
               <Percent color="#f7931a" $percent={data.btcMarketCapPercent} />
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
-            <Image alt="" src="ETHIcon.svg" width={25} height={25} />
+            <EthIcon />
             {data.ethMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
               <Percent color="#849dff" $percent={data.ethMarketCapPercent} />
