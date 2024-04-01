@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   NavContainer,
   LinkContainer,
@@ -15,6 +14,11 @@ import { SetStateAction, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setCurrency } from "@/app/redux/features/currencySlice";
 import { selectDarkMode, toggle } from "@/app/redux/features/darkModeSlice";
+import { HomeIcon } from "../SVGs/NavIcons/HomeIcon";
+import { PortfolioIcon } from "../SVGs/NavIcons/PortfolioIcon";
+import { DollarIcon } from "../SVGs/NavIcons/DollarIcon";
+import { DarkModeIcon } from "../SVGs/NavIcons/DarkModeIcon";
+import { Logo } from "../SVGs/NavIcons/Logo";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -37,19 +41,14 @@ const Navbar = () => {
 
   return (
     <NavContainer>
-      <Image alt="logo" src="NavLogoDark.svg" width={25} height={25} />
+      <Logo />
       <LinkContainer>
         <StyledLink href={"/"}>
-          <Image alt="home button" src="HomeIcon.svg" width={25} height={25} />
+          <HomeIcon />
           Home
         </StyledLink>
         <StyledLink href={"/portfolio"}>
-          <Image
-            alt="portfolio button"
-            src="PortfolioIcon.svg"
-            width={25}
-            height={25}
-          />
+          <PortfolioIcon />
           Portfolio
         </StyledLink>
       </LinkContainer>
@@ -67,12 +66,7 @@ const Navbar = () => {
       </div>
       <CurrencyDiv>
         <label>
-          <Image
-            alt="currency button"
-            src="DollarIcon.svg"
-            width={25}
-            height={25}
-          />
+          <DollarIcon />
         </label>
         <StyledSelect onChange={handleCurrencyChange}>
           <option value={"usd"}>USD</option>
@@ -83,12 +77,7 @@ const Navbar = () => {
         </StyledSelect>
       </CurrencyDiv>
       <StyledModeBtn onClick={toggleDarkMode}>
-        <Image
-          alt="dark mode button"
-          src="ModeIcon.svg"
-          width={25}
-          height={25}
-        />
+        <DarkModeIcon />
       </StyledModeBtn>
     </NavContainer>
   );
