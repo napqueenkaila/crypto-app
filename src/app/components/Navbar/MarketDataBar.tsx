@@ -10,6 +10,8 @@ import { useGetMarketDataQuery } from "@/app/redux/features/api";
 import { compactCurrencyFormatter } from "@/app/utils";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { FlashIcon, ExchangeIcon } from "../SVGs/NavIcons/MarketDataIcons";
+import { BtcIcon, EthIcon } from "../SVGs/NavIcons/CoinIcons";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized, isSuccess } =
@@ -29,14 +31,15 @@ const MarketDataBar = () => {
       {isSuccess ? (
         <>
           <DataDiv>
-            <Image alt="" src="Flash.svg" width={25} height={25} />
+            <FlashIcon />
             Coins {data.activeCryptos}
           </DataDiv>
 
           <DataDiv>
-            <Image alt="" src="ExchangeIcon.svg" width={25} height={25} />
+            <ExchangeIcon />
             Exchange {data.exchange}
           </DataDiv>
+          
           <DataDiv>
             <Image alt="" src="GreenArrow.svg" width={25} height={25} />
             {compactCurrencyFormatter.format(data.totalMarketCap[currency])}
@@ -48,14 +51,14 @@ const MarketDataBar = () => {
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
-            <Image alt="" src="BTCIcon.svg" width={25} height={25} />
+            <BtcIcon />
             {data.btcMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
               <Percent color="#f7931a" $percent={data.btcMarketCapPercent} />
             </PercentageBarDiv>
           </DataDiv>
           <DataDiv>
-            <Image alt="" src="ETHIcon.svg" width={25} height={25} />
+            <EthIcon />
             {data.ethMarketCapPercent.toFixed(0)}%
             <PercentageBarDiv>
               <Percent color="#849dff" $percent={data.ethMarketCapPercent} />
