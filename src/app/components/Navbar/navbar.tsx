@@ -22,7 +22,7 @@ import { Logo } from "../SVGs/NavIcons/Logo";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const darkMode = useAppSelector(selectDarkMode);
+  const {darkMode} = useAppSelector(selectDarkMode);
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
@@ -77,7 +77,7 @@ const Navbar = () => {
         </StyledSelect>
       </CurrencyDiv>
       <StyledModeBtn onClick={toggleDarkMode}>
-        <DarkModeIcon />
+        <DarkModeIcon darkMode={darkMode} />
       </StyledModeBtn>
     </NavContainer>
   );
