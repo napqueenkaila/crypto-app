@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { PercentChangeDiv } from "@/app/styling/components/Table/styled.PercentChange";
+import { ArrowIcon } from "../SVGs/ArrowIcon";
 
 interface Props {
     percentChange: number;
@@ -12,7 +12,7 @@ const PercentChange = ({ percentChange }: Props) => {
       <PercentChangeDiv
         $isPositive={$isPositive}
       >
-        <Image src={$isPositive ? "GreenArrow.svg" : "RedArrow.svg"} alt="" width={10} height={16} />
+        <ArrowIcon isPositive={$isPositive} />
         {percentChange.toFixed(2)}%
       </PercentChangeDiv>
     );
