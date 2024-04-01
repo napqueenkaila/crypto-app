@@ -1,4 +1,4 @@
-export const ArrowIcon = ({ isPositive }:{isPositive:boolean}) => {
+export const ArrowIcon = ({ isPositive }: { isPositive: boolean }) => {
   return (
     <svg
       width="8"

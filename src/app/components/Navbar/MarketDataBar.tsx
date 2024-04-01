@@ -9,9 +9,7 @@ import { useGetMarketDataQuery } from "@/app/redux/features/api";
 import { compactCurrencyFormatter } from "@/app/utils";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
-import { FlashIcon, ExchangeIcon } from "../SVGs/NavIcons/MarketDataIcons";
-import { BtcIcon, EthIcon } from "../SVGs/NavIcons/CoinIcons";
-import { ArrowIcon } from "../SVGs/ArrowIcon";
+import { FlashIcon, ExchangeIcon, BtcIcon, EthIcon, ArrowIcon } from "../SVGs/index";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized, isSuccess } =

@@ -1,5 +1,5 @@
 import { PercentChangeDiv } from "@/app/styling/components/Table/styled.PercentChange";
-import { ArrowIcon } from "../SVGs/ArrowIcon";
+import { ArrowIcon } from "../SVGs/index";
 
 interface Props {
     percentChange: number;
