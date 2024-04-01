@@ -44,11 +44,11 @@ const Navbar = () => {
       <Logo />
       <LinkContainer>
         <StyledLink href={"/"}>
-          <HomeIcon />
+          <HomeIcon darkMode={darkMode} />
           Home
         </StyledLink>
         <StyledLink href={"/portfolio"}>
-          <PortfolioIcon />
+          <PortfolioIcon darkMode={ darkMode} />
           Portfolio
         </StyledLink>
       </LinkContainer>
