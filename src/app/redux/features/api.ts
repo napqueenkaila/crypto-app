@@ -42,16 +42,17 @@ interface CoinData {
   links: { homepage: string[]; blockchain_site: string[] };
   description: { en: string };
   market_data: {
-    ath: {};
-    ath_date: {};
-    atl: {};
-    atl_date: {};
-    market_cap: {};
-    fully_diluted_valuation: {};
-    total_volume: {};
-    total_supply: {};
-    circulating_supply: {};
-    max_supply: {};
+    ath: string[];
+    ath_date: string[];
+    atl: string[];
+    atl_date: string[];
+    market_cap: string[];
+    fully_diluted_valuation: string[];
+    total_volume: string[];
+    total_supply: string[];
+    circulating_supply: string[];
+    max_supply: string[];
+    current_price: string[];
   };
 }
 
