@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   NavContainer,
   LinkContainer,
@@ -15,10 +14,11 @@ import { SetStateAction, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setCurrency } from "@/app/redux/features/currencySlice";
 import { selectDarkMode, toggle } from "@/app/redux/features/darkModeSlice";
+import { HomeIcon, PortfolioIcon, DollarIcon, DarkModeIcon, Logo } from "../SVGs/index";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const darkMode = useAppSelector(selectDarkMode);
+  const { darkMode } = useAppSelector(selectDarkMode);
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
@@ -37,19 +37,14 @@ const Navbar = () => {
 
   return (
     <NavContainer>
-      <Image alt="logo" src="NavLogoDark.svg" width={25} height={25} />
+      <Logo darkMode={darkMode} />
       <LinkContainer>
         <StyledLink href={"/"}>
-          <Image alt="home button" src="HomeIcon.svg" width={25} height={25} />
+          <HomeIcon darkMode={darkMode} />
           Home
         </StyledLink>
         <StyledLink href={"/portfolio"}>
-          <Image
-            alt="portfolio button"
-            src="PortfolioIcon.svg"
-            width={25}
-            height={25}
-          />
+          <PortfolioIcon darkMode={darkMode} />
           Portfolio
         </StyledLink>
       </LinkContainer>
@@ -67,28 +62,18 @@ const Navbar = () => {
       </div>
       <CurrencyDiv>
         <label>
-          <Image
-            alt="currency button"
-            src="DollarIcon.svg"
-            width={25}
-            height={25}
-          />
+          <DollarIcon />
         </label>
         <StyledSelect onChange={handleCurrencyChange}>
-          <option value={"usd"}>USD</option>
-          <option value={"gbp"}>GBP</option>
-          <option value={"eur"}>EUR</option>
-          <option value={"btc"}>BTC</option>
-          <option value={"eth"}>ETH</option>
+          <option value="usd">USD</option>
+          <option value="gbp">GBP</option>
+          <option value="eur">EUR</option>
+          <option value="btc">BTC</option>
+          <option value="eth">ETH</option>
         </StyledSelect>
       </CurrencyDiv>
       <StyledModeBtn onClick={toggleDarkMode}>
-        <Image
-          alt="dark mode button"
-          src="ModeIcon.svg"
-          width={25}
-          height={25}
-        />
+        <DarkModeIcon darkMode={darkMode} />
       </StyledModeBtn>
     </NavContainer>
   );
