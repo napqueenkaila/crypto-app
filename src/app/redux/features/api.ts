@@ -43,9 +43,9 @@ interface CoinData {
   description: { en: string };
   market_data: {
     ath: Record<string, number>;
-    ath_date: Record<string, number>;
+    ath_date: Record<string, string>;
     atl: Record<string, number>;
-    atl_date: Record<string, number>;
+    atl_date: Record<string, string>;
     market_cap: Record<string, number>;
     fully_diluted_valuation: Record<string, number>;
     total_volume: Record<string, number>;
