@@ -25,7 +25,11 @@ export const LinkIcon = () => {
   );
 };
 
-export const CopyIcon = () => {
+export const CopyIcon = ({
+  copyToClipboard,
+}: {
+  copyToClipboard: () => void;
+}) => {
   return (
     <svg
       width="21"
@@ -33,6 +37,7 @@ export const CopyIcon = () => {
       viewBox="0 0 21 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={copyToClipboard}
     >
       <path
         d="M13.987 10.7503V14.2503C13.987 17.167 12.8203 18.3337 9.90365 18.3337H6.40365C3.48698 18.3337 2.32031 17.167 2.32031 14.2503V10.7503C2.32031 7.83366 3.48698 6.66699 6.40365 6.66699H9.90365C12.8203 6.66699 13.987 7.83366 13.987 10.7503Z"
