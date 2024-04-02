@@ -42,17 +42,17 @@ interface CoinData {
   links: { homepage: string[]; blockchain_site: string[] };
   description: { en: string };
   market_data: {
-    ath: string[];
-    ath_date: string[];
-    atl: string[];
-    atl_date: string[];
-    market_cap: string[];
-    fully_diluted_valuation: string[];
-    total_volume: string[];
-    total_supply: string[];
-    circulating_supply: string[];
-    max_supply: string[];
-    current_price: string[];
+    ath: Record<string, number>;
+    ath_date: Record<string, number>;
+    atl: Record<string, number>;
+    atl_date: Record<string, number>;
+    market_cap: Record<string, number>;
+    fully_diluted_valuation: Record<string, number>;
+    total_volume: Record<string, number>;
+    total_supply: number;
+    circulating_supply: number;
+    max_supply: number;
+    current_price: Record<string, number>;
   };
 }
 
@@ -96,7 +96,7 @@ export const api = createApi({
       },
     }),
     getBarChartData: builder.query({
-      query: (currency:string) =>
+      query: (currency: string) =>
         `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: BarData) => {
         return {
@@ -105,7 +105,7 @@ export const api = createApi({
       },
     }),
     getTableData: builder.query({
-      query: ({page, currency}) =>
+      query: ({ page, currency }) =>
         `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
       async onQueryStarted(page, { dispatch, queryFulfilled }) {
         try {
@@ -153,14 +153,47 @@ export const api = createApi({
       query: (coinId) =>
         `coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`,
       transformResponse: (response: CoinData) => {
+        const {
+          id,
+          name,
+          symbol,
+          image,
+          links: { homepage, blockchain_site },
+          description,
+          market_data: {
+            ath,
+            ath_date,
+            atl,
+            atl_date,
+            market_cap,
+            fully_diluted_valuation,
+            total_supply,
+            total_volume,
+            circulating_supply,
+            max_supply,
+            current_price,
+          },
+        } = response;
         return {
-          id: response.id,
-          name: response.name,
-          symbol: response.symbol,
-          image: response.image.thumb,
-          links: response.links,
-          description: response.description,
-          market_data: response.market_data,
+          id,
+          name,
+          symbol,
+          image,
+          links: { homepage, blockchain_site },
+          description,
+          market_data: {
+            ath,
+            ath_date,
+            atl,
+            atl_date,
+            market_cap,
+            fully_diluted_valuation,
+            total_supply,
+            total_volume,
+            circulating_supply,
+            max_supply,
+            current_price,
+          },
         };
       },
     }),
