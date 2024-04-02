@@ -4,21 +4,45 @@ import { selectCurrency } from "../redux/features/currencySlice";
 
 const StatsContainer = styled.div`
   grid-area: stats;
+  background-color: #1e1932;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 
 const StatDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 `;
 
 const Name = styled.div`
   font-size: 16px;
   font-weight: 400;
+  white-space: pre-wrap;
 `;
 
 const Value = styled.div`
   font-weight: 500;
   font-size: 20px;
+`;
+
+const PercentageBarDiv = styled.div`
+  width: 100%;
+  height: 6px;
+  background-color: #ffffff66;
+  border-radius: 2px;
+`;
+
+interface PercentProps {
+  $percent?: number | string;
+}
+
+const Percent = styled.div<PercentProps>`
+  height: 100%;
+  width: ${(props) => `${props.$percent}%`};
+  background-color: ${(props) => props.color};
 `;
 
 interface CoinStatsProps {
@@ -27,6 +51,7 @@ interface CoinStatsProps {
   total_volume: Record<string, number>;
   circulating_supply: number;
   max_supply: number;
+  total_supply: number;
 }
 
 const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
@@ -40,9 +65,7 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
       </StatDiv>
       <StatDiv>
         <Name>Fully Diluted Valuation</Name>
-        <Value>
-          {marketData.fully_diluted_valuation[currency]}
-        </Value>
+        <Value>{marketData.fully_diluted_valuation[currency]}</Value>
       </StatDiv>
       <StatDiv>
         <Name>Volume 24h</Name>
@@ -52,6 +75,7 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
         <Name>Volume/Market</Name>
         <Value>(what r this)</Value>
       </StatDiv>
+      <br />
       <StatDiv>
         <Name>Total Volume</Name>
         <Value>{marketData.total_volume[currency]}</Value>
@@ -64,7 +88,13 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
         <Name>Max Supply</Name>
         <Value>{marketData.max_supply}</Value>
       </StatDiv>
-      <div>percent bar here</div>
+      <br />
+      <PercentageBarDiv>
+        <Percent
+          color="#f7931a"
+          $percent={marketData.circulating_supply / marketData.total_supply}
+        />
+      </PercentageBarDiv>
     </StatsContainer>
   );
 };
