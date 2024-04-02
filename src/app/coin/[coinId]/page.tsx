@@ -6,6 +6,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import CoinLink from "../CoinLink";
 import CoinStats from "../CoinStats";
+import CoinDescription from "../CoinDescription";
 
 const GridContainer = styled.div`
   margin: 0 auto;
@@ -41,10 +42,6 @@ const ProfitDiv = styled.div`
   grid-area: profit;
 `;
 
-const DescriptionDiv = styled.div`
-  grid-area: description;
-`;
-
 const LinkContainer = styled.div`
   grid-area: links;
 `;
@@ -78,11 +75,8 @@ export default function Coin({ params }: { params: { coinId: string } }) {
               <div>{data.market_data.atl_date[currency]}</div>
             </div>
           </ProfitDiv>
-          <CoinStats marketData={data.market_data}/>
-          <DescriptionDiv>
-            <div>Description</div>
-            <div>{data.description["en"]}</div>
-          </DescriptionDiv>
+          <CoinStats marketData={data.market_data} />
+          <CoinDescription description={ data.description["en"]} />
           <LinkContainer>
             <CoinLink link={data.links.blockchain_site[1]} />
             <CoinLink link={data.links.blockchain_site[2]} />
