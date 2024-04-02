@@ -2,11 +2,10 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { useGetCoinDataQuery } from "@/app/redux/features/api";
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
 import CoinLink from "../CoinLink";
 import CoinStats from "../CoinStats";
 import CoinDescription from "../CoinDescription";
+import CoinProfit from "../CoinProfit";
 
 const GridContainer = styled.div`
   margin: 0 auto;
@@ -34,20 +33,11 @@ const CoinName = styled.div`
   justify-content: center;
 `;
 
-const ProfitDiv = styled.div`
-  border-radius: 12px;
-  background-color: #1e1932;
-  max-width: fit-content;
-  padding: 40px 56px;
-  grid-area: profit;
-`;
-
 const LinkContainer = styled.div`
   grid-area: links;
 `;
 
 export default function Coin({ params }: { params: { coinId: string } }) {
-  const { currency } = useAppSelector(selectCurrency);
   const { data, isSuccess } = useGetCoinDataQuery(params.coinId);
 
   return (
@@ -63,20 +53,9 @@ export default function Coin({ params }: { params: { coinId: string } }) {
             </CoinName>
             <CoinLink link={data.links.homepage[0]} />
           </div>
-          <ProfitDiv>
-            <div>{data.market_data.current_price[currency]}</div>
-            <div>Profit: profit</div>
-            <div>
-              <div>All time high: {data.market_data.ath[currency]}</div>
-              <div>{data.market_data.ath_date[currency]}</div>
-            </div>
-            <div>
-              <div>All time low: {data.market_data.atl[currency]}</div>
-              <div>{data.market_data.atl_date[currency]}</div>
-            </div>
-          </ProfitDiv>
+          <CoinProfit marketData={data.market_data} />
           <CoinStats marketData={data.market_data} />
-          <CoinDescription description={ data.description["en"]} />
+          <CoinDescription description={data.description["en"]} />
           <LinkContainer>
             <CoinLink link={data.links.blockchain_site[1]} />
             <CoinLink link={data.links.blockchain_site[2]} />
