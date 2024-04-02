@@ -9,13 +9,13 @@ import CoinProfit from "../CoinProfit";
 
 const GridContainer = styled.div`
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 0;
   max-width: 80vw;
-  border: 3px red solid;
   display: grid;
   grid-template-areas:
     "name profit stats"
     "description description links";
+    gap: 20px;
 `;
 
 const CoinName = styled.div`

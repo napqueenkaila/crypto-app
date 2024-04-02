@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
+import { ArrowIcon } from "../components/SVGs";
 
 const ProfitDiv = styled.div`
   border-radius: 12px;
@@ -8,6 +9,42 @@ const ProfitDiv = styled.div`
   max-width: fit-content;
   padding: 40px 56px;
   grid-area: profit;
+`;
+
+const CurrentPrice = styled.div`
+  font-weight: 700;
+  font-size: 28px;
+`;
+
+const AllTimeDiv = styled.div`
+  display: grid;
+  grid-template-areas: "arrow title"
+  "arrow date";
+place-items: center left;
+
+`;
+
+const StyledArrow = styled(ArrowIcon)`
+grid-area: arrow;
+`;
+
+const AllTimeTitle = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  grid-area: title;
+  text-overflow: ellipsis;
+`;
+
+const StyledSpan = styled.span`
+  font-weight: 500;
+  font-size: 20px;
+`;
+
+const AllTimeDate = styled.div`
+  color: #b9b9ba;
+  font-weight: 400;
+  font-size: 14px;
+  grid-area: date;
 `;
 
 interface Props {
@@ -48,16 +85,26 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
 
   return (
     <ProfitDiv>
-      <div>{formatCurrency(marketData.current_price[currency])}</div>
+      <CurrentPrice>
+        {formatCurrency(marketData.current_price[currency])}
+      </CurrentPrice>
       <div>Profit: profit</div>
-      <div>
-        <div>All time high: {formatCurrency(marketData.ath[currency])}</div>
-        <div>{formatDate(marketData.ath_date[currency])}</div>
-      </div>
-      <div>
-        <div>All time low: {formatCurrency(marketData.atl[currency])}</div>
-        <div>{formatDate(marketData.atl_date[currency])}</div>
-      </div>
+      <AllTimeDiv>
+        <StyledArrow isPositive={true} />
+        <AllTimeTitle>
+          All time high:{" "}
+          <StyledSpan>{formatCurrency(marketData.ath[currency])}</StyledSpan>
+        </AllTimeTitle>
+        <AllTimeDate>{formatDate(marketData.ath_date[currency])}</AllTimeDate>
+      </AllTimeDiv>
+      <AllTimeDiv>
+        <StyledArrow isPositive={false} />
+        <AllTimeTitle>
+          All time low:{" "}
+          <StyledSpan>{formatCurrency(marketData.atl[currency])}</StyledSpan>
+        </AllTimeTitle>
+        <AllTimeDate>{formatDate(marketData.atl_date[currency])}</AllTimeDate>
+      </AllTimeDiv>
     </ProfitDiv>
   );
 };
