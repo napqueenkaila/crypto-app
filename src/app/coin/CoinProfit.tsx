@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
 import { ArrowIcon } from "../components/SVGs";
+import { formatCurrencyWithCommas } from "../utils";
 
 const ProfitDiv = styled.div`
   border-radius: 12px;
@@ -18,14 +19,14 @@ const CurrentPrice = styled.div`
 
 const AllTimeDiv = styled.div`
   display: grid;
-  grid-template-areas: "arrow title"
-  "arrow date";
-place-items: center left;
-
+  grid-template-areas:
+    "arrow title"
+    "arrow date";
+  place-items: center left;
 `;
 
 const StyledArrow = styled(ArrowIcon)`
-grid-area: arrow;
+  grid-area: arrow;
 `;
 
 const AllTimeTitle = styled.div`
@@ -58,15 +59,6 @@ interface Props {
 const CoinProfit = ({ marketData }: { marketData: Props }) => {
   const { currency } = useAppSelector(selectCurrency);
 
-  const formatCurrency = (num: number) => {
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency,
-      minimumFractionDigits: 0,
-    });
-    return formatter.format(num);
-  };
-
   const formatDate = (dateStr: string): string => {
     const date = new Date(dateStr);
     const options: Intl.DateTimeFormatOptions = {
@@ -86,14 +78,16 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
   return (
     <ProfitDiv>
       <CurrentPrice>
-        {formatCurrency(marketData.current_price[currency])}
+        {formatCurrencyWithCommas(marketData.current_price[currency], currency)}
       </CurrentPrice>
       <div>Profit: profit</div>
       <AllTimeDiv>
         <StyledArrow isPositive={true} />
         <AllTimeTitle>
           All time high:{" "}
-          <StyledSpan>{formatCurrency(marketData.ath[currency])}</StyledSpan>
+          <StyledSpan>
+            {formatCurrencyWithCommas(marketData.ath[currency], currency)}
+          </StyledSpan>
         </AllTimeTitle>
         <AllTimeDate>{formatDate(marketData.ath_date[currency])}</AllTimeDate>
       </AllTimeDiv>
@@ -101,7 +95,9 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
         <StyledArrow isPositive={false} />
         <AllTimeTitle>
           All time low:{" "}
-          <StyledSpan>{formatCurrency(marketData.atl[currency])}</StyledSpan>
+          <StyledSpan>
+            {formatCurrencyWithCommas(marketData.atl[currency], currency)}
+          </StyledSpan>
         </AllTimeTitle>
         <AllTimeDate>{formatDate(marketData.atl_date[currency])}</AllTimeDate>
       </AllTimeDiv>
