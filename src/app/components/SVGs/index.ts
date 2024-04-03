@@ -6,5 +6,6 @@ import { Logo } from "./NavIcons/Logo";
 import { ExchangeIcon, FlashIcon } from "./NavIcons/MarketDataIcons";
 import { PortfolioIcon } from "./NavIcons/PortfolioIcon";
 import { ArrowIcon } from "./ArrowIcon";
+import { CopyIcon, LinkIcon } from "./LinkIcons";
 
-export { BtcIcon, EthIcon, DarkModeIcon, DollarIcon, HomeIcon, Logo, ExchangeIcon, FlashIcon, PortfolioIcon, ArrowIcon };
+export { BtcIcon, EthIcon, DarkModeIcon, DollarIcon, HomeIcon, Logo, ExchangeIcon, FlashIcon, PortfolioIcon, ArrowIcon, CopyIcon, LinkIcon };

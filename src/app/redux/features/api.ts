@@ -42,16 +42,17 @@ interface CoinData {
   links: { homepage: string[]; blockchain_site: string[] };
   description: { en: string };
   market_data: {
-    ath: {};
-    ath_date: {};
-    atl: {};
-    atl_date: {};
-    market_cap: {};
-    fully_diluted_valuation: {};
-    total_volume: {};
-    total_supply: {};
-    circulating_supply: {};
-    max_supply: {};
+    ath: Record<string, number>;
+    ath_date: Record<string, string>;
+    atl: Record<string, number>;
+    atl_date: Record<string, string>;
+    market_cap: Record<string, number>;
+    fully_diluted_valuation: Record<string, number>;
+    total_volume: Record<string, number>;
+    total_supply: number;
+    circulating_supply: number;
+    max_supply: number;
+    current_price: Record<string, number>;
   };
 }
 
@@ -161,14 +162,47 @@ export const api = createApi({
       query: (coinId) =>
         `coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`,
       transformResponse: (response: CoinData) => {
+        const {
+          id,
+          name,
+          symbol,
+          image,
+          links: { homepage, blockchain_site },
+          description,
+          market_data: {
+            ath,
+            ath_date,
+            atl,
+            atl_date,
+            market_cap,
+            fully_diluted_valuation,
+            total_supply,
+            total_volume,
+            circulating_supply,
+            max_supply,
+            current_price,
+          },
+        } = response;
         return {
-          id: response.id,
-          name: response.name,
-          symbol: response.symbol,
-          image: response.image.thumb,
-          links: response.links,
-          description: response.description,
-          market_data: response.market_data,
+          id,
+          name,
+          symbol,
+          image,
+          links: { homepage, blockchain_site },
+          description,
+          market_data: {
+            ath,
+            ath_date,
+            atl,
+            atl_date,
+            market_cap,
+            fully_diluted_valuation,
+            total_supply,
+            total_volume,
+            circulating_supply,
+            max_supply,
+            current_price,
+          },
         };
       },
     }),
