@@ -2,20 +2,21 @@ import { PercentChangeDiv } from "@/app/styling/components/Table/styled.PercentC
 import { ArrowIcon } from "../SVGs/index";
 
 interface Props {
-    percentChange: number;
+  percentChange: number;
 }
 
 const PercentChange = ({ percentChange }: Props) => {
-    const $isPositive = percentChange >= 0 ? true : false;
+  const $isPositive = percentChange >= 0 ? true : false;
 
-    return (
-      <PercentChangeDiv
-        $isPositive={$isPositive}
-      >
-        <ArrowIcon isPositive={$isPositive} />
-        {percentChange.toFixed(2)}%
-      </PercentChangeDiv>
-    );
- };
+  return (
+    <PercentChangeDiv $isPositive={$isPositive}>
+      <ArrowIcon isPositive={$isPositive} />
+      {!$isPositive
+        ? (percentChange * -1).toFixed(2)
+        : percentChange?.toFixed(2)}
+      %
+    </PercentChangeDiv>
+  );
+};
 
 export default PercentChange;
