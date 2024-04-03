@@ -55,6 +55,15 @@ interface CoinData {
   };
 }
 
+interface CarouselData {
+  id: string;
+  name: string;
+  symbol: string;
+  image: string;
+  current_price: number;
+  price_change_percentage_24h: number;
+}
+
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
@@ -95,7 +104,7 @@ export const api = createApi({
       },
     }),
     getBarChartData: builder.query({
-      query: (currency:string) =>
+      query: (currency: string) =>
         `coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=daily`,
       transformResponse: (response: BarData) => {
         return {
@@ -104,7 +113,7 @@ export const api = createApi({
       },
     }),
     getTableData: builder.query({
-      query: ({page, currency}) =>
+      query: ({ page, currency }) =>
         `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
       async onQueryStarted(page, { dispatch, queryFulfilled }) {
         try {
@@ -163,6 +172,23 @@ export const api = createApi({
         };
       },
     }),
+    getCarouselData: builder.query({
+      query: (currency) =>
+        `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h&locale=en&precision=2`,
+      transformResponse: (response: []) => {
+        const carouselData: CarouselData[] = response.map((coin: CarouselData) => {
+          return {
+            id: coin.id,
+            name: coin.name,
+            symbol: coin.symbol,
+            image: coin.image,
+            current_price: coin.current_price,
+            price_change_percentage_24h: coin.price_change_percentage_24h,
+          };
+        });
+        return carouselData;
+      },
+    }),
   }),
 });
 
@@ -173,4 +199,5 @@ export const {
   useGetBarChartDataQuery,
   useGetTableDataQuery,
   useGetCoinDataQuery,
+  useGetCarouselDataQuery,
 } = api;
