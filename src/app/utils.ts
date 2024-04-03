@@ -3,3 +3,12 @@ export const compactCurrencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
+
+export const formatCurrencyWithCommas = (num: number, currency: string) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: 0,
+  });
+  return formatter.format(num);
+};

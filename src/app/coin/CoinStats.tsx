@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
+import { formatCurrencyWithCommas } from "../utils";
 
 const StatsContainer = styled.div`
   grid-area: stats;
@@ -74,15 +75,27 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
     <StatsContainer>
       <StatDiv>
         <Name>Market Cap</Name>
-        <Value>{marketData.market_cap[currency]}</Value>
+        <Value>
+          {formatCurrencyWithCommas(marketData.market_cap[currency], currency)}
+        </Value>
       </StatDiv>
       <StatDiv>
         <Name>Fully Diluted Valuation</Name>
-        <Value>{marketData.fully_diluted_valuation[currency]}</Value>
+        <Value>
+          {formatCurrencyWithCommas(
+            marketData.fully_diluted_valuation[currency],
+            currency
+          )}
+        </Value>
       </StatDiv>
       <StatDiv>
         <Name>Volume 24h</Name>
-        <Value>{marketData.total_volume[currency]}</Value>
+        <Value>
+          {formatCurrencyWithCommas(
+            marketData.total_volume[currency],
+            currency
+          )}
+        </Value>
       </StatDiv>
       <StatDiv>
         <Name>Volume/Market</Name>
