@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
 import { ArrowIcon } from "../components/SVGs";
-import { formatCurrencyWithCommas } from "../utils";
+import { formatCurrencyWithCommas, formatAllTimeDate } from "../utils";
 
 const ProfitDiv = styled.div`
   border-radius: 12px;
@@ -59,22 +59,6 @@ interface Props {
 const CoinProfit = ({ marketData }: { marketData: Props }) => {
   const { currency } = useAppSelector(selectCurrency);
 
-  const formatDate = (dateStr: string): string => {
-    const date = new Date(dateStr);
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      timeZoneName: "short",
-    };
-    const formatter = new Intl.DateTimeFormat("en-US", options);
-    return formatter.format(date);
-  };
-
   return (
     <ProfitDiv>
       <CurrentPrice>
@@ -89,7 +73,7 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.ath[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatDate(marketData.ath_date[currency])}</AllTimeDate>
+        <AllTimeDate>{formatAllTimeDate(marketData.ath_date[currency])}</AllTimeDate>
       </AllTimeDiv>
       <AllTimeDiv>
         <StyledArrow isPositive={false} />
@@ -99,7 +83,7 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.atl[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatDate(marketData.atl_date[currency])}</AllTimeDate>
+        <AllTimeDate>{formatAllTimeDate(marketData.atl_date[currency])}</AllTimeDate>
       </AllTimeDiv>
     </ProfitDiv>
   );
