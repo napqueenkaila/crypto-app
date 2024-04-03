@@ -7,10 +7,10 @@ const Wrapper = styled.div`
 `;
 
 const CardContainer = styled.div`
-  box-shadow: 4px 4px 20px 8px #7878fa26;
   background-color: #191925;
   border: 1px;
   width: 200px;
+  padding: 16px;
   height: 78px;
   display: grid;
   grid-template-areas:
@@ -38,12 +38,11 @@ const CoinPrice = styled.div`
   grid-area: Price;
 `;
 
-const CoinPercent = styled.div<{$isPositive: boolean}>`
+const CoinPercent = styled.div<{ $isPositive: boolean }>`
   font-size: 14px;
   font-weight: 400;
   grid-area: Percent;
   color: ${(props) => (props.$isPositive ? "#01F1E3" : "#FE2264")};
-
 `;
 
 interface CarouselData {
@@ -55,7 +54,7 @@ interface CarouselData {
   price_change_percentage_24h: number;
 }
 
-const CoinCard = ({ coinData }: {coinData: CarouselData}) => {
+const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
   const $isPositive = coinData.price_change_percentage_24h >= 0 ? true : false;
 
   return (
@@ -67,8 +66,11 @@ const CoinCard = ({ coinData }: {coinData: CarouselData}) => {
         </CoinName>
         <CoinPrice>{coinData.current_price} USD</CoinPrice>
         <CoinPercent $isPositive={$isPositive}>
-          <ArrowIcon isPositive={$isPositive } />
-          {coinData.price_change_percentage_24h.toFixed(2)}%
+          <ArrowIcon isPositive={$isPositive} />
+          {!$isPositive
+            ? coinData.price_change_percentage_24h * -1
+            : coinData.price_change_percentage_24h.toFixed(2)}
+          %
         </CoinPercent>
       </CardContainer>
     </Wrapper>
