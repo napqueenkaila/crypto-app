@@ -45,6 +45,15 @@ const Percent = styled.div<PercentProps>`
   background-color: ${(props) => props.color};
 `;
 
+const ValuesDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledValues = styled.div`
+  font-size: 12px;
+`;
+
 interface CoinStatsProps {
   market_cap: Record<string, number>;
   fully_diluted_valuation: Record<string, number>;
@@ -56,6 +65,10 @@ interface CoinStatsProps {
 
 const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
   const { currency } = useAppSelector(selectCurrency);
+
+  const percentCirculatingSupply =
+    (marketData.circulating_supply / marketData.total_supply) * 100;
+  const percentTotalSupply = 100 - percentCirculatingSupply;
 
   return (
     <StatsContainer>
@@ -73,7 +86,11 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
       </StatDiv>
       <StatDiv>
         <Name>Volume/Market</Name>
-        <Value>(what r this)</Value>
+        <Value>
+          {(
+            marketData.total_volume[currency] / marketData.market_cap[currency]
+          ).toFixed(5)}
+        </Value>
       </StatDiv>
       <br />
       <StatDiv>
@@ -89,12 +106,15 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
         <Value>{marketData.max_supply}</Value>
       </StatDiv>
       <br />
-      <PercentageBarDiv>
-        <Percent
-          color="#f7931a"
-          $percent={marketData.circulating_supply / marketData.total_supply}
-        />
-      </PercentageBarDiv>
+      <div>
+        <ValuesDiv>
+          <StyledValues>{percentCirculatingSupply.toFixed(0)}%</StyledValues>
+          <StyledValues>{percentTotalSupply.toFixed(0)}%</StyledValues>
+        </ValuesDiv>
+        <PercentageBarDiv>
+          <Percent color="#f7931a" $percent={percentCirculatingSupply} />
+        </PercentageBarDiv>
+      </div>
     </StatsContainer>
   );
 };
