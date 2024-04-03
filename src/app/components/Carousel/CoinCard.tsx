@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { ArrowIcon } from "../SVGs";
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -37,11 +38,12 @@ const CoinPrice = styled.div`
   grid-area: Price;
 `;
 
-const CoinPercent = styled.div`
+const CoinPercent = styled.div<{$isPositive: boolean}>`
   font-size: 14px;
   font-weight: 400;
   grid-area: Percent;
-  color: #01f1e3;
+  color: ${(props) => (props.$isPositive ? "#01F1E3" : "#FE2264")};
+
 `;
 
 interface CarouselData {
@@ -54,6 +56,7 @@ interface CarouselData {
 }
 
 const CoinCard = ({ coinData }: {coinData: CarouselData}) => {
+  const $isPositive = coinData.price_change_percentage_24h >= 0 ? true : false;
 
   return (
     <Wrapper>
@@ -63,7 +66,10 @@ const CoinCard = ({ coinData }: {coinData: CarouselData}) => {
           {coinData.name} ({coinData.symbol.toUpperCase()})
         </CoinName>
         <CoinPrice>{coinData.current_price} USD</CoinPrice>
-        <CoinPercent>{coinData.price_change_percentage_24h.toFixed(2)}</CoinPercent>
+        <CoinPercent $isPositive={$isPositive}>
+          <ArrowIcon isPositive={$isPositive } />
+          {coinData.price_change_percentage_24h.toFixed(2)}%
+        </CoinPercent>
       </CardContainer>
     </Wrapper>
   );
