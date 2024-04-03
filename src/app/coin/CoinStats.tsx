@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
-import { formatCurrencyWithCommas } from "../utils";
+import { formatCurrencyWithCommas, formatNumberWithCommas } from "../utils";
 
 const StatsContainer = styled.div`
   grid-area: stats;
@@ -64,7 +64,13 @@ interface CoinStatsProps {
   total_supply: number;
 }
 
-const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
+const CoinStats = ({
+  marketData,
+  symbol,
+}: {
+  marketData: CoinStatsProps;
+  symbol: string;
+}) => {
   const { currency } = useAppSelector(selectCurrency);
 
   const percentCirculatingSupply =
@@ -108,15 +114,21 @@ const CoinStats = ({ marketData }: { marketData: CoinStatsProps }) => {
       <br />
       <StatDiv>
         <Name>Total Volume</Name>
-        <Value>{marketData.total_volume[currency]}</Value>
+        <Value>
+          {formatNumberWithCommas(marketData.total_volume[currency])} {symbol.toUpperCase()}
+        </Value>
       </StatDiv>
       <StatDiv>
         <Name>Circulating Supply</Name>
-        <Value>{marketData.circulating_supply}</Value>
+        <Value>
+          {formatNumberWithCommas(marketData.circulating_supply)} {symbol.toUpperCase()}
+        </Value>
       </StatDiv>
       <StatDiv>
         <Name>Max Supply</Name>
-        <Value>{marketData.max_supply}</Value>
+        <Value>
+          {formatNumberWithCommas(marketData.max_supply)} {symbol.toUpperCase()}
+        </Value>
       </StatDiv>
       <br />
       <div>

@@ -54,7 +54,7 @@ export default function Coin({ params }: { params: { coinId: string } }) {
             <CoinLink link={data.links.homepage[0]} />
           </div>
           <CoinProfit marketData={data.market_data} />
-          <CoinStats marketData={data.market_data} />
+          <CoinStats marketData={data.market_data} symbol={data.symbol} />
           <CoinDescription description={data.description["en"]} />
           <LinkContainer>
             <CoinLink link={data.links.blockchain_site[1]} />

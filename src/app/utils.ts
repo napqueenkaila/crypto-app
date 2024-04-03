@@ -12,3 +12,7 @@ export const formatCurrencyWithCommas = (num: number, currency: string) => {
   });
   return formatter.format(num);
 };
+
+export const formatNumberWithCommas = (num: number) => {
+  return new Intl.NumberFormat().format(num);
+};
