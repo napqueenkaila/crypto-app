@@ -5,6 +5,7 @@ import Providers from "./styling/theme/Providers";
 import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
 import StoreProvider from "./StoreProvider";
+import SliderButton from "./components/Converter/SliderButton";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Providers>
             <MarketDataBar />
             <Navbar />
+            <SliderButton />
             {children}
           </Providers>
         </StoreProvider>
