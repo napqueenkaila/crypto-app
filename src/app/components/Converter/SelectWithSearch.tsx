@@ -20,10 +20,11 @@ const SelectWithSearch = ({ options, coin, setCoin }: Props) => {
     snapshot: OptionSnapshot,
     className: string
   ) => {
+    const imgStyle = { borderRadius: "50%", verticalAlign: "middle", marginRight: 10 };
     return (
       <button {...props} className={className} type="button">
         <span>
-          <Image src={option.image} alt="" width={25} height={25} />
+          <Image src={option.image} style={imgStyle} alt="" width={25} height={25} />
           <span>{option.name}</span>
         </span>
       </button>
