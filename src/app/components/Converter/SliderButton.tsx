@@ -2,19 +2,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styled from "styled-components";
 
-const ButtonWrapper = styled.div`
+const LinkWrapper = styled.div`
   width: 40%;
   margin: 20px 100px;
+  background-color: #191925;
+  display: flex;
 `;
 
-const StyledButton = styled.button`
-  background-color: #232336;
-  width: 50%;
+const StyledLink = styled(Link)`
   padding: 12px 32px;
+  background-color: #232336;
+  text-align: center;
+  width: 50%;
   border-radius: 6px;
-  border: none;
   color: #fff;
   font-size: 16px;
+  text-decoration: none;
   &.active {
     background-color: #6161d680;
     font-weight: 500;
@@ -25,20 +28,17 @@ const SliderButton = () => {
   const pathname = usePathname();
 
   return (
-    <ButtonWrapper>
-      <Link href="/">
-        <StyledButton className={`${pathname === "/" ? "active" : ""} `}>
-          Coins
-        </StyledButton>
-      </Link>
-      <Link href="/converter">
-        <StyledButton
-          className={`${pathname === "/converter" ? "active" : ""} `}
-        >
-          Converter
-        </StyledButton>
-      </Link>
-    </ButtonWrapper>
+    <LinkWrapper>
+      <StyledLink href="/" className={`${pathname === "/" ? "active" : ""} `}>
+        Coins
+      </StyledLink>
+      <StyledLink
+        href="/converter"
+        className={`${pathname === "/converter" ? "active" : ""} `}
+      >
+        Converter
+      </StyledLink>
+    </LinkWrapper>
   );
 };
 export default SliderButton;
