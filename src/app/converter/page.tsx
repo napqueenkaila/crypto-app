@@ -23,9 +23,11 @@ export default function Converter() {
   const [toCoin, setToCoin] = useState("ethereum");
   const { data: options } = useGetCarouselDataQuery(currency);
 
-  const mappedOptions = options?.map((option) => {
-    return { name: option.name, value: option.id, image: option.image };
-  });
+  const mappedOptions = options?.map((option) => ({
+    name: option.name,
+    value: option.id,
+    image: option.image,
+  }));
 
   return (
     <Container>
