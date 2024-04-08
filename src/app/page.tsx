@@ -20,12 +20,12 @@ export default function Home() {
   return (
     <main>
       <HomeDiv>
-        <Carousel/>
+        <Carousel />
         <ChartDiv>
           <LineChart />
           <BarChart />
         </ChartDiv>
-        <Table/>
+        <Table />
       </HomeDiv>
     </main>
   );
