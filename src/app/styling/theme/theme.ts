@@ -15,6 +15,13 @@ export const darkTheme = {
     backgroundColor: "#1E1932",
     textColor: "#D1d1d1",
   },
+  sliderButton: {
+    containerBackground: "#191925",
+    backgroundColor: "#232336",
+    activeBackgroundColor: "#6161D680",
+    inactiveTextColor: "#FFFFFF",
+    activeTextColor: "#FFFFFF",
+  },
   charts: {
     legendTitleColor: "#D1D1D1",
     legendValueColor: "#FFFFFF",
@@ -38,6 +45,13 @@ export const lightTheme: ThemeType = {
   marketDataBar: {
     backgroundColor: "#353570",
     textColor: "#D1D1D1",
+  },
+  sliderButton: {
+    containerBackground: "#FFFFFF",
+    backgroundColor: "#FFFFFF",
+    activeBackgroundColor: "#7878FA80",
+    inactiveTextColor: "#424286",
+    activeTextColor: "#FFFFFF",
   },
   charts: {
     legendTitleColor: "#191932",
