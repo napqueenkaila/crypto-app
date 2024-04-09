@@ -5,7 +5,7 @@ export const darkTheme = {
   text: "#ffffff",
   navbar: {
     backgroundColor: "#14142b",
-    textColor: "#FFFFFF80", //grayed out - inactive page
+    inactiveTextColor: "#FFFFFF80",
     inputTextColor: "#D1D1D1",
     inputBackgroundColor: "#191925",
     selectTextColor: "#FFFFFFCC",
