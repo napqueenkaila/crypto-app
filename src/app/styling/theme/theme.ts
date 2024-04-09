@@ -8,6 +8,7 @@ export const darkTheme = {
     inactiveTextColor: "#FFFFFF80",
     inputTextColor: "#D1D1D1",
     inputBackgroundColor: "#191925",
+    dropDownBackgroundColor: "#191925",
     selectTextColor: "#FFFFFFCC",
   },
   marketDataBar: {
@@ -31,6 +32,7 @@ export const lightTheme: ThemeType = {
     inactiveTextColor: "#35357080",
     inputTextColor: "#424286",
     inputBackgroundColor: "#CCCCFA66",
+    dropDownBackgroundColor: "#CCCCFA",
     selectTextColor: "#424286CC",
   },
   marketDataBar: {

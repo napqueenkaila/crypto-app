@@ -39,14 +39,15 @@ const SearchInput = styled.input`
 
 const DropdownDiv = styled.div`
   position: absolute;
-  background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
+  background-color: ${({ theme }) => theme.navbar.dropDownBackgroundColor};
   color: ${({ theme }) => theme.navbar.inputTextColor};
-  border: red solid 1px;
   width: 356px;
+  z-index: 1;
 `;
 
 const DropdownItem = styled.div`
   padding: 10px 5px;
+  border-top: 1px solid #ffffff0d;
 `;
 
 const CurrencyDiv = styled.div`
@@ -56,7 +57,7 @@ const CurrencyDiv = styled.div`
   border-radius: 6px;
   border: 1px #ffffff0d solid;
   padding: 12px 16px;
-  background-color: ${({theme}) => theme.navbar.inputBackgroundColor};
+  background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
 `;
 
 const StyledSelect = styled.select`
@@ -67,7 +68,7 @@ const StyledSelect = styled.select`
 
 const StyledModeBtn = styled.button`
   color: #ffffffcc;
-  background-color: ${({theme}) => theme.navbar.inputBackgroundColor};
+  background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
   border-radius: 12px;
   border: 1px #ffffff0d solid;
   width: 48px;
