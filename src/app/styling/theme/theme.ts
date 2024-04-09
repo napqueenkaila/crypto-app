@@ -33,6 +33,11 @@ export const darkTheme = {
     blockBackgroundColor: "#1e1932",
     textColor: "#FFFFFFF",
   },
+  carousel: {
+    cardBackgroundColor: "#191925",
+    coinTextColor: "#FFFFFF",
+    priceTextColor: "#D1D1D1",
+  },
 };
 
 export const lightTheme: ThemeType = {
@@ -67,6 +72,11 @@ export const lightTheme: ThemeType = {
   coinPage: {
     blockBackgroundColor: "#FFFFFF",
     textColor: "#353570",
+  },
+  carousel: {
+    cardBackgroundColor: "#FFFFFF",
+    coinTextColor: "#181825",
+    priceTextColor: "#424286",
   },
 };
 
