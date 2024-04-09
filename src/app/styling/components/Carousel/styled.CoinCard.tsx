@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.carousel.cardBackgroundColor};
   border: 1px;
+  border-radius: 6px;
   width: 200px;
   padding: 16px;
   height: 78px;
