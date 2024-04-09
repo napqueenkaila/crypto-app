@@ -7,6 +7,7 @@ import {
   CoinPrice,
   CoinPercent,
 } from "@/app/styling/components/Carousel/styled.CoinCard";
+import { formatNumberWithCommas } from "@/app/utils";
 
 interface CarouselData {
   id: string;
@@ -27,11 +28,13 @@ const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
         <CoinName>
           {coinData.name} ({coinData.symbol.toUpperCase()})
         </CoinName>
-        <CoinPrice>{coinData.current_price} USD</CoinPrice>
+        <CoinPrice>
+          {formatNumberWithCommas(coinData.current_price)} USD
+        </CoinPrice>
         <CoinPercent $isPositive={$isPositive}>
           <ArrowIcon isPositive={$isPositive} />
           {!$isPositive
-            ? coinData.price_change_percentage_24h * -1
+            ? (coinData.price_change_percentage_24h * -1).toFixed(2)
             : coinData.price_change_percentage_24h.toFixed(2)}
           %
         </CoinPercent>
