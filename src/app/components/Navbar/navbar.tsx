@@ -48,14 +48,20 @@ const Navbar = () => {
       <Logo darkMode={darkMode} />
       <LinkContainer>
         <StyledLink href="/" className={`${pathname === "/" ? "active" : ""}`}>
-          <HomeIcon darkMode={darkMode} />
+          <HomeIcon
+            darkMode={darkMode}
+            active={pathname === "/" ? true : false}
+          />
           Home
         </StyledLink>
         <StyledLink
           href="/portfolio"
           className={`${pathname === "/portfolio" ? "active" : ""}`}
         >
-          <PortfolioIcon darkMode={darkMode} />
+          <PortfolioIcon
+            darkMode={darkMode}
+            active={pathname === "/portfolio" ? true : false}
+          />
           Portfolio
         </StyledLink>
       </LinkContainer>
