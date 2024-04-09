@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { CopyIcon, LinkIcon } from "@/app/components/SVGs";
 import Link from "next/link";
+import { useAppSelector } from "../redux/hooks";
+import { selectDarkMode } from "../redux/features/darkModeSlice";
 
 const LinkDiv = styled.div`
   display: flex;
@@ -14,6 +16,7 @@ const LinkDiv = styled.div`
 `;
 
 const CoinLink = ({ link }: { link: string }) => {
+  const { darkMode } = useAppSelector(selectDarkMode);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link);
   };
@@ -21,10 +24,10 @@ const CoinLink = ({ link }: { link: string }) => {
   return (
     <LinkDiv>
       <Link href={link}>
-        <LinkIcon />
+        <LinkIcon darkMode={darkMode} />
       </Link>
       <div>{link}</div>
-      <CopyIcon copyToClipboard={copyToClipboard} />
+      <CopyIcon darkMode={darkMode} copyToClipboard={copyToClipboard} />
     </LinkDiv>
   );
 };
