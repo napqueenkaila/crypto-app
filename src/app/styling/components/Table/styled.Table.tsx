@@ -5,7 +5,7 @@ export const TableWrapper = styled.div`
 `;
 
 export const TableHead = styled.div`
-  color: #d1d1d1;
+  color: ${({theme}) => theme.table.headerTextColor};
   font-size: 14px;
   font-weight: 400;
   padding: 20px;

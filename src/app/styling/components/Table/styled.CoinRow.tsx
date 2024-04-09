@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledRow = styled.div`
   padding: 20px;
-  background-color: #191925;
+  background-color: ${({theme}) => theme.table.coinRowBackgroundColor};
   border-radius: 12px;
   display: grid;
   grid-template-columns: 1fr 4fr repeat(4, 2fr) repeat(2, 4fr) 2fr;
@@ -12,7 +12,7 @@ export const StyledRow = styled.div`
 `;
 
 export const RankDiv = styled.div`
-  color: #d1d1d1;
+  color: ${({theme}) => theme.table.rankTextColor};
   font-weight: 500;
 `;
 
@@ -21,9 +21,11 @@ export const NameDiv = styled(Link)`
   align-items: center;
   gap: 15px;
   max-width: 200px;
-  color: #FFFFFF;
+  color: ${({theme}) => theme.table.textColor};
   text-decoration: none;
   .name {
     overflow-wrap: break-word;
   }
 `;
+//#00B1A7 - light mode
+//#01F1E3 - dark mode
