@@ -17,6 +17,11 @@ const LinkContainer = styled.div`
 
 const StyledLink = styled(Link)`
   display: flex;
+  text-decoration: none;
+  color: ${({ theme }) => theme.navbar.inactiveTextColor};
+  &.active{
+    color: ${({theme}) => theme.text}
+  }
 `;
 
 const SearchInput = styled.input`
