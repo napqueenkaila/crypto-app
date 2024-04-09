@@ -38,6 +38,12 @@ export const darkTheme = {
     coinTextColor: "#FFFFFF",
     priceTextColor: "#D1D1D1",
   },
+  table: {
+    headerTextColor: "#D1D1D1",
+    coinRowBackgroundColor: "#191925",
+    rankTextColor: "#d1d1d1",
+    textColor: "#FFFFFF",
+  },
 };
 
 export const lightTheme: ThemeType = {
@@ -77,6 +83,12 @@ export const lightTheme: ThemeType = {
     cardBackgroundColor: "#FFFFFF",
     coinTextColor: "#181825",
     priceTextColor: "#424286",
+  },
+  table: {
+    headerTextColor: "#424286",
+    coinRowBackgroundColor: "#FFFFFF",
+    rankTextColor: "#424286",
+    textColor: "#232336",
   },
 };
 
