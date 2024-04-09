@@ -29,6 +29,10 @@ export const darkTheme = {
     lineBackgroundColor: "#191932",
     barBackgroundColor: "#1E1932",
   },
+  coinPage: {
+    blockBackgroundColor: "#1e1932",
+    textColor: "#FFFFFFF",
+  },
 };
 
 export const lightTheme: ThemeType = {
@@ -59,6 +63,10 @@ export const lightTheme: ThemeType = {
     legendDateColor: "#424286",
     lineBackgroundColor: "#ffffff",
     barBackgroundColor: "#ffffff",
+  },
+  coinPage: {
+    blockBackgroundColor: "#FFFFFF",
+    textColor: "#353570",
   },
 };
 
