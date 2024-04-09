@@ -28,7 +28,7 @@ export const lightTheme: ThemeType = {
   text: "#353570",
   navbar: {
     backgroundColor: "#fff",
-    textColor: "#353570",
+    inactiveTextColor: "#353570",
     inputTextColor: "#424286",
     inputBackgroundColor: "#CCCCFA66",
     selectTextColor: "#424286CC",
