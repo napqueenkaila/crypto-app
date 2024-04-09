@@ -52,6 +52,7 @@ const DropdownItem = styled.div`
 const CurrencyDiv = styled.div`
   display: flex;
   align-items: center;
+  gap: 5px;
   border-radius: 6px;
   border: 1px #ffffff0d solid;
   padding: 12px 16px;
@@ -61,6 +62,7 @@ const CurrencyDiv = styled.div`
 const StyledSelect = styled.select`
   background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
   color: ${({ theme }) => theme.navbar.selectTextColor};
+  border: none;
 `;
 
 const StyledModeBtn = styled.button`
