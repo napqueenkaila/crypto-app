@@ -25,7 +25,7 @@ export const darkTheme = {
 };
 
 export const lightTheme: ThemeType = {
-  body: "#ffffff",
+  body: "#ebebeb",
   text: "#353570",
   navbar: {
     backgroundColor: "#fff",
