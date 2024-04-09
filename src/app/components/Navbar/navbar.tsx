@@ -14,7 +14,14 @@ import { SetStateAction, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setCurrency } from "@/app/redux/features/currencySlice";
 import { selectDarkMode, toggle } from "@/app/redux/features/darkModeSlice";
-import { HomeIcon, PortfolioIcon, DollarIcon, DarkModeIcon, Logo } from "../SVGs/index";
+import {
+  HomeIcon,
+  PortfolioIcon,
+  DollarIcon,
+  DarkModeIcon,
+  Logo,
+} from "../SVGs/index";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +29,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useGetSearchDataQuery(searchQuery);
   const dropdownCoins = data?.coins.slice(0, 5);
+  const pathname = usePathname();
 
   const toggleDarkMode = () => {
     dispatch(toggle(darkMode));
@@ -39,11 +47,14 @@ const Navbar = () => {
     <NavContainer>
       <Logo darkMode={darkMode} />
       <LinkContainer>
-        <StyledLink href={"/"}>
+        <StyledLink href="/" className={`${pathname === "/" ? "active" : ""}`}>
           <HomeIcon darkMode={darkMode} />
           Home
         </StyledLink>
-        <StyledLink href={"/portfolio"}>
+        <StyledLink
+          href="/portfolio"
+          className={`${pathname === "/portfolio" ? "active" : ""}`}
+        >
           <PortfolioIcon darkMode={darkMode} />
           Portfolio
         </StyledLink>
