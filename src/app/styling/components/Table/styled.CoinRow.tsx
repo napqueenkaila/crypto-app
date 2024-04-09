@@ -27,5 +27,3 @@ export const NameDiv = styled(Link)`
     overflow-wrap: break-word;
   }
 `;
-//#00B1A7 - light mode
-//#01F1E3 - dark mode
