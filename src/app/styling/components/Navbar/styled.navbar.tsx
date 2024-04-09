@@ -18,9 +18,11 @@ const LinkContainer = styled.div`
 const StyledLink = styled(Link)`
   display: flex;
   text-decoration: none;
+  align-items: center;
+  gap: 5px;
   color: ${({ theme }) => theme.navbar.inactiveTextColor};
-  &.active{
-    color: ${({theme}) => theme.text}
+  &.active {
+    color: ${({ theme }) => theme.text};
   }
 `;
 
