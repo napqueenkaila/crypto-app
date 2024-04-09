@@ -6,7 +6,7 @@ import { formatCurrencyWithCommas, formatAllTimeDate } from "../utils";
 
 const ProfitDiv = styled.div`
   border-radius: 12px;
-  background-color: #1e1932;
+  background-color: ${({ theme }) => theme.coinPage.blockBackgroundColor};
   max-width: fit-content;
   padding: 40px 56px;
   grid-area: profit;
@@ -73,7 +73,9 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.ath[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatAllTimeDate(marketData.ath_date[currency])}</AllTimeDate>
+        <AllTimeDate>
+          {formatAllTimeDate(marketData.ath_date[currency])}
+        </AllTimeDate>
       </AllTimeDiv>
       <AllTimeDiv>
         <StyledArrow isPositive={false} />
@@ -83,7 +85,9 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.atl[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatAllTimeDate(marketData.atl_date[currency])}</AllTimeDate>
+        <AllTimeDate>
+          {formatAllTimeDate(marketData.atl_date[currency])}
+        </AllTimeDate>
       </AllTimeDiv>
     </ProfitDiv>
   );

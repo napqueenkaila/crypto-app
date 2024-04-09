@@ -5,7 +5,7 @@ import { formatCurrencyWithCommas, formatNumberWithCommas } from "../utils";
 
 const StatsContainer = styled.div`
   grid-area: stats;
-  background-color: #1e1932;
+  background-color: ${({ theme }) => theme.coinPage.blockBackgroundColor};
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -115,13 +115,15 @@ const CoinStats = ({
       <StatDiv>
         <Name>Total Volume</Name>
         <Value>
-          {formatNumberWithCommas(marketData.total_volume[currency])} {symbol.toUpperCase()}
+          {formatNumberWithCommas(marketData.total_volume[currency])}{" "}
+          {symbol.toUpperCase()}
         </Value>
       </StatDiv>
       <StatDiv>
         <Name>Circulating Supply</Name>
         <Value>
-          {formatNumberWithCommas(marketData.circulating_supply)} {symbol.toUpperCase()}
+          {formatNumberWithCommas(marketData.circulating_supply)}{" "}
+          {symbol.toUpperCase()}
         </Value>
       </StatDiv>
       <StatDiv>

@@ -24,8 +24,8 @@ const GridContainer = styled.div`
 
 const CoinName = styled.div`
   grid-area: name;
-  background-color: #1e1932;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.coinPage.blockBackgroundColor};
+  color: ${({ theme }) => theme.coinPage.textColor};
   font-weight: 700;
   font-size: 28px;
   border-radius: 12px;
@@ -35,12 +35,12 @@ const CoinName = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
 `;
 
 const HomeLink = styled.div`
   grid-area: homelink;
-  place-self: center ;
+  place-self: center;
   width: 100%;
 `;
 

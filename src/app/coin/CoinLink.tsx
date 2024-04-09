@@ -8,7 +8,8 @@ const LinkDiv = styled.div`
   width: 100%;
   gap: 10px;
   border-radius: 12px;
-  background-color: #1e1932;
+  background-color: ${({ theme }) => theme.coinPage.blockBackgroundColor};
+  color: ${({ theme }) => theme.coinPage.textColor};
   padding: 16px 24px;
 `;
 
