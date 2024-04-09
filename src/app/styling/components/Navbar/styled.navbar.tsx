@@ -55,6 +55,7 @@ const CurrencyDiv = styled.div`
   border-radius: 6px;
   border: 1px #ffffff0d solid;
   padding: 12px 16px;
+  background-color: ${({theme}) => theme.navbar.inputBackgroundColor};
 `;
 
 const StyledSelect = styled.select`
@@ -64,7 +65,7 @@ const StyledSelect = styled.select`
 
 const StyledModeBtn = styled.button`
   color: #ffffffcc;
-  background-color: #191925;
+  background-color: ${({theme}) => theme.navbar.inputBackgroundColor};
   border-radius: 12px;
   border: 1px #ffffff0d solid;
   width: 48px;
