@@ -1,18 +1,11 @@
-import styled from "styled-components";
-import { CopyIcon, LinkIcon } from "@/app/components/SVGs";
 import Link from "next/link";
-
-const LinkDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 10px;
-  border-radius: 12px;
-  background-color: #1e1932;
-  padding: 16px 24px;
-`;
+import { useAppSelector } from "../redux/hooks";
+import { selectDarkMode } from "../redux/features/darkModeSlice";
+import { CopyIcon, LinkIcon } from "@/app/components/SVGs";
+import { LinkDiv } from "../styling/components/CoinPage/styled.CoinLink";
 
 const CoinLink = ({ link }: { link: string }) => {
+  const { darkMode } = useAppSelector(selectDarkMode);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link);
   };
@@ -20,10 +13,10 @@ const CoinLink = ({ link }: { link: string }) => {
   return (
     <LinkDiv>
       <Link href={link}>
-        <LinkIcon />
+        <LinkIcon darkMode={darkMode} />
       </Link>
       <div>{link}</div>
-      <CopyIcon copyToClipboard={copyToClipboard} />
+      <CopyIcon darkMode={darkMode} copyToClipboard={copyToClipboard} />
     </LinkDiv>
   );
 };

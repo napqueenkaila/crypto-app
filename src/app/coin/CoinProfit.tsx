@@ -1,52 +1,15 @@
-import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
-import { ArrowIcon } from "../components/SVGs";
 import { formatCurrencyWithCommas, formatAllTimeDate } from "../utils";
-
-const ProfitDiv = styled.div`
-  border-radius: 12px;
-  background-color: #1e1932;
-  max-width: fit-content;
-  padding: 40px 56px;
-  grid-area: profit;
-`;
-
-const CurrentPrice = styled.div`
-  font-weight: 700;
-  font-size: 28px;
-`;
-
-const AllTimeDiv = styled.div`
-  display: grid;
-  grid-template-areas:
-    "arrow title"
-    "arrow date";
-  place-items: center left;
-`;
-
-const StyledArrow = styled(ArrowIcon)`
-  grid-area: arrow;
-`;
-
-const AllTimeTitle = styled.div`
-  font-weight: 400;
-  font-size: 16px;
-  grid-area: title;
-  text-overflow: ellipsis;
-`;
-
-const StyledSpan = styled.span`
-  font-weight: 500;
-  font-size: 20px;
-`;
-
-const AllTimeDate = styled.div`
-  color: #b9b9ba;
-  font-weight: 400;
-  font-size: 14px;
-  grid-area: date;
-`;
+import {
+  ProfitDiv,
+  CurrentPrice,
+  AllTimeDiv,
+  AllTimeTitle,
+  AllTimeDate,
+  StyledArrow,
+  StyledSpan,
+} from "../styling/components/CoinPage/styled.CoinProfit";
 
 interface Props {
   current_price: Record<string, number>;
@@ -73,7 +36,9 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.ath[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatAllTimeDate(marketData.ath_date[currency])}</AllTimeDate>
+        <AllTimeDate>
+          {formatAllTimeDate(marketData.ath_date[currency])}
+        </AllTimeDate>
       </AllTimeDiv>
       <AllTimeDiv>
         <StyledArrow isPositive={false} />
@@ -83,7 +48,9 @@ const CoinProfit = ({ marketData }: { marketData: Props }) => {
             {formatCurrencyWithCommas(marketData.atl[currency], currency)}
           </StyledSpan>
         </AllTimeTitle>
-        <AllTimeDate>{formatAllTimeDate(marketData.atl_date[currency])}</AllTimeDate>
+        <AllTimeDate>
+          {formatAllTimeDate(marketData.atl_date[currency])}
+        </AllTimeDate>
       </AllTimeDiv>
     </ProfitDiv>
   );

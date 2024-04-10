@@ -9,8 +9,9 @@ const HeaderDiv = styled.div`
 `;
 
 const StyledText = styled.div`
-  color: #d1d1d1;
+  color: ${({ theme }) => theme.carousel.priceTextColor};
   font-size: 14px;
   font-weight: 400;
 `;
+
 export { Wrapper, HeaderDiv, StyledText };

@@ -6,8 +6,9 @@ const Wrapper = styled.div`
 `;
 
 const CardContainer = styled.div`
-  background-color: #191925;
+  background-color: ${({ theme }) => theme.carousel.cardBackgroundColor};
   border: 1px;
+  border-radius: 6px;
   width: 200px;
   padding: 16px;
   height: 78px;
@@ -23,7 +24,7 @@ const CoinIcon = styled(Image)`
 `;
 
 const CoinName = styled.div`
-  color: #ffffff;
+  color: ${({ theme }) => theme.carousel.coinTextColor};
   font-size: 16px;
   font-weight: 500;
   grid-area: Name;
@@ -31,7 +32,7 @@ const CoinName = styled.div`
 `;
 
 const CoinPrice = styled.div`
-  color: #d1d1d1;
+  color: ${({ theme }) => theme.carousel.priceTextColor};
   font-size: 14px;
   font-weight: 400;
   grid-area: Price;
