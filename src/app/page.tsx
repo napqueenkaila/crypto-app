@@ -14,6 +14,7 @@ const ChartDiv = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+  height: 400px;
 `;
 
 export default function Home() {

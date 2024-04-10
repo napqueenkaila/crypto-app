@@ -28,7 +28,9 @@ ChartJS.register(
 );
 
 const Wrapper = styled.div`
-  width: 100%;
+  position: relative;
+  width: 50%;
+  height: 100%;
 `;
 
 const LineChart = () => {
