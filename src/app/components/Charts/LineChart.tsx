@@ -1,5 +1,4 @@
 import styled, { useTheme } from "styled-components";
-import { useGetLineChartDataQuery } from "@/app/redux/features/api";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,12 +9,10 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
-import { formatDateLabel } from "./utils";
-import { options } from "./options";
 import { Line } from "react-chartjs-2";
 import Legend from "./Legend";
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { options } from "./options";
+import { formatDateLabel } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -33,18 +30,16 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const LineChart = ({todaysDate}:{todaysDate:string}) => {
+const LineChart = ({chartData, todaysDate}:{chartData:number[][],todaysDate:string}) => {
   const theme = useTheme();
-  const { currency } = useAppSelector(selectCurrency);
-  const { data } = useGetLineChartDataQuery(currency);
-  const lineChartLabels = data?.prices.map((el) => formatDateLabel(el[0]));
-  
+  const lineChartLabels = chartData.map((el) => formatDateLabel(el[0]));
+
   const lineChartData = {
     labels: lineChartLabels,
     datasets: [
       {
         label: "",
-        data: data?.prices.map((el) => el[1]),
+        data: chartData.map((el) => el[1]),
         borderColor: "#7878FA",
         fill: true,
         backgroundColor: (context) => {

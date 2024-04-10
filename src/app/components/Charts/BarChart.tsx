@@ -10,12 +10,10 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { options } from "./options";
 import { formatDateLabel } from "./utils";
-import { useGetBarChartDataQuery } from "@/app/redux/features/api";
+import { options } from "./options";
 import Legend from "./Legend";
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -32,17 +30,15 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const BarChart = ({todaysDate}:{todaysDate:string}) => {
+const BarChart = ({chartData, todaysDate}:{chartData: number[][],todaysDate:string}) => {
   const theme = useTheme();
-  const { currency } = useAppSelector(selectCurrency);
-  const { data } = useGetBarChartDataQuery(currency);
-  const barChartLabels = data?.volume.map((el) => formatDateLabel(el[0]));
+  const barChartLabels = chartData.map((el) => formatDateLabel(el[0]));
   const barChartData = {
     labels: barChartLabels,
     datasets: [
       {
         label: "",
-        data: data?.volume.map((el) => el[1]),
+        data: chartData.map((el) => el[1]),
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 350);
