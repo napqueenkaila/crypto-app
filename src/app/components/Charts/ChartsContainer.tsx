@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
+import { useGetChartDataQuery } from "@/app/redux/features/api";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 
 const Container = styled.div`
   display: flex;
@@ -10,13 +13,23 @@ const Container = styled.div`
 `;
 
 const ChartsContainer = () => {
-
-  const todaysDate = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(new Date(Date.now()));
+  const { currency } = useAppSelector(selectCurrency);
+  const defaultCoin = "bitcoin";
+  const { data, isSuccess } = useGetChartDataQuery({currency, defaultCoin});
+  const todaysDate = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(Date.now()));
 
   return (
     <Container>
-      <LineChart todaysDate={todaysDate} />
-      <BarChart todaysDate={todaysDate} />
+      {isSuccess ? (
+        <>
+          <LineChart chartData={data.prices} todaysDate={todaysDate} />
+          <BarChart chartData={data.total_volumes} todaysDate={todaysDate} />
+        </>
+      ) : null}
     </Container>
   );
 };
