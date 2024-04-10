@@ -10,10 +10,13 @@ const Container = styled.div`
 `;
 
 const ChartsContainer = () => {
+
+  const todaysDate = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(new Date(Date.now()));
+
   return (
     <Container>
-      <LineChart />
-      <BarChart />
+      <LineChart todaysDate={todaysDate} />
+      <BarChart todaysDate={todaysDate} />
     </Container>
   );
 };

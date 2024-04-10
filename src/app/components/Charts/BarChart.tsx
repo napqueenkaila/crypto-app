@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const BarChart = () => {
+const BarChart = ({todaysDate}:{todaysDate:string}) => {
   const theme = useTheme();
   const { currency } = useAppSelector(selectCurrency);
   const { data } = useGetBarChartDataQuery(currency);
@@ -58,7 +58,7 @@ const BarChart = () => {
 
   return (
     <Wrapper>
-      <Legend chartType="bar" />
+      <Legend chartType="bar" todaysDate={todaysDate} />
       <Bar
         style={{
           backgroundColor: theme.charts.barBackgroundColor,

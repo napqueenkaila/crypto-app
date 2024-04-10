@@ -33,12 +33,12 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const LineChart = () => {
+const LineChart = ({todaysDate}:{todaysDate:string}) => {
   const theme = useTheme();
   const { currency } = useAppSelector(selectCurrency);
   const { data } = useGetLineChartDataQuery(currency);
   const lineChartLabels = data?.prices.map((el) => formatDateLabel(el[0]));
-
+  
   const lineChartData = {
     labels: lineChartLabels,
     datasets: [
@@ -61,7 +61,7 @@ const LineChart = () => {
 
   return (
     <Wrapper>
-      <Legend chartType="line" />
+      <Legend chartType="line" todaysDate={todaysDate} />
       <Line
         style={{ backgroundColor: theme.charts.lineBackgroundColor, borderRadius: "12px", padding: "24px" }}
         options={options}
