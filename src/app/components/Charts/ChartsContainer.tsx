@@ -15,7 +15,8 @@ const Container = styled.div`
 const ChartsContainer = () => {
   const { currency } = useAppSelector(selectCurrency);
   const defaultCoin = "bitcoin";
-  const { data, isSuccess } = useGetChartDataQuery({currency, defaultCoin});
+  const defaultRange = 365;
+  const { data, isSuccess } = useGetChartDataQuery({currency, defaultCoin, defaultRange});
   const todaysDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
