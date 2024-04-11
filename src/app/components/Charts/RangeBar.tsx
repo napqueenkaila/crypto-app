@@ -12,11 +12,23 @@ const Bar = styled.div`
 
 const StyledInput = styled.input`
   opacity: 0;
+  position: absolute;
 `;
 
 const StyledLabel = styled.label`
+  font-size: 14px;
+  color: #a7a7cc;
+  padding: 8px 20px;
+  border: 1px solid transparent;
+  border-radius: 6px;
   &:hover {
     cursor: pointer;
+  }
+  ${StyledInput}:checked + & {
+    color: #e4e4f0;
+    font-weight: 500;
+    box-shadow: 4px 4px 20px 8px #7878fa26;
+    background-color: #6161d680;
   }
 `;
 
@@ -30,15 +42,18 @@ const RangeBar = ({
   return (
     <Bar>
       {ranges.map((range) => (
-        <StyledLabel onChange={handleChange} key={range.value} htmlFor="range">
-          {range.value}
+        <>
           <StyledInput
             type="radio"
             id={range.value}
-            value={range.days}
             name="range"
+            value={range.days}
+            onChange={handleChange}
           />
-        </StyledLabel>
+          <StyledLabel key={range.value} htmlFor={range.value}>
+            {range.value}
+          </StyledLabel>
+        </>
       ))}
     </Bar>
   );
