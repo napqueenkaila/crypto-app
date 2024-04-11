@@ -4,6 +4,8 @@ import BarChart from "./BarChart";
 import { useGetChartDataQuery } from "@/app/redux/features/api";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
+import RangeBar from "./RangeBar";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -35,15 +37,22 @@ const ChartsContainer = () => {
     day: "numeric",
   }).format(new Date(Date.now()));
 
+  const handleRangeChange = (e) => {
+    setRange(e.target.value);
+  };
+  
   return (
-    <Container>
-      {isSuccess ? (
-        <>
-          <LineChart chartData={data.prices} todaysDate={todaysDate} />
-          <BarChart chartData={data.total_volumes} todaysDate={todaysDate} />
-        </>
-      ) : null}
-    </Container>
+    <>
+      <Container>
+        {isSuccess ? (
+          <>
+            <LineChart chartData={data.prices} todaysDate={todaysDate} />
+            <BarChart chartData={data.total_volumes} todaysDate={todaysDate} />
+          </>
+        ) : null}
+      </Container>
+      <RangeBar handleChange={handleRangeChange} ranges={ranges} />
+    </>
   );
 };
 export default ChartsContainer;
