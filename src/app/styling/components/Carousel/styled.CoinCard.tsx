@@ -5,8 +5,11 @@ const Wrapper = styled.div`
   display: inline-block;
 `;
 
-const CardContainer = styled.div`
-  background-color: ${({ theme }) => theme.carousel.cardBackgroundColor};
+const CardContainer = styled.div<{ $isSelected: boolean }>`
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected
+      ? theme.carousel.selectedCardBackgroundColor
+      : theme.carousel.cardBackgroundColor};
   border: 1px;
   border-radius: 6px;
   width: 200px;
