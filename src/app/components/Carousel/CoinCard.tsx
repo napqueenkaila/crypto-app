@@ -8,6 +8,11 @@ import {
   CoinPercent,
 } from "@/app/styling/components/Carousel/styled.CoinCard";
 import { formatNumberWithCommas } from "@/app/utils";
+import {
+  selectCoinOne,
+  setCoinOne,
+} from "@/app/redux/features/selectedCoinsSlice";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 
 interface CarouselData {
   id: string;
@@ -19,11 +24,25 @@ interface CarouselData {
 }
 
 const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
+  const coinOneSelected = useAppSelector(selectCoinOne);
   const $isPositive = coinData.price_change_percentage_24h >= 0 ? true : false;
+  const $isSelected = coinData.id === coinOneSelected.id;
+  const dispatch = useAppDispatch();
+  const handleSelect = (selected: { [key: string]: string }) => {
+    dispatch(setCoinOne(selected));
+  };
 
   return (
-    <Wrapper>
-      <CardContainer>
+    <Wrapper
+      onClick={() =>
+        handleSelect({
+          id: coinData.id,
+          name: coinData.name,
+          symbol: coinData.symbol,
+        })
+      }
+    >
+      <CardContainer $isSelected={$isSelected}>
         <CoinIcon src={coinData.image} alt="" width={32} height={32} />
         <CoinName>
           {coinData.name} ({coinData.symbol.toUpperCase()})

@@ -29,15 +29,17 @@ const Date = styled.p`
 `;
 
 type Props = {
-    chartType: string;
+  chartType: string;
+  todaysDate: string;
+  selectedCoin: {id: string, name: string, symbol: string};
 }
 
-const Legend = ({chartType}: Props): JSX.Element => {
+const Legend = ({ chartType, todaysDate, selectedCoin }: Props): JSX.Element => {
   return (
     <LegendWrapper>
-      <Title>{chartType === "line" ? "Bitcoin" : "Volume 24h"}</Title>
+      <Title>{chartType === "line" ? `${selectedCoin.name} (${selectedCoin.symbol.toUpperCase()})` : "Volume 24h"}</Title>
       <Value>$13.431 mln</Value>
-      <Date>September 29, 2023</Date>
+      <Date>{todaysDate}</Date>
     </LegendWrapper>
   );
 };
