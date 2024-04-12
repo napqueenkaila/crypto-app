@@ -17,18 +17,11 @@ const Container = styled.div`
 const ChartsContainer = () => {
   const { currency } = useAppSelector(selectCurrency);
   const defaultCoin = "bitcoin";
-  const [range, setRange] = useState(180);
-  const ranges = [
-    { value: "1D", days: 1 },
-    { value: "7D", days: 7 },
-    { value: "14D", days: 14 },
-    { value: "1M", days: 30 },
-    { value: "1Y", days: 365 }
-  ];
+  const [selectedDays, setSelectedDays] = useState(7);
   const { data, isSuccess } = useGetChartDataQuery({
     currency,
     defaultCoin,
-    range,
+    selectedDays,
   });
 
   const todaysDate = new Intl.DateTimeFormat("en-US", {
@@ -37,10 +30,11 @@ const ChartsContainer = () => {
     day: "numeric",
   }).format(new Date(Date.now()));
 
-  const handleRangeChange = (e) => {
-    setRange(e.target.value);
+  const handleDaysChange = (e) => {
+    const newDays = Number(e.target.value);
+    setSelectedDays(newDays);
   };
-  
+
   return (
     <>
       <Container>
@@ -51,7 +45,10 @@ const ChartsContainer = () => {
           </>
         ) : null}
       </Container>
-      <RangeBar handleChange={handleRangeChange} ranges={ranges} />
+      <RangeBar
+        handleChange={handleDaysChange}
+        selectedDays={selectedDays}
+      />
     </>
   );
 };

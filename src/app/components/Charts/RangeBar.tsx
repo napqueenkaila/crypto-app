@@ -34,27 +34,52 @@ const StyledLabel = styled.label`
 
 const RangeBar = ({
   handleChange,
-  ranges,
+  selectedDays,
 }: {
   handleChange: (e: any) => void;
-  ranges: { value: string; days: number }[];
+  selectedDays: number;
 }) => {
+  const ranges = ["1D", "7D", "14D", "1M", "1Y"];
+  const getRangeValue = (range: string) => {
+    let rangeValue;
+    switch (range) {
+      case "1D":
+        rangeValue = 1;
+        break;
+      case "7D":
+        rangeValue = 7;
+        break;
+      case "14D":
+        rangeValue = 14;
+        break;
+      case "1M":
+        rangeValue = 30;
+        break;
+      case "1Y":
+        rangeValue = 365;
+        break;
+    }
+    return rangeValue;
+  };
+
   return (
     <Bar>
-      {ranges.map((range) => (
-        <>
-          <StyledInput
-            type="radio"
-            id={range.value}
-            name="range"
-            value={range.days}
-            onChange={handleChange}
-          />
-          <StyledLabel key={range.value} htmlFor={range.value}>
-            {range.value}
-          </StyledLabel>
-        </>
-      ))}
+      {ranges.map((range) => {
+        const value = getRangeValue(range);
+        return (
+          <div key={range}>
+            <StyledInput
+              type="radio"
+              id={range}
+              name="range"
+              value={value}
+              onChange={handleChange}
+              checked={selectedDays === value}
+            />
+            <StyledLabel htmlFor={range}>{range}</StyledLabel>
+          </div>
+        );
+      })}
     </Bar>
   );
 };
