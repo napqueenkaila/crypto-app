@@ -6,6 +6,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import RangeBar from "./RangeBar";
 import { useState } from "react";
+import { selectCoinOne } from "@/app/redux/features/selectedCoinsSlice";
 
 const Container = styled.div`
   display: flex;
@@ -16,11 +17,11 @@ const Container = styled.div`
 
 const ChartsContainer = () => {
   const { currency } = useAppSelector(selectCurrency);
-  const defaultCoin = "bitcoin";
+  const coinOneSelected = useAppSelector(selectCoinOne);
   const [selectedDays, setSelectedDays] = useState(7);
-  const { data, isSuccess } = useGetChartDataQuery({
+  const { data: coinOneData, isSuccess } = useGetChartDataQuery({
     currency,
-    defaultCoin,
+    coinOneSelected,
     selectedDays,
   });
 
@@ -40,15 +41,20 @@ const ChartsContainer = () => {
       <Container>
         {isSuccess ? (
           <>
-            <LineChart chartData={data.prices} todaysDate={todaysDate} />
-            <BarChart chartData={data.total_volumes} todaysDate={todaysDate} />
+            <LineChart
+              selectedCoin={coinOneSelected}
+              chartData={coinOneData.prices}
+              todaysDate={todaysDate}
+            />
+            <BarChart
+              selectedCoin={coinOneSelected}
+              chartData={coinOneData.total_volumes}
+              todaysDate={todaysDate}
+            />
           </>
         ) : null}
       </Container>
-      <RangeBar
-        handleChange={handleDaysChange}
-        selectedDays={selectedDays}
-      />
+      <RangeBar handleChange={handleDaysChange} selectedDays={selectedDays} />
     </>
   );
 };
