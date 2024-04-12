@@ -3,6 +3,7 @@ import { api } from "./features/api";
 import hasMoreReducer from "./features/hasMoreSlice";
 import currencyReducer from "./features/currencySlice";
 import darkModeReducer from "./features/darkModeSlice";
+import selectedCoinsReducer from "./features/selectedCoinsSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
       hasMore: hasMoreReducer,
       currency: currencyReducer,
       darkMode: darkModeReducer,
+      selectedCoins: selectedCoinsReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(api.middleware),
