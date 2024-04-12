@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface SelectedCoinsState{
-    coinOne: string;
+    coinOne: {id: string, name: string, symbol: string};
     coinTwo: string;
 }
 
 const initialState: SelectedCoinsState = {
-    coinOne: "bitcoin",
+    coinOne: {id: "bitcoin", name: "Bitcoin", symbol: "btc"},
     coinTwo: ""
 };
 
