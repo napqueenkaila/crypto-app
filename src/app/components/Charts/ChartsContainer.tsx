@@ -6,7 +6,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import RangeBar from "./RangeBar";
 import { useState } from "react";
-import { selectCoinOne } from "@/app/redux/features/selectedCoinsSlice";
+import { todaysDate } from "./utils";
 
 const Container = styled.div`
   display: flex;
