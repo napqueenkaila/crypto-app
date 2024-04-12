@@ -24,12 +24,7 @@ const ChartsContainer = () => {
     coinOneSelected,
     selectedDays,
   });
-
-  const todaysDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date(Date.now()));
+  // const { data: coinTwoData } = useGetChartDataQuery({ currency, coinTwoSelected, selectedDays });
 
   const handleDaysChange = (e) => {
     const newDays = Number(e.target.value);
