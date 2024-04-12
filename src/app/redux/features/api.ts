@@ -89,7 +89,7 @@ export const api = createApi({
     }),
     getChartData: builder.query({
       query: ({ currency, coinOneSelected, selectedDays }) =>
-        `coins/${coinOneSelected}/market_chart?vs_currency=${currency}&days=${selectedDays}&interval=daily`,
+        `coins/${coinOneSelected.id}/market_chart?vs_currency=${currency}&days=${selectedDays}&interval=daily`,
     }),
     getTableData: builder.query({
       query: ({ page, currency }) =>
