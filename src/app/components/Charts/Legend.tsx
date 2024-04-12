@@ -31,13 +31,14 @@ const Date = styled.p`
 type Props = {
   chartType: string;
   todaysDate: string;
+  selectedCoin: string;
 }
 
-const Legend = ({ chartType, todaysDate }: Props): JSX.Element => {
-
+const Legend = ({ chartType, todaysDate, selectedCoin }: Props): JSX.Element => {
+  const capitalizeFirstLetter = (str:string) => str.charAt(0).toUpperCase() + str.slice(1);
   return (
     <LegendWrapper>
-      <Title>{chartType === "line" ? "Bitcoin" : "Volume 24h"}</Title>
+      <Title>{chartType === "line" ? capitalizeFirstLetter(selectedCoin) : "Volume 24h"}</Title>
       <Value>$13.431 mln</Value>
       <Date>{todaysDate}</Date>
     </LegendWrapper>

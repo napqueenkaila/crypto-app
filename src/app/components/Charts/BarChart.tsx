@@ -30,7 +30,15 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const BarChart = ({chartData, todaysDate}:{chartData: number[][],todaysDate:string}) => {
+const BarChart = ({
+  selectedCoin,
+  chartData,
+  todaysDate,
+}: {
+  selectedCoin: string;
+  chartData: number[][];
+  todaysDate: string;
+}) => {
   const theme = useTheme();
   const barChartLabels = chartData.map((el) => formatDateLabel(el[0]));
   const barChartData = {
@@ -54,7 +62,11 @@ const BarChart = ({chartData, todaysDate}:{chartData: number[][],todaysDate:stri
 
   return (
     <Wrapper>
-      <Legend chartType="bar" todaysDate={todaysDate} />
+      <Legend
+        selectedCoin={selectedCoin}
+        chartType="bar"
+        todaysDate={todaysDate}
+      />
       <Bar
         style={{
           backgroundColor: theme.charts.barBackgroundColor,
