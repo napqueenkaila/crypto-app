@@ -37,7 +37,7 @@ const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
     if (coinOneSelected) {
       dispatch(setCoinTwo(selected));
     } else {
-    dispatch(setCoinOne(selected));
+      dispatch(setCoinOne(selected));
     }
   };
 
