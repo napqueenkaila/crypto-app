@@ -10,7 +10,9 @@ import {
 import { formatNumberWithCommas } from "@/app/utils";
 import {
   selectCoinOne,
+  selectCoinTwo,
   setCoinOne,
+  setCoinTwo,
 } from "@/app/redux/features/selectedCoinsSlice";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 
@@ -25,11 +27,18 @@ interface CarouselData {
 
 const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
   const coinOneSelected = useAppSelector(selectCoinOne);
+  const coinTwoSelected = useAppSelector(selectCoinTwo);
   const $isPositive = coinData.price_change_percentage_24h >= 0 ? true : false;
-  const $isSelected = coinData.id === coinOneSelected.id;
+  const $isSelected =
+    coinData.id === coinOneSelected.id || coinData.id === coinTwoSelected?.id;
   const dispatch = useAppDispatch();
+
   const handleSelect = (selected: { [key: string]: string }) => {
+    if (coinOneSelected) {
+      dispatch(setCoinTwo(selected));
+    } else {
     dispatch(setCoinOne(selected));
+    }
   };
 
   return (
