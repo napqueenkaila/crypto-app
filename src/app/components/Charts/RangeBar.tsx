@@ -3,11 +3,15 @@ import styled from "styled-components";
 const Bar = styled.div`
   background-color: #232336;
   border-radius: 6px;
-  width: 40%;
+  width: 30%;
   padding: 4px;
   display: flex;
   justify-content: space-around;
-  margin: 30px 0;
+  margin: 20px 0;
+`;
+
+const RangeDiv = styled.div`
+padding: 4px;
 `;
 
 const StyledInput = styled.input`
@@ -67,7 +71,7 @@ const RangeBar = ({
       {ranges.map((range) => {
         const value = getRangeValue(range);
         return (
-          <div key={range}>
+          <RangeDiv key={range}>
             <StyledInput
               type="radio"
               id={range}
@@ -77,7 +81,7 @@ const RangeBar = ({
               checked={selectedDays === value}
             />
             <StyledLabel htmlFor={range}>{range}</StyledLabel>
-          </div>
+          </RangeDiv>
         );
       })}
     </Bar>

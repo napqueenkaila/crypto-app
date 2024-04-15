@@ -7,6 +7,7 @@ import { selectCurrency } from "@/app/redux/features/currencySlice";
 import RangeBar from "./RangeBar";
 import { useState } from "react";
 import { todaysDate } from "./utils";
+import { selectCoinOne } from "@/app/redux/features/selectedCoinsSlice";
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +25,6 @@ const ChartsContainer = () => {
     coinOneSelected,
     selectedDays,
   });
-  // const { data: coinTwoData } = useGetChartDataQuery({ currency, coinTwoSelected, selectedDays });
 
   const handleDaysChange = (e) => {
     const newDays = Number(e.target.value);

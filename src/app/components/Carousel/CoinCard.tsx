@@ -1,4 +1,10 @@
-import { ArrowIcon } from "../SVGs";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import {
+  selectCoinOne,
+  selectCoinTwo,
+  setCoinOne,
+  setCoinTwo,
+} from "@/app/redux/features/selectedCoinsSlice";
 import {
   Wrapper,
   CardContainer,
@@ -7,12 +13,8 @@ import {
   CoinPrice,
   CoinPercent,
 } from "@/app/styling/components/Carousel/styled.CoinCard";
+import { ArrowIcon } from "../SVGs";
 import { formatNumberWithCommas } from "@/app/utils";
-import {
-  selectCoinOne,
-  setCoinOne,
-} from "@/app/redux/features/selectedCoinsSlice";
-import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 
 interface CarouselData {
   id: string;
@@ -25,11 +27,38 @@ interface CarouselData {
 
 const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
   const coinOneSelected = useAppSelector(selectCoinOne);
+  const coinTwoSelected = useAppSelector(selectCoinTwo);
+  const emptySelectedCoin = { id: "", name: "", symbol: "" };
   const $isPositive = coinData.price_change_percentage_24h >= 0 ? true : false;
-  const $isSelected = coinData.id === coinOneSelected.id;
+  const $isSelected =
+    coinData.id === coinOneSelected.id || coinData.id === coinTwoSelected?.id;
   const dispatch = useAppDispatch();
-  const handleSelect = (selected: { [key: string]: string }) => {
-    dispatch(setCoinOne(selected));
+
+  const handleSelect = (selected: {
+    id: string;
+    name: string;
+    symbol: string;
+  }) => {
+    if (selected.id === coinOneSelected.id && coinTwoSelected.id !== "") {
+      // Unselect the first coin
+      dispatch(setCoinOne(emptySelectedCoin));
+    } else if (
+      selected.id === coinTwoSelected?.id &&
+      coinOneSelected.id !== ""
+    ) {
+      // Unselect the second coin
+      dispatch(setCoinTwo(emptySelectedCoin));
+    } else if (coinOneSelected.id === "") {
+      // Set the first coin if it's empty
+      dispatch(setCoinOne(selected));
+    } else if (coinTwoSelected.id === "") {
+      // Set the second coin if it's empty
+      dispatch(setCoinTwo(selected));
+    } else {
+      // Swap coins
+      dispatch(setCoinOne(selected));
+      dispatch(setCoinTwo(coinOneSelected));
+    }
   };
 
   return (
