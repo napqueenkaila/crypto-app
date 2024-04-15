@@ -40,19 +40,23 @@ const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
     symbol: string;
   }) => {
     if (selected.id === coinOneSelected.id && coinTwoSelected.id !== "") {
-      // Unselect the first coin
-      dispatch(setCoinOne(emptySelectedCoin));
+      // unselect coinOne if clicked and coinTwo is NOT empty
+      dispatch(setCoinOne(coinTwoSelected));
+      dispatch(setCoinTwo(emptySelectedCoin));
     } else if (
       selected.id === coinTwoSelected?.id &&
       coinOneSelected.id !== ""
     ) {
-      // Unselect the second coin
+      // Unselect coinTwo if clicked and coinOne is NOT empty
       dispatch(setCoinTwo(emptySelectedCoin));
-    } else if (coinOneSelected.id === "") {
-      // Set the first coin if it's empty
-      dispatch(setCoinOne(selected));
     } else if (coinTwoSelected.id === "") {
-      // Set the second coin if it's empty
+      if (selected.id === coinOneSelected.id) {
+        dispatch(setCoinOne(selected));
+      } else {
+        // Set coinTwo if it's empty
+        dispatch(setCoinTwo(selected));
+      }
+    } else if (coinOneSelected.id !== "" && coinTwoSelected.id !== "") {
       dispatch(setCoinTwo(selected));
     } else {
       // Swap coins
