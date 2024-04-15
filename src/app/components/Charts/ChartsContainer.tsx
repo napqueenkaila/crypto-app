@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import LineChart from "./LineChart";
-import BarChart from "./BarChart";
-import { useGetChartDataQuery } from "@/app/redux/features/api";
+import { useState } from "react";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
-import RangeBar from "./RangeBar";
-import { useState } from "react";
-import { todaysDate } from "./utils";
 import { selectCoinOne } from "@/app/redux/features/selectedCoinsSlice";
+import { useGetChartDataQuery } from "@/app/redux/features/api";
+import RangeBar from "./RangeBar";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
+import { todaysDate } from "./utils";
 
 const Container = styled.div`
   display: flex;
