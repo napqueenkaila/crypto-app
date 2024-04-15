@@ -32,11 +32,13 @@ const Wrapper = styled.div`
 
 const LineChart = ({
   coinOne,
+  coinTwo,
   chartDataOne,
   chartDataTwo,
   todaysDate,
 }: {
   coinOne: { [key: string]: string };
+  coinTwo: { [key: string]: string };
   chartDataOne: number[][];
   chartDataTwo: number[][];
   todaysDate: string;
@@ -46,7 +48,7 @@ const LineChart = ({
 
   const datasets = [
     {
-      label: "",
+      label: coinOne.name,
       data: formatChartData(chartDataOne),
       borderColor: "#7878fa",
       fill: true,
@@ -63,7 +65,7 @@ const LineChart = ({
 
   if (chartDataTwo) {
     datasets.push({
-      label: "",
+      label: coinTwo.name,
       data: formatChartData(chartDataTwo),
       borderColor: "#D878FA",
       fill: true,

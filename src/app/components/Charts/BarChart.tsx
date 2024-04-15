@@ -32,11 +32,13 @@ const Wrapper = styled.div`
 
 const BarChart = ({
   coinOne,
+  coinTwo,
   chartDataOne,
   chartDataTwo,
   todaysDate,
 }: {
   coinOne: { [key: string]: string };
+  coinTwo: { [key: string]: string };
   chartDataOne: number[][];
   chartDataTwo: number[][];
   todaysDate: string;
@@ -46,7 +48,7 @@ const BarChart = ({
 
   const datasets = [
     {
-      label: "coinOne",
+      label: coinOne.name,
       data: formatChartData(chartDataOne),
       backgroundColor: (context) => {
         const ctx = context.chart.ctx;
@@ -62,7 +64,7 @@ const BarChart = ({
 
   if (chartDataTwo) {
     datasets.push({
-      label: "coinTwo",
+      label: coinTwo.name,
       data: formatChartData(chartDataTwo),
       backgroundColor: (context) => {
         const ctx = context.chart.ctx;
