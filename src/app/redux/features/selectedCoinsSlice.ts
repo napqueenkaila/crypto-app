@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface SelectedCoinsState {
   coinOne: { id: string; name: string; symbol: string };
-  coinTwo: { id: string; name: string; symbol: string } | null;
+  coinTwo: { id: string; name: string; symbol: string };
   compareCoins: boolean;
 }
 
 const initialState: SelectedCoinsState = {
   coinOne: { id: "bitcoin", name: "Bitcoin", symbol: "btc" },
-  coinTwo: null,
+  coinTwo: { id: "", name: "", symbol: "" },
   compareCoins: false,
 };
 
