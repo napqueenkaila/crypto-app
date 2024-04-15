@@ -33,33 +33,54 @@ const Wrapper = styled.div`
 const LineChart = ({
   coinOne,
   chartDataOne,
+  chartDataTwo,
   todaysDate,
 }: {
   coinOne: { [key: string]: string };
   chartDataOne: number[][];
+  chartDataTwo: number[][];
   todaysDate: string;
 }) => {
   const theme = useTheme();
   const lineChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
 
+  const datasets = [
+    {
+      label: "",
+      data: formatChartData(chartDataOne),
+      borderColor: "#7878fa",
+      fill: true,
+      borderWidth: 2,
+      backgroundColor: (context) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+        gradient.addColorStop(0, "rgba(116,116,242,0.6)");
+        gradient.addColorStop(1, "rgba(116,116,242,0.01)");
+        return gradient;
+      },
+    },
+  ];
+
+  if (chartDataTwo) {
+    datasets.push({
+      label: "",
+      data: formatChartData(chartDataTwo),
+      borderColor: "#D878FA",
+      fill: true,
+      borderWidth: 2,
+      backgroundColor: (context) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+        gradient.addColorStop(0, "rgba(231,114,255,0.6)");
+        gradient.addColorStop(1, "rgba(231,114,255,0.01)");
+        return gradient;
+      },
+    });
+  }
+
   const lineChartData = {
     labels: lineChartLabels,
-    datasets: [
-      {
-        label: "",
-        data: formatChartData(chartDataOne),
-        borderColor: "#7878FA",
-        fill: true,
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(116,116,242,0.6)");
-          gradient.addColorStop(1, "rgba(116,116,242,0.01)");
-          return gradient;
-        },
-        borderWidth: 2,
-      },
-    ],
+    datasets: datasets,
   };
 
   return (

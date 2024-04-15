@@ -56,11 +56,13 @@ const ChartsContainer = () => {
             <LineChart
               coinOne={coinOneSelected}
               chartDataOne={coinOneData.prices}
+              chartDataTwo={coinTwoData?.prices}
               todaysDate={todaysDate}
             />
             <BarChart
               coinOne={coinOneSelected}
               chartDataOne={coinOneData.total_volumes}
+              chartDataTwo={coinTwoData?.total_volumes}
               todaysDate={todaysDate}
             />
           </>

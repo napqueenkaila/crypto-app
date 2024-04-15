@@ -10,6 +10,8 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import Legend from "./Legend";
+import { options } from "./options";
 import { formatDateLabel, formatChartData } from "./utils";
 import { options } from "./options";
 import Legend from "./Legend";
@@ -33,31 +35,52 @@ const Wrapper = styled.div`
 const BarChart = ({
   coinOne,
   chartDataOne,
+  chartDataTwo,
   todaysDate,
 }: {
   coinOne: { [key: string]: string };
   chartDataOne: number[][];
+  chartDataTwo: number[][];
   todaysDate: string;
 }) => {
   const theme = useTheme();
   const barChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
+
+  const datasets = [
+    {
+      label: "coinOne",
+      data: formatChartData(chartDataOne),
+      backgroundColor: (context) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+        gradient.addColorStop(0, "rgba(157,98,217,1)");
+        gradient.addColorStop(1, "rgba(179,116,242,0.01)");
+        return gradient;
+      },
+      barThickness: 2,
+      borderRadius: 4,
+    },
+  ];
+
+  if (chartDataTwo) {
+    datasets.push({
+      label: "coinTwo",
+      data: formatChartData(chartDataTwo),
+      backgroundColor: (context) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+        gradient.addColorStop(0, "rgba(231,114,255,0.6)");
+        gradient.addColorStop(1, "rgba(231,114,255,0.01)");
+        return gradient;
+      },
+      barThickness: 2,
+      borderRadius: 4,
+    });
+  }
+
   const barChartData = {
     labels: barChartLabels,
-    datasets: [
-      {
-        label: "",
-        data: formatChartData(chartDataOne),
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(157,98,217,1)");
-          gradient.addColorStop(1, "rgba(179,116,242,0.01)");
-          return gradient;
-        },
-        barThickness: 2,
-        borderRadius: 4,
-      },
-    ],
+    datasets: datasets,
   };
 
   return (
