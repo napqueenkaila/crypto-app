@@ -12,7 +12,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import Legend from "./Legend";
 import { options } from "./options";
-import { formatDateLabel, formatChartData } from "./utils";
+import { formatChartData, getChartLabels } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -42,7 +42,7 @@ const BarChart = ({
   todaysDate: string;
 }) => {
   const theme = useTheme();
-  const barChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
+  const barChartLabels = getChartLabels(chartDataOne);
 
   const datasets = [
     {

@@ -1,8 +1,10 @@
-export const formatDateLabel = (date: number) => {
-  return new Intl.DateTimeFormat("en", {
-    day: "2-digit",
-    month: "short",
-  }).format(date);
+export const getChartLabels = (data: number[][]) => {
+  return data.map((el: number[]) => {
+    return new Intl.DateTimeFormat("en", {
+      day: "2-digit",
+      month: "short",
+    }).format(el[0]);
+  });
 };
 
 export const todaysDate = new Intl.DateTimeFormat("en-US", {

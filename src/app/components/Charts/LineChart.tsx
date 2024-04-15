@@ -12,7 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import Legend from "./Legend";
 import { options } from "./options";
-import { formatDateLabel, formatChartData } from "./utils";
+import { formatChartData, getChartLabels } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -42,7 +42,7 @@ const LineChart = ({
   todaysDate: string;
 }) => {
   const theme = useTheme();
-  const lineChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
+  const lineChartLabels = getChartLabels(chartDataOne);
 
   const datasets = [
     {
