@@ -22,7 +22,7 @@ const ChartsContainer = () => {
   const [selectedDays, setSelectedDays] = useState(7);
   const { data: coinOneData, isSuccess } = useGetChartDataQuery({
     currency,
-    coinOneSelected,
+    selectedCoinId: coinOneSelected.id,
     selectedDays,
   });
 
