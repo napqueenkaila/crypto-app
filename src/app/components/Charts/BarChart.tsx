@@ -13,8 +13,6 @@ import { Bar } from "react-chartjs-2";
 import Legend from "./Legend";
 import { options } from "./options";
 import { formatDateLabel, formatChartData } from "./utils";
-import { options } from "./options";
-import Legend from "./Legend";
 
 ChartJS.register(
   CategoryScale,
