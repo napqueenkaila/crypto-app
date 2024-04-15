@@ -10,7 +10,7 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { formatDateLabel } from "./utils";
+import { formatDateLabel, formatChartData } from "./utils";
 import { options } from "./options";
 import Legend from "./Legend";
 
@@ -46,7 +46,7 @@ const BarChart = ({
     datasets: [
       {
         label: "",
-        data: chartDataOne.map((el) => el[1]),
+        data: formatChartData(chartDataOne),
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 350);

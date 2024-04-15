@@ -12,7 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import Legend from "./Legend";
 import { options } from "./options";
-import { formatDateLabel } from "./utils";
+import { formatDateLabel, formatChartData } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -47,7 +47,7 @@ const LineChart = ({
     datasets: [
       {
         label: "",
-        data: chartDataOne.map((el) => el[1]),
+        data: formatChartData(chartDataOne),
         borderColor: "#7878FA",
         fill: true,
         backgroundColor: (context) => {
