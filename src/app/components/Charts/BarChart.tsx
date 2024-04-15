@@ -31,22 +31,22 @@ const Wrapper = styled.div`
 `;
 
 const BarChart = ({
-  selectedCoin,
-  chartData,
+  coinOne,
+  chartDataOne,
   todaysDate,
 }: {
-  selectedCoin: string;
-  chartData: number[][];
+  coinOne: { [key: string]: string };
+  chartDataOne: number[][];
   todaysDate: string;
 }) => {
   const theme = useTheme();
-  const barChartLabels = chartData.map((el) => formatDateLabel(el[0]));
+  const barChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
   const barChartData = {
     labels: barChartLabels,
     datasets: [
       {
         label: "",
-        data: chartData.map((el) => el[1]),
+        data: chartDataOne.map((el) => el[1]),
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 350);
@@ -62,11 +62,7 @@ const BarChart = ({
 
   return (
     <Wrapper>
-      <Legend
-        selectedCoin={selectedCoin}
-        chartType="bar"
-        todaysDate={todaysDate}
-      />
+      <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
       <Bar
         style={{
           backgroundColor: theme.charts.barBackgroundColor,

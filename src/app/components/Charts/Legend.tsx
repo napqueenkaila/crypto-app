@@ -15,7 +15,7 @@ const Title = styled.p`
 `;
 
 const Value = styled.p`
-  color: ${({theme}) => theme.charts.legendValueColor};
+  color: ${({ theme }) => theme.charts.legendValueColor};
   font-weight: 700;
   font-size: 28px;
   line-height: 28px;
@@ -31,13 +31,17 @@ const Date = styled.p`
 type Props = {
   chartType: string;
   todaysDate: string;
-  selectedCoin: {id: string, name: string, symbol: string};
-}
+  coinOne: { [key: string]: string };
+};
 
-const Legend = ({ chartType, todaysDate, selectedCoin }: Props): JSX.Element => {
+const Legend = ({ chartType, todaysDate, coinOne }: Props): JSX.Element => {
   return (
     <LegendWrapper>
-      <Title>{chartType === "line" ? `${selectedCoin.name} (${selectedCoin.symbol.toUpperCase()})` : "Volume 24h"}</Title>
+      <Title>
+        {chartType === "line"
+          ? `${coinOne.name} (${coinOne.symbol.toUpperCase()})`
+          : "Volume 24h"}
+      </Title>
       <Value>$13.431 mln</Value>
       <Date>{todaysDate}</Date>
     </LegendWrapper>

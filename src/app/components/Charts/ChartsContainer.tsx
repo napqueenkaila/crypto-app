@@ -54,13 +54,13 @@ const ChartsContainer = () => {
         {isSuccess ? (
           <>
             <LineChart
-              selectedCoin={coinOneSelected}
-              chartData={coinOneData.prices}
+              coinOne={coinOneSelected}
+              chartDataOne={coinOneData.prices}
               todaysDate={todaysDate}
             />
             <BarChart
-              selectedCoin={coinOneSelected}
-              chartData={coinOneData.total_volumes}
+              coinOne={coinOneSelected}
+              chartDataOne={coinOneData.total_volumes}
               todaysDate={todaysDate}
             />
           </>

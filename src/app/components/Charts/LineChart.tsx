@@ -30,16 +30,24 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const LineChart = ({ selectedCoin, chartData, todaysDate }: { selectedCoin: string; chartData:number[][],todaysDate:string}) => {
+const LineChart = ({
+  coinOne,
+  chartDataOne,
+  todaysDate,
+}: {
+  coinOne: { [key: string]: string };
+  chartDataOne: number[][];
+  todaysDate: string;
+}) => {
   const theme = useTheme();
-  const lineChartLabels = chartData.map((el) => formatDateLabel(el[0]));
+  const lineChartLabels = chartDataOne.map((el) => formatDateLabel(el[0]));
 
   const lineChartData = {
     labels: lineChartLabels,
     datasets: [
       {
         label: "",
-        data: chartData.map((el) => el[1]),
+        data: chartDataOne.map((el) => el[1]),
         borderColor: "#7878FA",
         fill: true,
         backgroundColor: (context) => {
@@ -56,9 +64,13 @@ const LineChart = ({ selectedCoin, chartData, todaysDate }: { selectedCoin: stri
 
   return (
     <Wrapper>
-      <Legend chartType="line" todaysDate={todaysDate} selectedCoin={selectedCoin} />
+      <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
       <Line
-        style={{ backgroundColor: theme.charts.lineBackgroundColor, borderRadius: "12px", padding: "24px" }}
+        style={{
+          backgroundColor: theme.charts.lineBackgroundColor,
+          borderRadius: "12px",
+          padding: "24px",
+        }}
         options={options}
         data={lineChartData}
       />
