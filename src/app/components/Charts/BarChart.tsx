@@ -10,6 +10,8 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import { options } from "./options";
 import { formatChartData, getChartLabels } from "./utils";
@@ -44,6 +46,7 @@ const BarChart = ({
   todaysDate: string;
 }) => {
   const theme = useTheme();
+  const compareCoins = useAppSelector(selectCompareCoins);
   const barChartLabels = getChartLabels(chartDataOne);
 
   const datasets = [
@@ -76,6 +79,10 @@ const BarChart = ({
       barThickness: 2,
       borderRadius: 4,
     });
+  }
+
+  if (!compareCoins && datasets.length > 1) {
+    datasets.pop();
   }
 
   const barChartData = {

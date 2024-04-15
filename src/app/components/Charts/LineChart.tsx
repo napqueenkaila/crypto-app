@@ -10,6 +10,8 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import { options } from "./options";
 import { formatChartData, getChartLabels } from "./utils";
@@ -44,6 +46,7 @@ const LineChart = ({
   todaysDate: string;
 }) => {
   const theme = useTheme();
+  const compareCoins = useAppSelector(selectCompareCoins);
   const lineChartLabels = getChartLabels(chartDataOne);
 
   const datasets = [
@@ -78,6 +81,10 @@ const LineChart = ({
         return gradient;
       },
     });
+  }
+
+  if (!compareCoins && datasets.length > 1) {
+    datasets.pop();
   }
 
   const lineChartData = {
