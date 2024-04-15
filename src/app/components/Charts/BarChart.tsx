@@ -60,7 +60,7 @@ const BarChart = ({
         gradient.addColorStop(1, "rgba(179,116,242,0.01)");
         return gradient;
       },
-      barThickness: 2,
+      barThickness: 20,
       borderRadius: 4,
     },
   ];
@@ -76,7 +76,7 @@ const BarChart = ({
         gradient.addColorStop(1, "rgba(231,114,255,0.01)");
         return gradient;
       },
-      barThickness: 2,
+      barThickness: 20,
       borderRadius: 4,
     });
   }
