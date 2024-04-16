@@ -14,5 +14,5 @@ export const todaysDate = new Intl.DateTimeFormat("en-US", {
 }).format(new Date(Date.now()));
 
 export const formatChartData = (data: number[][]) => {
-  return data.map((el) => el[1]);
+  return data?.map((el) => el[1]);
 };
