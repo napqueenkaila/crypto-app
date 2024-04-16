@@ -19,7 +19,7 @@ const ConverterValueDiv = styled.div`
 
 export default function Converter() {
   const { currency } = useAppSelector(selectCurrency);
-  const [fromCoin, setfromCoin] = useState("bitcoin");
+  const [fromCoin, setFromCoin] = useState("bitcoin");
   const [toCoin, setToCoin] = useState("ethereum");
   const { data: options } = useGetCarouselDataQuery(currency);
 
@@ -35,7 +35,7 @@ export default function Converter() {
         <SelectWithSearch
           options={mappedOptions}
           coin={fromCoin}
-          setCoin={setfromCoin}
+          setCoin={setFromCoin}
         />
       </ConverterValueDiv>
       <ConverterValueDiv>
