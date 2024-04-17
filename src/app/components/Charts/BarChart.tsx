@@ -14,7 +14,11 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import { options } from "./options";
-import { formatChartData, getChartLabels } from "./utils";
+import {
+  formatChartData,
+  getChartLabels,
+  getChartBackgroundColor,
+} from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -53,13 +57,7 @@ const BarChart = ({
     {
       label: coinOne.name,
       data: formatChartData(chartDataOne),
-      backgroundColor: (context) => {
-        const ctx = context.chart.ctx;
-        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-        gradient.addColorStop(0, "rgba(157,98,217,1)");
-        gradient.addColorStop(1, "rgba(179,116,242,0.01)");
-        return gradient;
-      },
+      backgroundColor: getChartBackgroundColor("one"),
       barThickness: 20,
       borderRadius: 4,
     },
@@ -69,13 +67,7 @@ const BarChart = ({
     datasets.push({
       label: coinTwo.name,
       data: formatChartData(chartDataTwo),
-      backgroundColor: (context) => {
-        const ctx = context.chart.ctx;
-        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-        gradient.addColorStop(0, "rgba(231,114,255,0.6)");
-        gradient.addColorStop(1, "rgba(231,114,255,0.01)");
-        return gradient;
-      },
+      backgroundColor: getChartBackgroundColor("two"),
       barThickness: 20,
       borderRadius: 4,
     });
