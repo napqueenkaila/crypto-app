@@ -13,6 +13,7 @@ import { Line } from "react-chartjs-2";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
+import CompareCoinsLegend from "./CompareCoinsLegend";
 import { options } from "./options";
 import {
   formatChartData,
@@ -96,6 +97,9 @@ const LineChart = ({
         options={options}
         data={lineChartData}
       />
+      {compareCoins && (
+        <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
+      )}
     </Wrapper>
   );
 };
