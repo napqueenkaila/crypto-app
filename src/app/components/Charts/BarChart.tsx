@@ -10,9 +10,15 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { formatDateLabel } from "./utils";
-import { options } from "./options";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
+import { options } from "./options";
+import {
+  formatChartData,
+  getChartLabels,
+  getChartBackgroundColor,
+} from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -31,42 +37,54 @@ const Wrapper = styled.div`
 `;
 
 const BarChart = ({
-  selectedCoin,
-  chartData,
+  coinOne,
+  coinTwo,
+  chartDataOne,
+  chartDataTwo,
   todaysDate,
 }: {
-  selectedCoin: string;
-  chartData: number[][];
+  coinOne: { [key: string]: string };
+  coinTwo: { [key: string]: string };
+  chartDataOne: number[][];
+  chartDataTwo: number[][];
   todaysDate: string;
 }) => {
   const theme = useTheme();
-  const barChartLabels = chartData.map((el) => formatDateLabel(el[0]));
+  const compareCoins = useAppSelector(selectCompareCoins);
+  const barChartLabels = getChartLabels(chartDataOne);
+
+  const datasets = [
+    {
+      label: coinOne.name,
+      data: formatChartData(chartDataOne),
+      backgroundColor: getChartBackgroundColor("one"),
+      barThickness: 20,
+      borderRadius: 4,
+    },
+  ];
+
+  if (chartDataTwo) {
+    datasets.push({
+      label: coinTwo.name,
+      data: formatChartData(chartDataTwo),
+      backgroundColor: getChartBackgroundColor("two"),
+      barThickness: 20,
+      borderRadius: 4,
+    });
+  }
+
+  if (!compareCoins && datasets.length > 1) {
+    datasets.pop();
+  }
+
   const barChartData = {
     labels: barChartLabels,
-    datasets: [
-      {
-        label: "",
-        data: chartData.map((el) => el[1]),
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(157,98,217,1)");
-          gradient.addColorStop(1, "rgba(179,116,242,0.01)");
-          return gradient;
-        },
-        barThickness: 2,
-        borderRadius: 4,
-      },
-    ],
+    datasets: datasets,
   };
 
   return (
     <Wrapper>
-      <Legend
-        selectedCoin={selectedCoin}
-        chartType="bar"
-        todaysDate={todaysDate}
-      />
+      <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
       <Bar
         style={{
           backgroundColor: theme.charts.barBackgroundColor,

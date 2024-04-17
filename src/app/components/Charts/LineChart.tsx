@@ -10,9 +10,15 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import { options } from "./options";
-import { formatDateLabel } from "./utils";
+import {
+  formatChartData,
+  getChartLabels,
+  getChartBackgroundColor,
+} from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -30,35 +36,63 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const LineChart = ({ selectedCoin, chartData, todaysDate }: { selectedCoin: string; chartData:number[][],todaysDate:string}) => {
+const LineChart = ({
+  coinOne,
+  coinTwo,
+  chartDataOne,
+  chartDataTwo,
+  todaysDate,
+}: {
+  coinOne: { [key: string]: string };
+  coinTwo: { [key: string]: string };
+  chartDataOne: number[][];
+  chartDataTwo: number[][];
+  todaysDate: string;
+}) => {
   const theme = useTheme();
-  const lineChartLabels = chartData.map((el) => formatDateLabel(el[0]));
+  const compareCoins = useAppSelector(selectCompareCoins);
+  const lineChartLabels = getChartLabels(chartDataOne);
+
+  const datasets = [
+    {
+      label: coinOne.name,
+      data: formatChartData(chartDataOne),
+      borderColor: "#7878fa",
+      fill: true,
+      borderWidth: 2,
+      backgroundColor: getChartBackgroundColor("one"),
+    },
+  ];
+
+  if (chartDataTwo) {
+    datasets.push({
+      label: coinTwo.name,
+      data: formatChartData(chartDataTwo),
+      borderColor: "#D878FA",
+      fill: true,
+      borderWidth: 2,
+      backgroundColor: getChartBackgroundColor("two"),
+    });
+  }
+
+  if (!compareCoins && datasets.length > 1) {
+    datasets.pop();
+  }
 
   const lineChartData = {
     labels: lineChartLabels,
-    datasets: [
-      {
-        label: "",
-        data: chartData.map((el) => el[1]),
-        borderColor: "#7878FA",
-        fill: true,
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(116,116,242,0.6)");
-          gradient.addColorStop(1, "rgba(116,116,242,0.01)");
-          return gradient;
-        },
-        borderWidth: 2,
-      },
-    ],
+    datasets: datasets,
   };
 
   return (
     <Wrapper>
-      <Legend chartType="line" todaysDate={todaysDate} selectedCoin={selectedCoin} />
+      <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
       <Line
-        style={{ backgroundColor: theme.charts.lineBackgroundColor, borderRadius: "12px", padding: "24px" }}
+        style={{
+          backgroundColor: theme.charts.lineBackgroundColor,
+          borderRadius: "12px",
+          padding: "24px",
+        }}
         options={options}
         data={lineChartData}
       />

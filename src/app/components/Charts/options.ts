@@ -11,6 +11,7 @@ export const options = {
       display: false,
     },
     x: {
+      stacked: true,
       display: true,
       ticks: {
         color: "#9b9ab6",

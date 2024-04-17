@@ -18,14 +18,18 @@ const selectedCoinsSlice = createSlice({
   reducers: {
     setCoinOne: (state, action) => {
       state.coinOne = action.payload;
-      if (state.coinOne && state.coinTwo) {
+      if (state.coinOne.id !== "" && state.coinTwo.id !== "") {
         state.compareCoins = true;
+      } else {
+        state.compareCoins = false;
       }
     },
     setCoinTwo: (state, action) => {
       state.coinTwo = action.payload;
-      if (state.coinOne && state.coinTwo) {
+      if (state.coinOne.id !== "" && state.coinTwo.id !== "") {
         state.compareCoins = true;
+      } else {
+        state.compareCoins = false;
       }
     },
   },
