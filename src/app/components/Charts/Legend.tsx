@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import { formatCompactCurrency } from "@/app/utils";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 
 const LegendWrapper = styled.div`
   padding-left: 25px;
@@ -43,18 +44,38 @@ const Legend = ({
   legendValue,
 }: Props): JSX.Element => {
   const { currency } = useAppSelector(selectCurrency);
+  const compareCoins = useAppSelector(selectCompareCoins);
+  const titleText = `${coinOne.name} (${coinOne.symbol.toUpperCase()})`;
+  
+  const getLegendJSX = () => {
+    if (chartType === "line" && compareCoins) {
+      return <Value>{todaysDate}</Value>;
+    } else if (chartType === "line" && !compareCoins) {
+      return (
+        <>
+          <Title>{titleText}</Title>
+          <Value>{formatCompactCurrency(legendValue, currency)}</Value>
+          <Date>{todaysDate}</Date>
+        </>
+      );
+    } else if (chartType === "bar" && compareCoins) {
+      return (
+        <>
+          <Value>Volume 24h</Value> <Date>{todaysDate}</Date>
+        </>
+      );
+    } else if (chartType === "bar" && !compareCoins) {
+      return (
+        <>
+          <Title>Volume 24h</Title>
+          <Value>{formatCompactCurrency(legendValue, currency)}</Value>
+          <Date>{todaysDate}</Date>
+        </>
+      );
+    }
+  };
 
-  return (
-    <LegendWrapper>
-      <Title>
-        {chartType === "line"
-          ? `${coinOne.name} (${coinOne.symbol.toUpperCase()})`
-          : "Volume 24h"}
-      </Title>
-      <Value>{formatCompactCurrency(legendValue, currency)}</Value>
-      <Date>{todaysDate}</Date>
-    </LegendWrapper>
-  );
+  return <LegendWrapper>{getLegendJSX()}</LegendWrapper>;
 };
 
 export default Legend;
