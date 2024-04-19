@@ -35,3 +35,10 @@ export const getChartGradient =
     gradient.addColorStop(1, chartColors[type as keyof ChartColors].end);
     return gradient;
   };
+
+export const getLegendValue = (data: number[][], index: number) => {
+   const formattedData = formatChartData(data);
+    return Number(
+      formattedData?.[index].toFixed(3) || formattedData.slice(-1)[0].toFixed(3)
+    );
+  };
