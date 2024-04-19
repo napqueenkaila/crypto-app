@@ -36,10 +36,12 @@ ChartJS.register(
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   width: 50%;
   height: 100%;
   background-color: ${({ theme }) => theme.charts.lineBackgroundColor};
   border-radius: 12px;
+  padding: 20px 0;
 `;
 
 const Container = styled.div<{ $compareCoins: boolean }>`

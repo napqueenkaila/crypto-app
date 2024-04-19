@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const LegendWrapper = styled.div`
-  padding-top: 20px;
   padding-left: 25px;
 `;
 
