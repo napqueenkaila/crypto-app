@@ -1,4 +1,5 @@
 export const options = {
+  onHover: {} as any,
   responsive: true,
   maintainAspectRatio: false,
   interaction: {
