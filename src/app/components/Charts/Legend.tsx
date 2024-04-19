@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { formatCompactCurrency } from "@/app/utils";
 
 const LegendWrapper = styled.div`
   padding-left: 25px;
@@ -30,9 +33,17 @@ type Props = {
   chartType: string;
   todaysDate: string;
   coinOne: { [key: string]: string };
+  legendValue: number;
 };
 
-const Legend = ({ chartType, todaysDate, coinOne }: Props): JSX.Element => {
+const Legend = ({
+  chartType,
+  todaysDate,
+  coinOne,
+  legendValue,
+}: Props): JSX.Element => {
+  const { currency } = useAppSelector(selectCurrency);
+
   return (
     <LegendWrapper>
       <Title>
@@ -40,7 +51,7 @@ const Legend = ({ chartType, todaysDate, coinOne }: Props): JSX.Element => {
           ? `${coinOne.name} (${coinOne.symbol.toUpperCase()})`
           : "Volume 24h"}
       </Title>
-      <Value>$13.431 mln</Value>
+      <Value>{formatCompactCurrency(legendValue, currency)}</Value>
       <Date>{todaysDate}</Date>
     </LegendWrapper>
   );
