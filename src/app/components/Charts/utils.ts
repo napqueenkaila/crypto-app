@@ -27,7 +27,7 @@ const chartColors: ChartColors = {
   two: { start: "rgba(231,114,255,0.6) ", end: "rgba(231,114,255,0.01)" },
 };
 
-export const getChartBackgroundColor =
+export const getChartGradient =
   (type: string) => (context: { chart: { ctx: any } }) => {
     const ctx = context.chart.ctx;
     const gradient = ctx.createLinearGradient(0, 0, 0, 350);

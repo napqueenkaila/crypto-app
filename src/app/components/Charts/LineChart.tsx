@@ -22,7 +22,7 @@ import {
 import {
   formatChartData,
   getChartLabels,
-  getChartBackgroundColor,
+  getChartGradient,
 } from "./utils";
 
 ChartJS.register(
@@ -59,7 +59,7 @@ const LineChart = ({
       borderColor: "#7878fa",
       fill: true,
       borderWidth: 2,
-      backgroundColor: getChartBackgroundColor("one"),
+      backgroundColor: getChartGradient("one"),
     },
   ];
 
@@ -70,7 +70,7 @@ const LineChart = ({
       borderColor: "#D878FA",
       fill: true,
       borderWidth: 2,
-      backgroundColor: getChartBackgroundColor("two"),
+      backgroundColor: getChartGradient("two"),
     });
   }
 

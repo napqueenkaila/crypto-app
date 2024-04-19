@@ -22,7 +22,7 @@ import {
 import {
   formatChartData,
   getChartLabels,
-  getChartBackgroundColor,
+  getChartGradient,
 } from "./utils";
 
 ChartJS.register(
@@ -56,7 +56,7 @@ const BarChart = ({
     {
       label: coinOne.name,
       data: formatChartData(chartDataOne),
-      backgroundColor: getChartBackgroundColor("one"),
+      backgroundColor: getChartGradient("one"),
       barThickness: 20,
       borderRadius: 4,
     },
@@ -66,7 +66,7 @@ const BarChart = ({
     datasets.push({
       label: coinTwo.name,
       data: formatChartData(chartDataTwo),
-      backgroundColor: getChartBackgroundColor("two"),
+      backgroundColor: getChartGradient("two"),
       barThickness: 20,
       borderRadius: 4,
     });
