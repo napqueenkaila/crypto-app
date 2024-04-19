@@ -7,11 +7,11 @@ export const options = {
   },
   plugins: {
     legend: {
-      display: false
+      display: false,
     },
     crosshair: {
       line: { color: "#FFF", width: 1 },
-      sync: {enabled: false}
+      sync: { enabled: false },
     },
     tooltip: {
       backgroundColor: "rgba(0,0,0,0)",
@@ -39,7 +39,7 @@ export const options = {
       radius: 0,
     },
     line: {
-      tension: .5,
+      tension: 0.5,
     },
   },
 };
