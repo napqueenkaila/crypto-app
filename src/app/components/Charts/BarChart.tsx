@@ -14,7 +14,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import CompareCoinsLegend from "./CompareCoinsLegend";
-import { options } from "./options";
+import { barOptions } from "./options";
 import {
   Wrapper,
   Container,
@@ -77,7 +77,7 @@ const BarChart = ({
       <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
       <Container $compareCoins={compareCoins}>
         <Bar
-          options={options}
+          options={barOptions}
           data={{ labels: barChartLabels, datasets: datasets }}
         />
       </Container>

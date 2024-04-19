@@ -14,7 +14,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
 import CompareCoinsLegend from "./CompareCoinsLegend";
-import { options } from "./options";
+import { lineOptions } from "./options";
 import {
   Wrapper,
   Container,
@@ -79,7 +79,7 @@ const LineChart = ({
       <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
       <Container $compareCoins={compareCoins}>
         <Line
-          options={options}
+          options={lineOptions}
           data={{ labels: lineChartLabels, datasets: datasets }}
         />
       </Container>
