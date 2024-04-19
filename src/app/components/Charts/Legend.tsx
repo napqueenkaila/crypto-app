@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const LegendWrapper = styled.div`
   position: absolute;
-  padding-left: 35px;
-  padding-top: 20px;
+  left:25px;
+  top: 20px;
 `;
 
 const Title = styled.p`
@@ -11,7 +11,7 @@ const Title = styled.p`
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 `;
 
 const Value = styled.p`
