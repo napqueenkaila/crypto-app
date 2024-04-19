@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,13 +30,23 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  CrosshairPlugin,
+  CrosshairPlugin
 );
 
 const Wrapper = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
+  background-color: ${({ theme }) => theme.charts.barBackgroundColor};
+  border-radius: 12px;
+`;
+
+const Container = styled.div<{ $compareCoins: boolean }>`
+  position: relative;
+  height: 35vh;
+  padding: 10px;
+  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "20px")};
 `;
 
 const BarChart = ({
@@ -52,7 +62,6 @@ const BarChart = ({
   chartDataTwo: number[][];
   todaysDate: string;
 }) => {
-  const theme = useTheme();
   const compareCoins = useAppSelector(selectCompareCoins);
   const barChartLabels = getChartLabels(chartDataOne);
 
@@ -88,15 +97,9 @@ const BarChart = ({
   return (
     <Wrapper>
       <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
-      <Bar
-        style={{
-          backgroundColor: theme.charts.barBackgroundColor,
-          borderRadius: "12px",
-          padding: "24px",
-        }}
-        options={options}
-        data={barChartData}
-      />
+      <Container $compareCoins={compareCoins}>
+        <Bar options={options} data={barChartData} />
+      </Container>
       {compareCoins && (
         <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
       )}

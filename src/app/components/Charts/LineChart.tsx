@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
-import { CrosshairPlugin } from "chartjs-plugin-crosshair"; 
+import { CrosshairPlugin } from "chartjs-plugin-crosshair";
 import { Line } from "react-chartjs-2";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
@@ -30,13 +30,23 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  CrosshairPlugin,
+  CrosshairPlugin
 );
 
 const Wrapper = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
+  background-color: ${({ theme }) => theme.charts.lineBackgroundColor};
+  border-radius: 12px;
+`;
+
+const Container = styled.div<{ $compareCoins: boolean }>`
+  position: relative;
+  height: 35vh;
+  padding: 10px;
+  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "20px")};
 `;
 
 const LineChart = ({
@@ -52,7 +62,6 @@ const LineChart = ({
   chartDataTwo: number[][];
   todaysDate: string;
 }) => {
-  const theme = useTheme();
   const compareCoins = useAppSelector(selectCompareCoins);
   const lineChartLabels = getChartLabels(chartDataOne);
 
@@ -90,15 +99,9 @@ const LineChart = ({
   return (
     <Wrapper>
       <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
-      <Line
-        style={{
-          backgroundColor: theme.charts.lineBackgroundColor,
-          borderRadius: "12px",
-          padding: "24px",
-        }}
-        options={options}
-        data={lineChartData}
-      />
+      <Container $compareCoins={compareCoins}>
+        <Line options={options} data={lineChartData} />
+      </Container>
       {compareCoins && (
         <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
       )}
