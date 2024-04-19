@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,10 +17,15 @@ import Legend from "./Legend";
 import CompareCoinsLegend from "./CompareCoinsLegend";
 import { lineOptions } from "./options";
 import {
+  formatChartData,
+  getChartLabels,
+  getChartGradient,
+  getLegendValue,
+} from "./utils";
+import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
-import { formatChartData, getChartLabels, getChartGradient } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +52,14 @@ const LineChart = ({
   todaysDate: string;
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
+  const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
   const lineChartLabels = getChartLabels(chartDataOne);
+
+  lineOptions.onHover = (event: any, price: any) => {
+    if (price[0]?.index !== undefined) {
+      setPriceIndex(price[0]?.index);
+    }
+  };
 
   const datasets = [
     {
@@ -76,7 +89,12 @@ const LineChart = ({
 
   return (
     <Wrapper>
-      <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
+      <Legend
+        chartType="line"
+        todaysDate={todaysDate}
+        coinOne={coinOne}
+        legendValue={getLegendValue(chartDataOne, priceIndex)}
+      />
       <Container $compareCoins={compareCoins}>
         <Line
           options={lineOptions}

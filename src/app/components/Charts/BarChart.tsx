@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,10 +17,15 @@ import Legend from "./Legend";
 import CompareCoinsLegend from "./CompareCoinsLegend";
 import { barOptions } from "./options";
 import {
+  formatChartData,
+  getChartLabels,
+  getChartGradient,
+  getLegendValue,
+} from "./utils";
+import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
-import { formatChartData, getChartLabels, getChartGradient } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +52,14 @@ const BarChart = ({
   todaysDate: string;
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
+  const [volumeIndex, setVolumeIndex] = useState(chartDataOne?.length - 1);
   const barChartLabels = getChartLabels(chartDataOne);
+
+  barOptions.onHover = (event: any, price: any) => {
+    if (price[0]?.index !== undefined) {
+      setVolumeIndex(price[0]?.index);
+    }
+  };
 
   const datasets = [
     {
@@ -74,7 +87,12 @@ const BarChart = ({
 
   return (
     <Wrapper>
-      <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
+      <Legend
+        coinOne={coinOne}
+        chartType="bar"
+        todaysDate={todaysDate}
+        legendValue={getLegendValue(chartDataOne, volumeIndex)}
+      />
       <Container $compareCoins={compareCoins}>
         <Bar
           options={barOptions}
