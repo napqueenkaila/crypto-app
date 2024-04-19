@@ -19,11 +19,7 @@ import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
-import {
-  formatChartData,
-  getChartLabels,
-  getChartGradient,
-} from "./utils";
+import { formatChartData, getChartLabels, getChartGradient } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -78,16 +74,14 @@ const LineChart = ({
     datasets.pop();
   }
 
-  const lineChartData = {
-    labels: lineChartLabels,
-    datasets: datasets,
-  };
-
   return (
     <Wrapper>
       <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
       <Container $compareCoins={compareCoins}>
-        <Line options={options} data={lineChartData} />
+        <Line
+          options={options}
+          data={{ labels: lineChartLabels, datasets: datasets }}
+        />
       </Container>
       {compareCoins && (
         <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />

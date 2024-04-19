@@ -19,11 +19,7 @@ import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
-import {
-  formatChartData,
-  getChartLabels,
-  getChartGradient,
-} from "./utils";
+import { formatChartData, getChartLabels, getChartGradient } from "./utils";
 
 ChartJS.register(
   CategoryScale,
@@ -76,16 +72,14 @@ const BarChart = ({
     datasets.pop();
   }
 
-  const barChartData = {
-    labels: barChartLabels,
-    datasets: datasets,
-  };
-
   return (
     <Wrapper>
       <Legend coinOne={coinOne} chartType="bar" todaysDate={todaysDate} />
       <Container $compareCoins={compareCoins}>
-        <Bar options={options} data={barChartData} />
+        <Bar
+          options={options}
+          data={{ labels: barChartLabels, datasets: datasets }}
+        />
       </Container>
       {compareCoins && (
         <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
