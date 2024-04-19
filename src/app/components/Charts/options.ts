@@ -1,9 +1,22 @@
 export const options = {
   responsive: true,
   maintainAspectRatio: false,
+  interaction: {
+    intersect: false,
+    mode: "x" as "x",
+  },
   plugins: {
     legend: {
       display: false
+    },
+    crosshair: {
+      line: { color: "#FFF", width: 1 },
+      sync: {enabled: false}
+    },
+    tooltip: {
+      backgroundColor: "rgba(0,0,0,0)",
+      borderWidth: 0.3,
+      intersect: false,
     },
   },
   scales: {
