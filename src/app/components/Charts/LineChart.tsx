@@ -46,7 +46,7 @@ const Container = styled.div<{ $compareCoins: boolean }>`
   position: relative;
   height: 35vh;
   padding: 10px;
-  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "20px")};
+  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "0px")};
 `;
 
 const LineChart = ({

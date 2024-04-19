@@ -36,6 +36,7 @@ ChartJS.register(
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  
   width: 50%;
   height: 100%;
   background-color: ${({ theme }) => theme.charts.barBackgroundColor};
@@ -46,7 +47,7 @@ const Container = styled.div<{ $compareCoins: boolean }>`
   position: relative;
   height: 35vh;
   padding: 10px;
-  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "20px")};
+  padding-bottom: ${(props) => (props.$compareCoins ? "25px" : "0px")};
 `;
 
 const BarChart = ({
