@@ -14,8 +14,8 @@ const CoinContainer = styled.div`
 `;
 
 const ColorBox = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 2px;
   background-color: ${(props) => props.color};
 `;
