@@ -9,6 +9,7 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
+import { CrosshairPlugin } from "chartjs-plugin-crosshair";
 import { Bar } from "react-chartjs-2";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
@@ -28,7 +29,8 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Filler
+  Filler,
+  CrosshairPlugin,
 );
 
 const Wrapper = styled.div`
