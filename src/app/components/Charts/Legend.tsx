@@ -35,6 +35,7 @@ type Props = {
   todaysDate: string;
   coinOne: { [key: string]: string };
   legendValue: number;
+  legendDate: string;
 };
 
 const Legend = ({
@@ -42,6 +43,7 @@ const Legend = ({
   todaysDate,
   coinOne,
   legendValue,
+  legendDate
 }: Props): JSX.Element => {
   const { currency } = useAppSelector(selectCurrency);
   const compareCoins = useAppSelector(selectCompareCoins);
@@ -49,19 +51,19 @@ const Legend = ({
   
   const getLegendJSX = () => {
     if (chartType === "line" && compareCoins) {
-      return <Value>{todaysDate}</Value>;
+      return <Value>{legendDate}</Value>;
     } else if (chartType === "line" && !compareCoins) {
       return (
         <>
           <Title>{titleText}</Title>
           <Value>{formatCompactCurrency(legendValue, currency)}</Value>
-          <Date>{todaysDate}</Date>
+          <Date>{legendDate}</Date>
         </>
       );
     } else if (chartType === "bar" && compareCoins) {
       return (
         <>
-          <Value>Volume 24h</Value> <Date>{todaysDate}</Date>
+          <Value>Volume 24h</Value> <Date>{legendDate}</Date>
         </>
       );
     } else if (chartType === "bar" && !compareCoins) {
@@ -69,7 +71,7 @@ const Legend = ({
         <>
           <Title>Volume 24h</Title>
           <Value>{formatCompactCurrency(legendValue, currency)}</Value>
-          <Date>{todaysDate}</Date>
+          <Date>{legendDate}</Date>
         </>
       );
     }
