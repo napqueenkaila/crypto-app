@@ -73,10 +73,7 @@ export const barOptions = {
     legend: {
       display: false,
     },
-    crosshair: {
-      line: { color: "#FFF", width: 1 },
-      sync: { enabled: false },
-    },
+    crosshair: false,
     tooltip: {
       backgroundColor: "rgba(0,0,0,0)",
       borderWidth: 0.3,
