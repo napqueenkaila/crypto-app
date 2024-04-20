@@ -37,8 +37,19 @@ export const getChartGradient =
   };
 
 export const getLegendValue = (data: number[][], index: number) => {
-   const formattedData = formatChartData(data);
-    return Number(
-      formattedData?.[index].toFixed(3) || formattedData.slice(-1)[0].toFixed(3)
-    );
-  };
+  const formattedData = formatChartData(data);
+  return Number(
+    formattedData?.[index].toFixed(3) || formattedData.slice(-1)[0].toFixed(3)
+  );
+};
+
+export const getLegendDate = (data: number[][], index: number) => {
+  const formattedData = data?.map((el) => {
+    return new Intl.DateTimeFormat("en", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(el[0]);
+  });
+  return formattedData[index];
+};
