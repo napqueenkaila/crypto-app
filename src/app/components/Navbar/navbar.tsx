@@ -78,10 +78,10 @@ const Navbar = () => {
         </DropdownDiv>
       </div>
       <CurrencyDiv>
-        <label>
+        <label htmlFor="currency">
           <DollarIcon darkMode={darkMode} />
         </label>
-        <StyledSelect onChange={handleCurrencyChange}>
+        <StyledSelect id="currency" onChange={handleCurrencyChange}>
           <option value="usd">USD</option>
           <option value="gbp">GBP</option>
           <option value="eur">EUR</option>
