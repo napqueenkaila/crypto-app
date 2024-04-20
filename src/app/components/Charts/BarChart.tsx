@@ -105,9 +105,7 @@ const BarChart = ({
           coinOne={coinOne.name}
           coinTwo={coinTwo.name}
           legendValueOne={getLegendValue(chartDataOne, volumeIndex)}
-          legendValueTwo={
-            chartDataTwo && getLegendValue(chartDataTwo, volumeIndex)
-          }
+          legendValueTwo={getLegendValue(chartDataTwo, volumeIndex)}
         />
       )}
     </Wrapper>

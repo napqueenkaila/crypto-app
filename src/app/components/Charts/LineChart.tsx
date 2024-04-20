@@ -106,9 +106,7 @@ const LineChart = ({
           coinOne={coinOne.name}
           coinTwo={coinTwo.name}
           legendValueOne={getLegendValue(chartDataOne, priceIndex)}
-          legendValueTwo={
-            chartDataTwo && getLegendValue(chartDataTwo, priceIndex)
-          }
+          legendValueTwo={getLegendValue(chartDataTwo, priceIndex)}
         />
       )}
     </Wrapper>
