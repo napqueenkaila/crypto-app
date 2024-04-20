@@ -18,7 +18,8 @@ export const lineOptions = {
       backgroundColor: "rgba(0,0,0,0)",
       borderWidth: 0.3,
       intersect: false,
-      position: "nearest",
+      position: "average",
+      mode: "index",
       callbacks: {
         label: function (context) {
           let label = context.dataset.label;
