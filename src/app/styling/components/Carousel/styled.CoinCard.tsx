@@ -3,6 +3,9 @@ import Image from "next/image";
 
 const Wrapper = styled.div`
   display: inline-block;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const CardContainer = styled.div<{ $isSelected: boolean }>`
