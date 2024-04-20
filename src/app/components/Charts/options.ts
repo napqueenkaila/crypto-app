@@ -21,7 +21,7 @@ export const lineOptions = {
       position: "average",
       mode: "index",
       callbacks: {
-        label: function (context) {
+        label: function (context: { dataset: { label: any; }; parsed: { y: number | bigint | null; }; }) {
           let label = context.dataset.label;
           if (label) {
             label += ": ";
@@ -79,7 +79,7 @@ export const barOptions = {
       borderWidth: 0.3,
       intersect: false,
       callbacks: {
-        label: function (context) {
+        label: function (context: { dataset: { label: any; }; parsed: { y: number | bigint | null; }; }) {
           let label = context.dataset.label;
           if (label) {
             label += ": ";
