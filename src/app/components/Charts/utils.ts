@@ -39,7 +39,7 @@ export const getChartGradient =
 export const getLegendValue = (data: number[][], index: number) => {
   const formattedData = formatChartData(data);
   return Number(
-    formattedData?.[index].toFixed(3) || formattedData.slice(-1)[0].toFixed(3)
+    formattedData?.[index].toFixed(3) || formattedData?.slice(-1)[0].toFixed(3)
   );
 };
 
