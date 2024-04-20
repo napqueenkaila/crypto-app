@@ -9,7 +9,6 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
-import { CrosshairPlugin } from "chartjs-plugin-crosshair";
 import { Bar } from "react-chartjs-2";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
@@ -36,7 +35,6 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  CrosshairPlugin
 );
 
 const BarChart = ({
@@ -69,6 +67,7 @@ const BarChart = ({
       backgroundColor: getChartGradient("one"),
       barThickness: 20,
       borderRadius: 4,
+      hoverBackgroundColor: "#fff",
     },
   ];
 
@@ -79,6 +78,7 @@ const BarChart = ({
       backgroundColor: getChartGradient("two"),
       barThickness: 20,
       borderRadius: 4,
+      hoverBackgroundColor: "red",
     });
   }
 
