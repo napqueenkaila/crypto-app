@@ -54,7 +54,6 @@ const LineChart = ({
   const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
   const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);
   const lineChartLabels = getChartLabels(chartDataOne);
-
   lineOptions.onHover = (event: any, price: any) => {
     if (price[0]?.index !== undefined) {
       setPriceIndex(price[0]?.index);
@@ -103,7 +102,14 @@ const LineChart = ({
         />
       </Container>
       {compareCoins && (
-        <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
+        <CompareCoinsLegend
+          coinOne={coinOne.name}
+          coinTwo={coinTwo.name}
+          legendValueOne={getLegendValue(chartDataOne, priceIndex)}
+          legendValueTwo={
+            chartDataTwo && getLegendValue(chartDataTwo, priceIndex)
+          }
+        />
       )}
     </Wrapper>
   );

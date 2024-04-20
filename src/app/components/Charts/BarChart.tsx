@@ -101,7 +101,14 @@ const BarChart = ({
         />
       </Container>
       {compareCoins && (
-        <CompareCoinsLegend coinOne={coinOne.name} coinTwo={coinTwo.name} />
+        <CompareCoinsLegend
+          coinOne={coinOne.name}
+          coinTwo={coinTwo.name}
+          legendValueOne={getLegendValue(chartDataOne, volumeIndex)}
+          legendValueTwo={
+            chartDataTwo && getLegendValue(chartDataTwo, volumeIndex)
+          }
+        />
       )}
     </Wrapper>
   );
