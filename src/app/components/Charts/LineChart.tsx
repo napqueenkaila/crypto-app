@@ -21,6 +21,7 @@ import {
   getChartLabels,
   getChartGradient,
   getLegendValue,
+  getLegendDate,
 } from "./utils";
 import {
   Wrapper,
@@ -53,11 +54,13 @@ const LineChart = ({
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
+  const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);
   const lineChartLabels = getChartLabels(chartDataOne);
 
   lineOptions.onHover = (event: any, price: any) => {
     if (price[0]?.index !== undefined) {
       setPriceIndex(price[0]?.index);
+      setDateIndex(price[0]?.index);
     }
   };
 
@@ -94,6 +97,7 @@ const LineChart = ({
         todaysDate={todaysDate}
         coinOne={coinOne}
         legendValue={getLegendValue(chartDataOne, priceIndex)}
+        legendDate={getLegendDate(chartDataOne, dateIndex)}
       />
       <Container $compareCoins={compareCoins}>
         <Line

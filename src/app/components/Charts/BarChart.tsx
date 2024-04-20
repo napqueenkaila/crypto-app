@@ -21,6 +21,7 @@ import {
   getChartLabels,
   getChartGradient,
   getLegendValue,
+  getLegendDate,
 } from "./utils";
 import {
   Wrapper,
@@ -53,11 +54,13 @@ const BarChart = ({
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [volumeIndex, setVolumeIndex] = useState(chartDataOne?.length - 1);
+  const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);
   const barChartLabels = getChartLabels(chartDataOne);
 
   barOptions.onHover = (event: any, price: any) => {
     if (price[0]?.index !== undefined) {
       setVolumeIndex(price[0]?.index);
+      setDateIndex(price[0]?.index);
     }
   };
 
@@ -92,6 +95,7 @@ const BarChart = ({
         chartType="bar"
         todaysDate={todaysDate}
         legendValue={getLegendValue(chartDataOne, volumeIndex)}
+        legendDate={getLegendDate(chartDataOne, dateIndex)}
       />
       <Container $compareCoins={compareCoins}>
         <Bar
