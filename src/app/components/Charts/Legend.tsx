@@ -32,7 +32,6 @@ const Date = styled.p`
 
 type Props = {
   chartType: string;
-  todaysDate: string;
   coinOne: { [key: string]: string };
   legendValue: number;
   legendDate: string;
@@ -40,7 +39,6 @@ type Props = {
 
 const Legend = ({
   chartType,
-  todaysDate,
   coinOne,
   legendValue,
   legendDate

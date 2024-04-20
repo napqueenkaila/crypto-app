@@ -13,7 +13,6 @@ import {
 import RangeBar from "./RangeBar";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
-import { todaysDate } from "./utils";
 
 const Container = styled.div`
   display: flex;
@@ -61,14 +60,12 @@ const ChartsContainer = () => {
               coinTwo={coinTwoSelected}
               chartDataOne={coinOneData.prices}
               chartDataTwo={coinTwoData?.prices}
-              todaysDate={todaysDate}
             />
             <BarChart
               coinOne={coinOneSelected}
               coinTwo={coinTwoSelected}
               chartDataOne={coinOneData.total_volumes}
               chartDataTwo={coinTwoData?.total_volumes}
-              todaysDate={todaysDate}
             />
           </>
         ) : null}

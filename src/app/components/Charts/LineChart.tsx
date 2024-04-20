@@ -44,13 +44,11 @@ const LineChart = ({
   coinTwo,
   chartDataOne,
   chartDataTwo,
-  todaysDate,
 }: {
   coinOne: { [key: string]: string };
   coinTwo: { [key: string]: string };
   chartDataOne: number[][];
   chartDataTwo: number[][];
-  todaysDate: string;
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
@@ -94,7 +92,6 @@ const LineChart = ({
     <Wrapper>
       <Legend
         chartType="line"
-        todaysDate={todaysDate}
         coinOne={coinOne}
         legendValue={getLegendValue(chartDataOne, priceIndex)}
         legendDate={getLegendDate(chartDataOne, dateIndex)}

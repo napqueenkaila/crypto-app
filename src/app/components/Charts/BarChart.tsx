@@ -44,13 +44,11 @@ const BarChart = ({
   coinTwo,
   chartDataOne,
   chartDataTwo,
-  todaysDate,
 }: {
   coinOne: { [key: string]: string };
   coinTwo: { [key: string]: string };
   chartDataOne: number[][];
   chartDataTwo: number[][];
-  todaysDate: string;
 }) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [volumeIndex, setVolumeIndex] = useState(chartDataOne?.length - 1);
@@ -93,7 +91,6 @@ const BarChart = ({
       <Legend
         coinOne={coinOne}
         chartType="bar"
-        todaysDate={todaysDate}
         legendValue={getLegendValue(chartDataOne, volumeIndex)}
         legendDate={getLegendDate(chartDataOne, dateIndex)}
       />
