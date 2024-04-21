@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,16 +9,24 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
+import { CrosshairPlugin } from "chartjs-plugin-crosshair";
 import { Line } from "react-chartjs-2";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
-import { options } from "./options";
+import CompareCoinsLegend from "./CompareCoinsLegend";
+import { lineOptions } from "./options";
 import {
   formatChartData,
   getChartLabels,
-  getChartBackgroundColor,
+  getChartGradient,
+  getLegendValue,
+  getLegendDate,
 } from "./utils";
+import {
+  Wrapper,
+  Container,
+} from "@/app/styling/components/Charts/styled.Charts";
 
 ChartJS.register(
   CategoryScale,
@@ -27,31 +35,31 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Filler
+  Filler,
+  CrosshairPlugin
 );
-
-const Wrapper = styled.div`
-  position: relative;
-  width: 50%;
-  height: 100%;
-`;
 
 const LineChart = ({
   coinOne,
   coinTwo,
   chartDataOne,
   chartDataTwo,
-  todaysDate,
 }: {
   coinOne: { [key: string]: string };
   coinTwo: { [key: string]: string };
   chartDataOne: number[][];
   chartDataTwo: number[][];
-  todaysDate: string;
 }) => {
-  const theme = useTheme();
   const compareCoins = useAppSelector(selectCompareCoins);
+  const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
+  const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);
   const lineChartLabels = getChartLabels(chartDataOne);
+  lineOptions.onHover = (event: any, price: any) => {
+    if (price[0]?.index !== undefined) {
+      setPriceIndex(price[0]?.index);
+      setDateIndex(price[0]?.index);
+    }
+  };
 
   const datasets = [
     {
@@ -60,7 +68,7 @@ const LineChart = ({
       borderColor: "#7878fa",
       fill: true,
       borderWidth: 2,
-      backgroundColor: getChartBackgroundColor("one"),
+      backgroundColor: getChartGradient("one"),
     },
   ];
 
@@ -71,7 +79,7 @@ const LineChart = ({
       borderColor: "#D878FA",
       fill: true,
       borderWidth: 2,
-      backgroundColor: getChartBackgroundColor("two"),
+      backgroundColor: getChartGradient("two"),
     });
   }
 
@@ -79,23 +87,28 @@ const LineChart = ({
     datasets.pop();
   }
 
-  const lineChartData = {
-    labels: lineChartLabels,
-    datasets: datasets,
-  };
-
   return (
     <Wrapper>
-      <Legend chartType="line" todaysDate={todaysDate} coinOne={coinOne} />
-      <Line
-        style={{
-          backgroundColor: theme.charts.lineBackgroundColor,
-          borderRadius: "12px",
-          padding: "24px",
-        }}
-        options={options}
-        data={lineChartData}
+      <Legend
+        chartType="line"
+        coinOne={coinOne}
+        legendValue={getLegendValue(chartDataOne, priceIndex)}
+        legendDate={getLegendDate(chartDataOne, dateIndex)}
       />
+      <Container $compareCoins={compareCoins}>
+        <Line
+          options={lineOptions}
+          data={{ labels: lineChartLabels, datasets: datasets }}
+        />
+      </Container>
+      {compareCoins && (
+        <CompareCoinsLegend
+          coinOne={coinOne.name}
+          coinTwo={coinTwo.name}
+          legendValueOne={getLegendValue(chartDataOne, priceIndex)}
+          legendValueTwo={getLegendValue(chartDataTwo, priceIndex)}
+        />
+      )}
     </Wrapper>
   );
 };

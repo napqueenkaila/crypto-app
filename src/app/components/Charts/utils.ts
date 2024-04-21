@@ -1,3 +1,5 @@
+import { formatCompactCurrency, formatCurrencyWithCommas } from "@/app/utils";
+
 export const getChartLabels = (data: number[][]) => {
   return data.map((el: number[]) => {
     return new Intl.DateTimeFormat("en", {
@@ -27,7 +29,7 @@ const chartColors: ChartColors = {
   two: { start: "rgba(231,114,255,0.6) ", end: "rgba(231,114,255,0.01)" },
 };
 
-export const getChartBackgroundColor =
+export const getChartGradient =
   (type: string) => (context: { chart: { ctx: any } }) => {
     const ctx = context.chart.ctx;
     const gradient = ctx.createLinearGradient(0, 0, 0, 350);
@@ -35,3 +37,34 @@ export const getChartBackgroundColor =
     gradient.addColorStop(1, chartColors[type as keyof ChartColors].end);
     return gradient;
   };
+
+export const getLegendValue = (data: number[][], index: number) => {
+  const formattedData = formatChartData(data);
+  return Number(
+    formattedData?.[index].toFixed(3) || formattedData?.slice(-1)[0].toFixed(3)
+  );
+};
+
+export const getLegendDate = (data: number[][], index: number) => {
+  return new Intl.DateTimeFormat("en", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(data[index][0]);
+};
+
+export const getLabelCallback = (context: {
+  dataset: { label: any };
+  parsed: { y: number | bigint | null };
+}) => {
+  let label = context.dataset.label;
+  if (label) label += ": ";
+  if (context.parsed.y !== null) {
+    if (context.parsed.y >= 100000) {
+      label += formatCompactCurrency(context.parsed.y, "USD");
+    } else {
+      label += formatCurrencyWithCommas(context.parsed.y, "USD");
+    }
+  }
+  return label;
+};

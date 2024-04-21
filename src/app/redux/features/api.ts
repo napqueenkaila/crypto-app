@@ -210,6 +210,7 @@ export const {
   useGetMarketDataQuery,
   useGetSearchDataQuery,
   useGetChartDataQuery,
+  useLazyGetChartDataQuery,
   useGetTableDataQuery,
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
