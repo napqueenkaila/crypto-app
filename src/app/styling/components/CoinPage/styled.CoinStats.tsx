@@ -29,7 +29,7 @@ const Value = styled.div`
 const PercentageBarDiv = styled.div`
   width: 100%;
   height: 6px;
-  background-color: #ffffff66;
+  background-color: #d1d1d1;
   border-radius: 2px;
 `;
 

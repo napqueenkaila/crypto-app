@@ -39,7 +39,7 @@ const StyledSpan = styled.span`
 `;
 
 const AllTimeDate = styled.div`
-  color: #b9b9ba;
+  color: ${({theme})=> theme.coinPage.allTimeDateColor};
   font-weight: 400;
   font-size: 14px;
   grid-area: date;

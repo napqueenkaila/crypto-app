@@ -21,6 +21,7 @@ const colors = {
   periwinkle: "#CCCCFA",
   transparentPeriwinkle: "#CCCCFA66",
   lavender: "#E4E4F0",
+  iris: "#5A4FCf",
 };
 
 export const darkTheme = {
@@ -65,6 +66,8 @@ export const darkTheme = {
   coinPage: {
     blockBackgroundColor: colors.darkPurple,
     textColor: colors.white,
+    buttonBackground: colors.iris,
+    allTimeDateColor: colors.silver,
   },
   carousel: {
     cardBackgroundColor: colors.raisinBlack,
@@ -122,6 +125,8 @@ export const lightTheme: ThemeType = {
   coinPage: {
     blockBackgroundColor: colors.white,
     textColor: colors.delftBlue,
+    buttonBackground: colors.iris,
+    allTimeDateColor: colors.transparentDelftBlue,
   },
   carousel: {
     cardBackgroundColor: colors.white,
