@@ -67,18 +67,18 @@ const BarChart = ({
       backgroundColor: getChartGradient("one"),
       barThickness: 20,
       borderRadius: 4,
-      hoverBackgroundColor: "#fff",
+      hoverBackgroundColor: "rgba(116,116,242,1)",
     },
   ];
 
   if (chartDataTwo) {
-    datasets.push({
+    datasets.unshift({
       label: coinTwo.name,
       data: formatChartData(chartDataTwo),
       backgroundColor: getChartGradient("two"),
       barThickness: 20,
       borderRadius: 4,
-      hoverBackgroundColor: "red",
+      hoverBackgroundColor: "rgba(231,114,255,1)",
     });
   }
 
