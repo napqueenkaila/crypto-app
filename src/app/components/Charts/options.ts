@@ -1,3 +1,5 @@
+import { getLabelCallback } from "./utils";
+
 export const lineOptions = {
   onHover: {} as any,
   responsive: true,
@@ -22,17 +24,7 @@ export const lineOptions = {
       mode: "index",
       callbacks: {
         label: function (context: { dataset: { label: any; }; parsed: { y: number | bigint | null; }; }) {
-          let label = context.dataset.label;
-          if (label) {
-            label += ": ";
-          }
-          if (context.parsed.y !== null) {
-            label += new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(context.parsed.y);
-          }
-          return label;
+          return getLabelCallback(context);
         },
       },
     },
@@ -80,17 +72,7 @@ export const barOptions = {
       intersect: false,
       callbacks: {
         label: function (context: { dataset: { label: any; }; parsed: { y: number | bigint | null; }; }) {
-          let label = context.dataset.label;
-          if (label) {
-            label += ": ";
-          }
-          if (context.parsed.y !== null) {
-            label += new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(context.parsed.y);
-          }
-          return label;
+          return getLabelCallback(context);
         },
       },
     },
