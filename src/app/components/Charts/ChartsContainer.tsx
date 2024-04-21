@@ -6,11 +6,13 @@ import {
   selectCoinOne,
   selectCoinTwo,
 } from "@/app/redux/features/selectedCoinsSlice";
-import { useGetChartDataQuery } from "@/app/redux/features/api";
+import {
+  useGetChartDataQuery,
+  useLazyGetChartDataQuery,
+} from "@/app/redux/features/api";
 import RangeBar from "./RangeBar";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
-import { todaysDate } from "./utils";
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +22,6 @@ const Container = styled.div`
 `;
 
 const ChartsContainer = () => {
-  const [skip, setSkip] = useState(true);
   const { currency } = useAppSelector(selectCurrency);
   const coinOneSelected = useAppSelector(selectCoinOne);
   const coinTwoSelected = useAppSelector(selectCoinTwo);
@@ -30,18 +31,19 @@ const ChartsContainer = () => {
     selectedCoinId: coinOneSelected.id,
     selectedDays,
   });
-  const { data: coinTwoData } = useGetChartDataQuery(
-    { currency, selectedCoinId: coinTwoSelected.id, selectedDays },
-    { skip }
-  );
 
+  const [trigger, result] = useLazyGetChartDataQuery();
+  const { data: coinTwoData } = result;
+  
   useEffect(() => {
-    if (coinTwoSelected.id === "") {
-      setSkip(true);
-    } else if (coinTwoSelected.id !== "") {
-      setSkip(false);
+    if (coinTwoSelected.id !== "") {
+      trigger({
+        currency: currency,
+        selectedCoinId: coinTwoSelected.id,
+        selectedDays: selectedDays,
+      });
     }
-  }, [coinTwoSelected]);
+  }, [coinTwoSelected, currency, selectedDays, trigger]);
 
   const handleDaysChange = (e) => {
     const newDays = Number(e.target.value);
@@ -58,14 +60,12 @@ const ChartsContainer = () => {
               coinTwo={coinTwoSelected}
               chartDataOne={coinOneData.prices}
               chartDataTwo={coinTwoData?.prices}
-              todaysDate={todaysDate}
             />
             <BarChart
               coinOne={coinOneSelected}
               coinTwo={coinTwoSelected}
               chartDataOne={coinOneData.total_volumes}
               chartDataTwo={coinTwoData?.total_volumes}
-              todaysDate={todaysDate}
             />
           </>
         ) : null}

@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { formatCompactCurrency } from "@/app/utils";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 
 const LegendWrapper = styled.div`
-  position: absolute;
-  padding-left: 35px;
-  padding-top: 20px;
+  padding-left: 25px;
 `;
 
 const Title = styled.p`
@@ -11,7 +13,7 @@ const Title = styled.p`
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 `;
 
 const Value = styled.p`
@@ -30,22 +32,50 @@ const Date = styled.p`
 
 type Props = {
   chartType: string;
-  todaysDate: string;
   coinOne: { [key: string]: string };
+  legendValue: number;
+  legendDate: string;
 };
 
-const Legend = ({ chartType, todaysDate, coinOne }: Props): JSX.Element => {
-  return (
-    <LegendWrapper>
-      <Title>
-        {chartType === "line"
-          ? `${coinOne.name} (${coinOne.symbol.toUpperCase()})`
-          : "Volume 24h"}
-      </Title>
-      <Value>$13.431 mln</Value>
-      <Date>{todaysDate}</Date>
-    </LegendWrapper>
-  );
+const Legend = ({
+  chartType,
+  coinOne,
+  legendValue,
+  legendDate
+}: Props): JSX.Element => {
+  const { currency } = useAppSelector(selectCurrency);
+  const compareCoins = useAppSelector(selectCompareCoins);
+  const titleText = `${coinOne.name} (${coinOne.symbol.toUpperCase()})`;
+  
+  const getLegendJSX = () => {
+    if (chartType === "line" && compareCoins) {
+      return <Value>{legendDate}</Value>;
+    } else if (chartType === "line" && !compareCoins) {
+      return (
+        <>
+          <Title>{titleText}</Title>
+          <Value>{formatCompactCurrency(legendValue, currency)}</Value>
+          <Date>{legendDate}</Date>
+        </>
+      );
+    } else if (chartType === "bar" && compareCoins) {
+      return (
+        <>
+          <Value>Volume 24h</Value> <Date>{legendDate}</Date>
+        </>
+      );
+    } else if (chartType === "bar" && !compareCoins) {
+      return (
+        <>
+          <Title>Volume 24h</Title>
+          <Value>{formatCompactCurrency(legendValue, currency)}</Value>
+          <Date>{legendDate}</Date>
+        </>
+      );
+    }
+  };
+
+  return <LegendWrapper>{getLegendJSX()}</LegendWrapper>;
 };
 
 export default Legend;

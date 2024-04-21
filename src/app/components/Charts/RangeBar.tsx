@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Bar = styled.div`
   background-color: #232336;
   border-radius: 6px;
-  width: 30%;
+  max-width: 50%;
+  min-width: fit-content;
   padding: 4px;
   display: flex;
   justify-content: space-around;
@@ -11,7 +12,7 @@ const Bar = styled.div`
 `;
 
 const RangeDiv = styled.div`
-padding: 4px;
+  padding: 4px;
 `;
 
 const StyledInput = styled.input`
