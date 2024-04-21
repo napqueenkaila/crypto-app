@@ -1,3 +1,5 @@
+import { formatCompactCurrency, formatCurrencyWithCommas } from "@/app/utils";
+
 export const getChartLabels = (data: number[][]) => {
   return data.map((el: number[]) => {
     return new Intl.DateTimeFormat("en", {
@@ -49,4 +51,20 @@ export const getLegendDate = (data: number[][], index: number) => {
     month: "long",
     year: "numeric",
   }).format(data[index][0]);
+};
+
+export const getLabelCallback = (context: {
+  dataset: { label: any };
+  parsed: { y: number | bigint | null };
+}) => {
+  let label = context.dataset.label;
+  if (label) label += ": ";
+  if (context.parsed.y !== null) {
+    if (context.parsed.y >= 100000) {
+      label += formatCompactCurrency(context.parsed.y, "USD");
+    } else {
+      label += formatCurrencyWithCommas(context.parsed.y, "USD");
+    }
+  }
+  return label;
 };
