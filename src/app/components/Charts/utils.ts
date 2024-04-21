@@ -44,12 +44,9 @@ export const getLegendValue = (data: number[][], index: number) => {
 };
 
 export const getLegendDate = (data: number[][], index: number) => {
-  const formattedData = data?.map((el) => {
-    return new Intl.DateTimeFormat("en", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }).format(el[0]);
-  });
-  return formattedData[index];
+  return new Intl.DateTimeFormat("en", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(data[index][0]);
 };
