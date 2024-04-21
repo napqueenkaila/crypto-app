@@ -46,14 +46,21 @@ export const darkTheme = {
     activeTextColor: colors.white,
   },
   charts: {
-    legendTitleColor: colors.gray,
-    legendValueColor: colors.white,
-    legendDateColor: colors.silver,
     chartBackgroundColor: colors.darkPurple,
-    rangeBackgroundColor: colors.spaceCadet,
-    rangeTextColor: colors.coolGray,
-    selectedRangeBgColor: colors.transparentSlateBlue,
-    selectedRangeTextColor: colors.lavender,
+    legend: {
+      legendTitleColor: colors.gray,
+      legendValueColor: colors.white,
+      legendDateColor: colors.silver,
+    },
+    rangeBar: {
+      rangeBackgroundColor: colors.spaceCadet,
+      rangeTextColor: colors.coolGray,
+      selectedRangeBgColor: colors.transparentSlateBlue,
+      selectedRangeTextColor: colors.lavender,
+    },
+    compareLegend: {
+      textColor: colors.gray,
+    },
   },
   coinPage: {
     blockBackgroundColor: colors.darkPurple,
@@ -96,14 +103,21 @@ export const lightTheme: ThemeType = {
     activeTextColor: colors.white,
   },
   charts: {
-    legendTitleColor: colors.spaceCadet,
-    legendValueColor: colors.raisinBlack,
-    legendDateColor: colors.marianBlue,
     chartBackgroundColor: colors.white,
-    rangeBackgroundColor: colors.transparentPeriwinkle,
-    rangeTextColor: colors.marianBlue,
-    selectedRangeBgColor: colors.transparentSlateBlue,
-    selectedRangeTextColor: colors.raisinBlack,
+    legend: {
+      legendTitleColor: colors.spaceCadet,
+      legendValueColor: colors.raisinBlack,
+      legendDateColor: colors.marianBlue,
+    },
+    rangeBar: {
+      rangeBackgroundColor: colors.transparentPeriwinkle,
+      rangeTextColor: colors.marianBlue,
+      selectedRangeBgColor: colors.transparentSlateBlue,
+      selectedRangeTextColor: colors.raisinBlack,
+    },
+    compareLegend: {
+      textColor: colors.marianBlue,
+    },
   },
   coinPage: {
     blockBackgroundColor: colors.white,

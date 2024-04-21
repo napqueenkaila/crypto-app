@@ -9,7 +9,7 @@ const CoinContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d1d1d1;
+  color: ${({theme}) => theme.charts.compareLegend.textColor};
   font-size: 14px;
 `;
 
