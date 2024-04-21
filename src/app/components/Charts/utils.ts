@@ -9,12 +9,6 @@ export const getChartLabels = (data: number[][]) => {
   });
 };
 
-export const todaysDate = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-}).format(new Date(Date.now()));
-
 export const formatChartData = (data: number[][]) => {
   return data?.map((el) => el[1]);
 };
