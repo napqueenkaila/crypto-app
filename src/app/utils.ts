@@ -1,4 +1,4 @@
-export const formatCompactCurrency = (num: number, currency: string) => {
+export const formatCompactCurrency = (num: number | bigint, currency: string) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     notation: "compact",
@@ -13,7 +13,7 @@ export const compactCurrencyFormatter = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-export const formatCurrencyWithCommas = (num: number, currency: string) => {
+export const formatCurrencyWithCommas = (num: number | bigint, currency: string) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency,
