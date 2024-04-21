@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Bar = styled.div`
-  background-color: #232336;
+  background-color: ${({theme}) => theme.charts.rangeBackgroundColor};
   border-radius: 6px;
   max-width: 50%;
   min-width: fit-content;
@@ -22,7 +22,7 @@ const StyledInput = styled.input`
 
 const StyledLabel = styled.label`
   font-size: 14px;
-  color: #a7a7cc;
+  color: ${({theme}) => theme.charts.rangeTextColor};
   padding: 8px 20px;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -30,10 +30,10 @@ const StyledLabel = styled.label`
     cursor: pointer;
   }
   ${StyledInput}:checked + & {
-    color: #e4e4f0;
+    color: ${({theme}) => theme.charts.selectedRangeTextColor};
     font-weight: 500;
     box-shadow: 4px 4px 20px 8px #7878fa26;
-    background-color: #6161d680;
+    background-color: ${({theme}) => theme.charts.selectedRangeBgColor};
   }
 `;
 

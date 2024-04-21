@@ -5,6 +5,7 @@ const colors = {
   transparentWhite: "#FFFFFF80",
   gray: "#D1D1D1",
   lightGray: "#EBEBEB",
+  coolGray: "#A7A7CC",
   silver: "#B9B9BA",
   richBlack: "#13121a",
   raisinBlack: "#191925",
@@ -18,7 +19,8 @@ const colors = {
   marianBlue: "#424286",
   transparentMarianBlue: "#424286CC",
   periwinkle: "#CCCCFA",
-  transparentPeriwinkle: "#CCCCFA66"
+  transparentPeriwinkle: "#CCCCFA66",
+  lavender: "#E4E4F0",
 };
 
 export const darkTheme = {
@@ -49,7 +51,9 @@ export const darkTheme = {
     legendDateColor: colors.silver,
     chartBackgroundColor: colors.darkPurple,
     rangeBackgroundColor: colors.spaceCadet,
-    selectedRangeColor: colors.transparentSlateBlue,
+    rangeTextColor: colors.coolGray,
+    selectedRangeBgColor: colors.transparentSlateBlue,
+    selectedRangeTextColor: colors.lavender,
   },
   coinPage: {
     blockBackgroundColor: colors.darkPurple,
@@ -97,7 +101,9 @@ export const lightTheme: ThemeType = {
     legendDateColor: colors.marianBlue,
     chartBackgroundColor: colors.white,
     rangeBackgroundColor: colors.transparentPeriwinkle,
-    selectedRangeColor: colors.transparentSlateBlue,
+    rangeTextColor: colors.marianBlue,
+    selectedRangeBgColor: colors.transparentSlateBlue,
+    selectedRangeTextColor: colors.raisinBlack,
   },
   coinPage: {
     blockBackgroundColor: colors.white,
