@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   width: 50%;
   height: 100%;
-  background-color: ${({ theme }) => theme.charts.barBackgroundColor};
+  background-color: ${({ theme }) => theme.charts.chartBackgroundColor};
   border-radius: 12px;
   padding: 20px 0;
 `;

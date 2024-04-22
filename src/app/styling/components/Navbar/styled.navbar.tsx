@@ -62,6 +62,9 @@ const CurrencyDiv = styled.div`
   border: 1px #ffffff0d solid;
   padding: 12px 16px;
   background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -80,6 +83,9 @@ const StyledModeBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export {
