@@ -40,14 +40,18 @@ const SearchInput = styled.input`
 const DropdownDiv = styled.div`
   position: absolute;
   background-color: ${({ theme }) => theme.navbar.dropDownBackgroundColor};
-  color: ${({ theme }) => theme.navbar.inputTextColor};
   width: 356px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
-const DropdownItem = styled.div`
+const DropdownItem = styled(Link)`
+  color: ${({ theme }) => theme.navbar.inputTextColor};
   padding: 10px 5px;
   border-top: 1px solid #ffffff0d;
+  text-decoration: none;
+  font-size: 14px;
 `;
 
 const CurrencyDiv = styled.div`

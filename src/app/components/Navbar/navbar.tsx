@@ -73,7 +73,11 @@ const Navbar = () => {
         />
         <DropdownDiv>
           {dropdownCoins?.map((coin: { id: string; name: string }) => {
-            return <DropdownItem key={coin.id}>{coin.name}</DropdownItem>;
+            return (
+              <DropdownItem href={`/coin/${coin.id}`} key={coin.id}>
+                {coin.name}
+              </DropdownItem>
+            );
           })}
         </DropdownDiv>
       </div>
