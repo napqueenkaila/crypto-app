@@ -9,12 +9,6 @@ export const getChartLabels = (data: number[][]) => {
   });
 };
 
-export const todaysDate = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-}).format(new Date(Date.now()));
-
 export const formatChartData = (data: number[][]) => {
   return data?.map((el) => el[1]);
 };
@@ -67,4 +61,26 @@ export const getLabelCallback = (context: {
     }
   }
   return label;
+};
+
+export const getRangeValue = (range: string) => {
+  let rangeValue;
+  switch (range) {
+    case "1D":
+      rangeValue = 1;
+      break;
+    case "7D":
+      rangeValue = 7;
+      break;
+    case "14D":
+      rangeValue = 14;
+      break;
+    case "1M":
+      rangeValue = 30;
+      break;
+    case "1Y":
+      rangeValue = 365;
+      break;
+  }
+  return rangeValue;
 };
