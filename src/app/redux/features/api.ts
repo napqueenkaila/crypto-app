@@ -57,6 +57,13 @@ interface CarouselData {
   price_change_percentage_24h: number;
 }
 
+interface InitialCoin {
+  id: string;
+  name: string;
+  image: string;
+  symbol: string;
+}
+
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
@@ -203,6 +210,22 @@ export const api = createApi({
         return carouselData;
       },
     }),
+    getInitialConverterCoins: builder.query({
+      query: (currency) =>
+        `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=en`,
+      transformResponse: (response: []) => {
+        const firstTwoCoins = response.slice(0, 2);
+        const initialCoins: { name: string; value: string; image: string }[] =
+          firstTwoCoins.map((coin: InitialCoin) => {
+            return {
+              name: `${coin.name} (${coin.symbol.toUpperCase()})`,
+              value: coin.id,
+              image: coin.image,
+            };
+          });
+        return initialCoins;
+      },
+    }),
   }),
 });
 
@@ -213,4 +236,6 @@ export const {
   useGetTableDataQuery,
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
+  useGetInitialConverterCoinsQuery,
+  usePrefetch,
 } = api;
