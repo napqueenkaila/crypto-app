@@ -31,7 +31,7 @@ export default function Converter() {
         ) : null}
       </ConverterValueDiv>
       <ConverterValueDiv>
-        {toIsSuccess !== undefined ? (
+        {toIsSuccess ? (
           <CoinInput coinData={toCoinData} setCoin={setToCoin} />
         ) : null}
       </ConverterValueDiv>
