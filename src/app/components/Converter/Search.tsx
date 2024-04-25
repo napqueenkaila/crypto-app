@@ -1,13 +1,12 @@
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { SetStateAction, useState } from "react";
 
-const Search = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const { data } = useGetSearchDataQuery(searchQuery);
+  const [converterSearchQuery, setConverterSearchQuery] = useState("");
+  const { data } = useGetSearchDataQuery(converterSearchQuery);
   const dropDownCoins = data.coins.slice(0, 10);
 
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
-    setSearchQuery(e.target.value);
+    setConverterSearchQuery(e.target.value);
   };
 
   return (
@@ -15,7 +14,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="&#128270;  Search..."
-        value={searchQuery}
+        value={converterSearchQuery}
         onChange={handleSearch}
       />
       <div>
