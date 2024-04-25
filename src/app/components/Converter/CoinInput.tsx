@@ -1,31 +1,42 @@
 import Image from "next/image";
 import { DownArrow } from "../SVGs/DownArrow";
 import Search from "./Search";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface Coin {
-  name: string;
   id: string;
+  name: string;
   image: string;
-  currentPrice: number;
+  currentPrice: Record<string, number>;
 }
 
-const CoinInput = ({ coin }: { coin: Coin }) => {
+const CoinInput = ({
+  coinData,
+  setCoin,
+}: {
+  coinData: Coin;
+  setCoin: Dispatch<SetStateAction<string>>;
+  }) => {
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleShowSearch = () => { 
-    setIsSearching(true);
+  const handleShowSearch = () => {
+    setIsSearching(!isSearching);
   };
+
   return (
-    <div onClick={handleShowSearch}>
+    <div>
       {isSearching ? (
-        <Search />
+        <Search setCoin={setCoin} setIsSearching={setIsSearching} />
       ) : (
-        <>
-          <Image src={coin.image} alt="" width={25} height={25} />
-          <div> {coin.name}</div>
+        <div onClick={handleShowSearch}>
+          {coinData && (
+            <>
+              <Image src={coinData.image} alt="" width={25} height={25} />
+              <div> {coinData.name}</div>
+            </>
+          )}
           <DownArrow />
-        </>
+        </div>
       )}
       <div></div>
     </div>
