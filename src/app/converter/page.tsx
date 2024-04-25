@@ -1,9 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../redux/hooks";
-import { selectCurrency } from "../redux/features/currencySlice";
-import { useGetInitialConverterCoinsQuery } from "../redux/features/api";
+import { useGetConverterCoinsDataQuery } from "../redux/features/api";
 import CoinInput from "../components/Converter/CoinInput";
 
 const Container = styled.div`
@@ -17,33 +15,25 @@ const ConverterValueDiv = styled.div`
   padding: 24px;
 `;
 
-interface Coin {
-  name: string;
-  id: string;
-  image: string;
-  currentPrice: number;
-}
-
 export default function Converter() {
-  const { currency } = useAppSelector(selectCurrency);
-  const { data, isSuccess } = useGetInitialConverterCoinsQuery(currency);
-  const [fromCoin, setFromCoin] = useState<Coin>();
-  const [toCoin, setToCoin] = useState<Coin>();
-
-  useEffect(() => {
-    if (isSuccess) {
-      setFromCoin(data[0]);
-      setToCoin(data[1]);
-    }
-  }, [isSuccess]);
+  const [fromCoin, setFromCoin] = useState("bitcoin");
+  const [toCoin, setToCoin] = useState("ethereum");
+  const { data: fromCoinData, isSuccess: fromIsSuccess } =
+    useGetConverterCoinsDataQuery(fromCoin);
+  const { data: toCoinData, isSuccess: toIsSuccess } =
+    useGetConverterCoinsDataQuery(toCoin);
 
   return (
     <Container>
       <ConverterValueDiv>
-        {fromCoin !== undefined ? <CoinInput coin={fromCoin} /> : null}
+        {fromIsSuccess ? (
+          <CoinInput coinData={fromCoinData} setCoin={setFromCoin} />
+        ) : null}
       </ConverterValueDiv>
       <ConverterValueDiv>
-        {toCoin !== undefined ? <CoinInput coin={toCoin} /> : null}
+        {toIsSuccess !== undefined ? (
+          <CoinInput coinData={toCoinData} setCoin={setToCoin} />
+        ) : null}
       </ConverterValueDiv>
     </Container>
   );
