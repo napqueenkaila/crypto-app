@@ -210,6 +210,7 @@ export const api = createApi({
         return {
           id: response.id,
           name: `${response.name} (${response.symbol.toUpperCase()})`,
+          symbol: response.symbol,
           image: response.image.thumb,
           currentPrice: response.market_data.current_price
         };
