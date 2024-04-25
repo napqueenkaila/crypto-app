@@ -57,14 +57,6 @@ interface CarouselData {
   price_change_percentage_24h: number;
 }
 
-interface InitialCoin {
-  id: string;
-  name: string;
-  image: string;
-  symbol: string;
-  current_price: number;
-}
-
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
 
 export const api = createApi({
@@ -211,26 +203,17 @@ export const api = createApi({
         return carouselData;
       },
     }),
-    getInitialConverterCoins: builder.query({
-      query: (currency) =>
-        `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=en`,
-      transformResponse: (response: []) => {
-        const firstTwoCoins = response.slice(0, 2);
-        const initialCoins: {
-          id: string;
-          name: string;
-          image: string;
-          currentPrice: number;
-        }[] = firstTwoCoins.map((coin: InitialCoin) => {
-          return {
-            id: coin.id,
-            name: `${coin.name} (${coin.symbol.toUpperCase()})`,
-            image: coin.image,
-            currentPrice: coin.current_price,
-          };
-        });
-        return initialCoins;
-      },
+    getConverterCoinsData: builder.query({
+      query: (coinId) =>
+        `coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
+      transformResponse: (response: CoinData) => {
+        return {
+          id: response.id,
+          name: `${response.name} (${response.symbol.toUpperCase()})`,
+          image: response.image.thumb,
+          currentPrice: response.market_data.current_price
+        };
+      }
     }),
   }),
 });
@@ -242,6 +225,6 @@ export const {
   useGetTableDataQuery,
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
-  useGetInitialConverterCoinsQuery,
+  useGetConverterCoinsDataQuery,
   usePrefetch,
 } = api;
