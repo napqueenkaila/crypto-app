@@ -13,14 +13,22 @@ interface Coin {
 const CoinInput = ({
   coinData,
   setCoin,
+  quantity,
+  setQuantity,
 }: {
   coinData: Coin;
   setCoin: Dispatch<SetStateAction<string>>;
-  }) => {
+  quantity: number;
+  setQuantity: Dispatch<SetStateAction<number>>;
+}) => {
   const [isSearching, setIsSearching] = useState(false);
 
   const handleShowSearch = () => {
     setIsSearching(!isSearching);
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(Number(e.target.value));
   };
 
   return (
@@ -38,7 +46,9 @@ const CoinInput = ({
           <DownArrow />
         </div>
       )}
-      <div></div>
+      <div>
+        <input type="number" value={quantity} onChange={handleQuantityChange} />
+      </div>
     </div>
   );
 };
