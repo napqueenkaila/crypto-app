@@ -62,6 +62,7 @@ interface InitialCoin {
   name: string;
   image: string;
   symbol: string;
+  current_price: number;
 }
 
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
@@ -215,14 +216,19 @@ export const api = createApi({
         `coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=en`,
       transformResponse: (response: []) => {
         const firstTwoCoins = response.slice(0, 2);
-        const initialCoins: { name: string; value: string; image: string }[] =
-          firstTwoCoins.map((coin: InitialCoin) => {
-            return {
-              name: `${coin.name} (${coin.symbol.toUpperCase()})`,
-              value: coin.id,
-              image: coin.image,
-            };
-          });
+        const initialCoins: {
+          id: string;
+          name: string;
+          image: string;
+          currentPrice: number;
+        }[] = firstTwoCoins.map((coin: InitialCoin) => {
+          return {
+            id: coin.id,
+            name: `${coin.name} (${coin.symbol.toUpperCase()})`,
+            image: coin.image,
+            currentPrice: coin.current_price,
+          };
+        });
         return initialCoins;
       },
     }),
