@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useGetConverterCoinsDataQuery } from "../redux/features/api";
 import CoinInput from "../components/Converter/CoinInput";
+import CoinOutput from "../components/Converter/CoinOutput";
 
 const Container = styled.div`
   width: 100%;
@@ -29,22 +30,28 @@ export default function Converter() {
     <Container>
       <ConverterValueDiv>
         {fromIsSuccess ? (
-          <CoinInput
-            coinData={fromCoinData}
-            setCoin={setFromCoin}
-            quantity={fromQuantity}
-            setQuantity={setFromQuantity}
-          />
+          <>
+            <CoinInput
+              coinData={fromCoinData}
+              setCoin={setFromCoin}
+              quantity={fromQuantity}
+              setQuantity={setFromQuantity}
+            />
+            <CoinOutput coinData={fromCoinData} />
+          </>
         ) : null}
       </ConverterValueDiv>
       <ConverterValueDiv>
         {toIsSuccess ? (
-          <CoinInput
-            coinData={toCoinData}
-            setCoin={setToCoin}
-            quantity={toQuantity}
-            setQuantity={setToQuantity}
-          />
+          <>
+            <CoinInput
+              coinData={toCoinData}
+              setCoin={setToCoin}
+              quantity={toQuantity}
+              setQuantity={setToQuantity}
+            />
+            <CoinOutput coinData={toCoinData} />
+          </>
         ) : null}
       </ConverterValueDiv>
     </Container>
