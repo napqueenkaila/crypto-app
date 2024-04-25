@@ -18,6 +18,8 @@ const ConverterValueDiv = styled.div`
 export default function Converter() {
   const [fromCoin, setFromCoin] = useState("bitcoin");
   const [toCoin, setToCoin] = useState("ethereum");
+  const [fromQuantity, setFromQuantity] = useState(1);
+  const [toQuantity, setToQuantity] = useState(1);
   const { data: fromCoinData, isSuccess: fromIsSuccess } =
     useGetConverterCoinsDataQuery(fromCoin);
   const { data: toCoinData, isSuccess: toIsSuccess } =
@@ -27,12 +29,22 @@ export default function Converter() {
     <Container>
       <ConverterValueDiv>
         {fromIsSuccess ? (
-          <CoinInput coinData={fromCoinData} setCoin={setFromCoin} />
+          <CoinInput
+            coinData={fromCoinData}
+            setCoin={setFromCoin}
+            quantity={fromQuantity}
+            setQuantity={setFromQuantity}
+          />
         ) : null}
       </ConverterValueDiv>
       <ConverterValueDiv>
         {toIsSuccess ? (
-          <CoinInput coinData={toCoinData} setCoin={setToCoin} />
+          <CoinInput
+            coinData={toCoinData}
+            setCoin={setToCoin}
+            quantity={toQuantity}
+            setQuantity={setToQuantity}
+          />
         ) : null}
       </ConverterValueDiv>
     </Container>
