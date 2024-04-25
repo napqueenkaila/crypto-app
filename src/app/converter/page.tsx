@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
 import { useGetInitialConverterCoinsQuery } from "../redux/features/api";
+import CoinInput from "../components/Converter/CoinInput";
 
 const Container = styled.div`
   width: 100%;
@@ -39,9 +40,10 @@ export default function Converter() {
   return (
     <Container>
       <ConverterValueDiv>
+        {fromCoin !== undefined ? <CoinInput coin={fromCoin} /> : null}
       </ConverterValueDiv>
       <ConverterValueDiv>
-
+        {toCoin !== undefined ? <CoinInput coin={toCoin} /> : null}
       </ConverterValueDiv>
     </Container>
   );
