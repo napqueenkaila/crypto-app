@@ -3,14 +3,9 @@ import {
   LinkWrapper,
   StyledLink,
 } from "@/app/styling/components/Converter/styled.SliderButton";
-import { usePrefetch } from "@/app/redux/features/api";
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
 
 const SliderButton = () => {
   const pathname = usePathname();
-  const { currency } = useAppSelector(selectCurrency);
-  const prefetchInitialCoins = usePrefetch("getInitialConverterCoins");
 
   return (
     <LinkWrapper>
@@ -20,7 +15,6 @@ const SliderButton = () => {
       <StyledLink
         href="/converter"
         className={`${pathname === "/converter" ? "active" : ""} `}
-        onMouseEnter={() => prefetchInitialCoins(currency, { force: true })}
       >
         Converter
       </StyledLink>

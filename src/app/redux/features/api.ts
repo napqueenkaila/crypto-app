@@ -227,5 +227,4 @@ export const {
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
   useGetConverterCoinsDataQuery,
-  usePrefetch,
 } = api;
