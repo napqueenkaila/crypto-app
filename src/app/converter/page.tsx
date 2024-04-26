@@ -2,8 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useGetConverterCoinsDataQuery } from "../redux/features/api";
-import CoinInput from "../components/Converter/CoinInput";
-import CoinOutput from "../components/Converter/CoinOutput";
+import CoinsContainer from "../components/Converter/CoinsContainer";
 
 const Container = styled.div`
   width: 100%;
@@ -11,16 +10,10 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
-const ConverterValueDiv = styled.div`
-  background-color: #191932;
-  padding: 24px;
-`;
-
 export default function Converter() {
   const [fromCoin, setFromCoin] = useState("bitcoin");
   const [toCoin, setToCoin] = useState("ethereum");
-  const [fromQuantity, setFromQuantity] = useState(1);
-  const [toQuantity, setToQuantity] = useState(1);
+
   const { data: fromCoinData, isSuccess: fromIsSuccess } =
     useGetConverterCoinsDataQuery(fromCoin);
   const { data: toCoinData, isSuccess: toIsSuccess } =
@@ -28,32 +21,14 @@ export default function Converter() {
 
   return (
     <Container>
-      <ConverterValueDiv>
-        {fromIsSuccess ? (
-          <>
-            <CoinInput
-              coinData={fromCoinData}
-              setCoin={setFromCoin}
-              quantity={fromQuantity}
-              setQuantity={setFromQuantity}
-            />
-            <CoinOutput coinData={fromCoinData} />
-          </>
-        ) : null}
-      </ConverterValueDiv>
-      <ConverterValueDiv>
-        {toIsSuccess ? (
-          <>
-            <CoinInput
-              coinData={toCoinData}
-              setCoin={setToCoin}
-              quantity={toQuantity}
-              setQuantity={setToQuantity}
-            />
-            <CoinOutput coinData={toCoinData} />
-          </>
-        ) : null}
-      </ConverterValueDiv>
+      {fromIsSuccess && toIsSuccess ? (
+        <CoinsContainer
+          fromCoinData={fromCoinData}
+          toCoinData={toCoinData}
+          setFromCoin={setFromCoin}
+          setToCoin={setToCoin}
+        />
+      ) : null}
     </Container>
   );
 }
