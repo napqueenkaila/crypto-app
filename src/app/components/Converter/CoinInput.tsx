@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { DownArrow } from "../SVGs/DownArrow";
-import Search from "./Search";
 import { Dispatch, SetStateAction, useState } from "react";
+import Search from "./Search";
+import { DownArrow } from "../SVGs/DownArrow";
 
 interface Coin {
   id: string;
@@ -11,24 +11,22 @@ interface Coin {
 }
 
 const CoinInput = ({
+  type,
   coinData,
   setCoin,
   quantity,
-  setQuantity,
+  handleQuantityChange,
 }: {
+  type: string;
   coinData: Coin;
   setCoin: Dispatch<SetStateAction<string>>;
-  quantity: number;
-  setQuantity: Dispatch<SetStateAction<number>>;
+  quantity: number | undefined;
+  handleQuantityChange: (e: any, type: any) => void;
 }) => {
   const [isSearching, setIsSearching] = useState(false);
 
   const handleShowSearch = () => {
     setIsSearching(!isSearching);
-  };
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuantity(Number(e.target.value));
   };
 
   return (
@@ -47,7 +45,11 @@ const CoinInput = ({
         </div>
       )}
       <div>
-        <input type="number" value={quantity} onChange={handleQuantityChange} />
+        <input
+          type="number"
+          value={quantity}
+          onChange={(e) => handleQuantityChange(e, type)}
+        />
       </div>
     </div>
   );
