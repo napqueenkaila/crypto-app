@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import LineChart from "./LineChart";
-import BarChart from "./BarChart";
-import { useGetChartDataQuery } from "@/app/redux/features/api";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
+import {
+  selectCoinOne,
+  selectCoinTwo,
+} from "@/app/redux/features/selectedCoinsSlice";
+import {
+  useGetChartDataQuery,
+  useLazyGetChartDataQuery,
+} from "@/app/redux/features/api";
 import RangeBar from "./RangeBar";
-import { useState } from "react";
-import { todaysDate } from "./utils";
-import { selectCoinOne } from "@/app/redux/features/selectedCoinsSlice";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 
 const Container = styled.div`
   display: flex;
@@ -19,12 +24,26 @@ const Container = styled.div`
 const ChartsContainer = () => {
   const { currency } = useAppSelector(selectCurrency);
   const coinOneSelected = useAppSelector(selectCoinOne);
+  const coinTwoSelected = useAppSelector(selectCoinTwo);
   const [selectedDays, setSelectedDays] = useState(7);
   const { data: coinOneData, isSuccess } = useGetChartDataQuery({
     currency,
-    coinOneSelected,
+    selectedCoinId: coinOneSelected.id,
     selectedDays,
   });
+
+  const [trigger, result] = useLazyGetChartDataQuery();
+  const { data: coinTwoData } = result;
+  
+  useEffect(() => {
+    if (coinTwoSelected.id !== "") {
+      trigger({
+        currency: currency,
+        selectedCoinId: coinTwoSelected.id,
+        selectedDays: selectedDays,
+      });
+    }
+  }, [coinTwoSelected, currency, selectedDays, trigger]);
 
   const handleDaysChange = (e) => {
     const newDays = Number(e.target.value);
@@ -37,14 +56,16 @@ const ChartsContainer = () => {
         {isSuccess ? (
           <>
             <LineChart
-              selectedCoin={coinOneSelected}
-              chartData={coinOneData.prices}
-              todaysDate={todaysDate}
+              coinOne={coinOneSelected}
+              coinTwo={coinTwoSelected}
+              chartDataOne={coinOneData.prices}
+              chartDataTwo={coinTwoData?.prices}
             />
             <BarChart
-              selectedCoin={coinOneSelected}
-              chartData={coinOneData.total_volumes}
-              todaysDate={todaysDate}
+              coinOne={coinOneSelected}
+              coinTwo={coinTwoSelected}
+              chartDataOne={coinOneData.total_volumes}
+              chartDataTwo={coinTwoData?.total_volumes}
             />
           </>
         ) : null}

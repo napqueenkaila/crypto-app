@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +10,22 @@ import {
   Filler,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { formatDateLabel } from "./utils";
-import { options } from "./options";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCompareCoins } from "@/app/redux/features/selectedCoinsSlice";
 import Legend from "./Legend";
+import CompareCoinsLegend from "./CompareCoinsLegend";
+import { barOptions } from "./options";
+import {
+  formatChartData,
+  getChartLabels,
+  getChartGradient,
+  getLegendValue,
+  getLegendDate,
+} from "./utils";
+import {
+  Wrapper,
+  Container,
+} from "@/app/styling/components/Charts/styled.Charts";
 
 ChartJS.register(
   CategoryScale,
@@ -21,61 +34,80 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Filler
+  Filler,
 );
 
-const Wrapper = styled.div`
-  position: relative;
-  width: 50%;
-  height: 100%;
-`;
-
 const BarChart = ({
-  selectedCoin,
-  chartData,
-  todaysDate,
+  coinOne,
+  coinTwo,
+  chartDataOne,
+  chartDataTwo,
 }: {
-  selectedCoin: string;
-  chartData: number[][];
-  todaysDate: string;
+  coinOne: { [key: string]: string };
+  coinTwo: { [key: string]: string };
+  chartDataOne: number[][];
+  chartDataTwo: number[][];
 }) => {
-  const theme = useTheme();
-  const barChartLabels = chartData.map((el) => formatDateLabel(el[0]));
-  const barChartData = {
-    labels: barChartLabels,
-    datasets: [
-      {
-        label: "",
-        data: chartData.map((el) => el[1]),
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-          gradient.addColorStop(0, "rgba(157,98,217,1)");
-          gradient.addColorStop(1, "rgba(179,116,242,0.01)");
-          return gradient;
-        },
-        barThickness: 2,
-        borderRadius: 4,
-      },
-    ],
+  const compareCoins = useAppSelector(selectCompareCoins);
+  const [volumeIndex, setVolumeIndex] = useState(chartDataOne?.length - 1);
+  const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);
+  const barChartLabels = getChartLabels(chartDataOne);
+
+  barOptions.onHover = (event: any, price: any) => {
+    if (price[0]?.index !== undefined) {
+      setVolumeIndex(price[0]?.index);
+      setDateIndex(price[0]?.index);
+    }
   };
+
+  const datasets = [
+    {
+      label: coinOne.name,
+      data: formatChartData(chartDataOne),
+      backgroundColor: getChartGradient("one"),
+      barThickness: 20,
+      borderRadius: 4,
+      hoverBackgroundColor: "rgba(116,116,242,1)",
+    },
+  ];
+
+  if (chartDataTwo) {
+    datasets.unshift({
+      label: coinTwo.name,
+      data: formatChartData(chartDataTwo),
+      backgroundColor: getChartGradient("two"),
+      barThickness: 20,
+      borderRadius: 4,
+      hoverBackgroundColor: "rgba(231,114,255,1)",
+    });
+  }
+
+  if (!compareCoins && datasets.length > 1) {
+    datasets.pop();
+  }
 
   return (
     <Wrapper>
       <Legend
-        selectedCoin={selectedCoin}
+        coinOne={coinOne}
         chartType="bar"
-        todaysDate={todaysDate}
+        legendValue={getLegendValue(chartDataOne, volumeIndex)}
+        legendDate={getLegendDate(chartDataOne, dateIndex)}
       />
-      <Bar
-        style={{
-          backgroundColor: theme.charts.barBackgroundColor,
-          borderRadius: "12px",
-          padding: "24px",
-        }}
-        options={options}
-        data={barChartData}
-      />
+      <Container $compareCoins={compareCoins}>
+        <Bar
+          options={barOptions}
+          data={{ labels: barChartLabels, datasets: datasets }}
+        />
+      </Container>
+      {compareCoins && (
+        <CompareCoinsLegend
+          coinOne={coinOne.name}
+          coinTwo={coinTwo.name}
+          legendValueOne={getLegendValue(chartDataOne, volumeIndex)}
+          legendValueTwo={getLegendValue(chartDataTwo, volumeIndex)}
+        />
+      )}
     </Wrapper>
   );
 };

@@ -12,7 +12,7 @@ const Title = styled.div`
 
 const StyledButton = styled.button`
   background: none;
-  color: #5a4fcf;
+  color: ${({theme}) => theme.coinPage.buttonBackground};
   border: none;
   display: inline;
 `;

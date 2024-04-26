@@ -88,8 +88,8 @@ export const api = createApi({
       query: (searchQuery) => `search?query=${searchQuery}`,
     }),
     getChartData: builder.query({
-      query: ({ currency, coinOneSelected, selectedDays }) =>
-        `coins/${coinOneSelected.id}/market_chart?vs_currency=${currency}&days=${selectedDays}&interval=daily`,
+      query: ({ currency, selectedCoinId, selectedDays }: {currency: string, selectedCoinId: string, selectedDays: number}) =>
+        `coins/${selectedCoinId}/market_chart?vs_currency=${currency}&days=${selectedDays}&interval=daily`,
     }),
     getTableData: builder.query({
       query: ({ page, currency }) =>
@@ -223,6 +223,7 @@ export const {
   useGetMarketDataQuery,
   useGetSearchDataQuery,
   useGetChartDataQuery,
+  useLazyGetChartDataQuery,
   useGetTableDataQuery,
   useGetCoinDataQuery,
   useGetCarouselDataQuery,

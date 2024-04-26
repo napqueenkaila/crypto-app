@@ -6,10 +6,16 @@ import {
   Percent,
 } from "@/app/styling/components/Navbar/styled.marketDataBar";
 import { useGetMarketDataQuery } from "@/app/redux/features/api";
-import { compactCurrencyFormatter } from "@/app/utils";
+import { formatCompactCurrency } from "@/app/utils";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
-import { FlashIcon, ExchangeIcon, BtcIcon, EthIcon, ArrowIcon } from "../SVGs/index";
+import {
+  FlashIcon,
+  ExchangeIcon,
+  BtcIcon,
+  EthIcon,
+  ArrowIcon,
+} from "../SVGs/index";
 
 const MarketDataBar = () => {
   const { data, isLoading, isError, isUninitialized, isSuccess } =
@@ -41,10 +47,10 @@ const MarketDataBar = () => {
             <ArrowIcon
               isPositive={data.totalMarketCap[currency] >= 0 ? true : false}
             />
-            {compactCurrencyFormatter.format(data.totalMarketCap[currency])}
+            {formatCompactCurrency(data.totalMarketCap[currency], currency)}
           </DataDiv>
           <DataDiv>
-            {compactCurrencyFormatter.format(data.totalVolume[currency])}
+            {formatCompactCurrency(data.totalVolume[currency], currency)}
             <PercentageBarDiv>
               <Percent color="#fff" $percent={100} />
             </PercentageBarDiv>
