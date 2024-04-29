@@ -9,7 +9,7 @@ interface MarketData {
   market_cap_percentage: { [key: string]: number };
 }
 
-interface TableData {
+export interface TableData {
   id: string;
   name: string;
   symbol: string;
