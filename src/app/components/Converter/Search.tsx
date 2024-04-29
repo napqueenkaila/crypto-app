@@ -5,10 +5,12 @@ import { TableData } from "@/app/redux/features/api";
 
 const Search = ({
   setCoin,
+  resetQuantities,
   isSearching,
   setIsSearching,
 }: {
   setCoin: Dispatch<SetStateAction<TableData>>;
+  resetQuantities: () => void;
   isSearching: boolean;
   setIsSearching: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -24,6 +26,7 @@ const Search = ({
 
   const handleSetCoin = (coin: TableData) => {
     setCoin(coin);
+    resetQuantities();
     setIsSearching(false);
   };
 

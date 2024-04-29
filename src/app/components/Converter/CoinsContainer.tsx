@@ -49,11 +49,16 @@ const CoinsContainer = ({
   }) => {
     setToQuantity(e.target.value);
     const newFromQuantity = calculateQuantity(
-      fromCoin.current_price,
       toCoin.current_price,
+      fromCoin.current_price,
       Number(e.target.value)
     );
     setFromQuantity(newFromQuantity);
+  };
+
+  const resetQuantities = () => {
+    setToQuantity(0);
+    setFromQuantity(0);
   };
 
   return (
@@ -63,6 +68,7 @@ const CoinsContainer = ({
           coinData={fromCoin}
           setCoin={setFromCoin}
           quantity={fromQuantity}
+          resetQuantities={resetQuantities}
           handleQuantityChange={handleFromQuantityChange}
         />
         <CoinOutput coinData={fromCoin} />
@@ -72,6 +78,7 @@ const CoinsContainer = ({
           coinData={toCoin}
           setCoin={setToCoin}
           quantity={toQuantity}
+          resetQuantities={resetQuantities}
           handleQuantityChange={handleToQuantityChange}
         />
         <CoinOutput coinData={toCoin} />

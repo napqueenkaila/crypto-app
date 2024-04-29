@@ -8,11 +8,13 @@ const CoinInput = ({
   coinData,
   setCoin,
   quantity,
+  resetQuantities,
   handleQuantityChange,
 }: {
   coinData: TableData;
   setCoin: Dispatch<SetStateAction<TableData>>;
-  quantity: number | undefined;
+  quantity: number;
+  resetQuantities: () => void;
   handleQuantityChange: (e: any) => void;
 }) => {
   const [isSearching, setIsSearching] = useState(false);
@@ -26,6 +28,7 @@ const CoinInput = ({
       {isSearching ? (
         <Search
           setCoin={setCoin}
+          resetQuantities={resetQuantities}
           isSearching={isSearching}
           setIsSearching={setIsSearching}
         />
