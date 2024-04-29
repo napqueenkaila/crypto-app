@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PercentProps } from "@/app/types/styled";
 
 const DataBarContainer = styled.div`
   background: ${({ theme }) => theme.marketDataBar.backgroundColor};
@@ -21,10 +22,6 @@ const PercentageBarDiv = styled.div`
   background-color: #ffffff66;
   border-radius: 2px;
 `;
-
-interface PercentProps {
-  $percent?: number | string;
-}
 
 const Percent = styled.div<PercentProps>`
   height: 100%;
