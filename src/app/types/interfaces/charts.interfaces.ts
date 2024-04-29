@@ -23,3 +23,8 @@ export interface RangeBarProps {
   handleChange: (e: any) => void;
   selectedDays: number;
 }
+
+export interface ChartColors {
+  one: { [key: string]: string };
+  two: { [key: string]: string };
+}
