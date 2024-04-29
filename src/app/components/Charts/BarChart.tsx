@@ -38,8 +38,6 @@ ChartJS.register(
   Filler
 );
 
-
-
 const BarChart = ({
   coinOne,
   coinTwo,
