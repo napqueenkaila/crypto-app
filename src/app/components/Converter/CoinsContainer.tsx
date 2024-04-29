@@ -32,23 +32,28 @@ const CoinsContainer = ({
     return quantity * (priceOne / priceTwo);
   };
 
-  const handleQuantityChange = (
-    e: { target: { value: SetStateAction<number> } },
-    type: string
-  ) => {
-    if (type == "from" && fromPrice !== undefined && toPrice !== undefined) {
-      setFromQuantity(e.target.value);
-      const newQuantity = calculateQuantity(fromPrice, toPrice, fromQuantity);
-      setToQuantity(newQuantity);
-    } else if (
-      type === "to" &&
-      toPrice !== undefined &&
-      fromPrice !== undefined
-    ) {
-      setToQuantity(e.target.value);
-      const newQuantity = calculateQuantity(toPrice, fromPrice, toQuantity);
-      setFromQuantity(newQuantity);
-    }
+  const handleFromQuantityChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    setFromQuantity(e.target.value);
+    const newToQuantity = calculateQuantity(
+      fromCoin.current_price,
+      toCoin.current_price,
+      Number(e.target.value)
+    );
+    setToQuantity(newToQuantity);
+  };
+
+  const handleToQuantityChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    setToQuantity(e.target.value);
+    const newFromQuantity = calculateQuantity(
+      fromCoin.current_price,
+      toCoin.current_price,
+      Number(e.target.value)
+    );
+    setFromQuantity(newFromQuantity);
   };
 
   return (
@@ -58,7 +63,7 @@ const CoinsContainer = ({
           coinData={fromCoin}
           setCoin={setFromCoin}
           quantity={fromQuantity}
-          handleQuantityChange={handleQuantityChange}
+          handleQuantityChange={handleFromQuantityChange}
         />
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
@@ -67,7 +72,7 @@ const CoinsContainer = ({
           coinData={toCoin}
           setCoin={setToCoin}
           quantity={toQuantity}
-          handleQuantityChange={handleQuantityChange}
+          handleQuantityChange={handleToQuantityChange}
         />
         <CoinOutput coinData={toCoin} />
       </ConverterValueDiv>
