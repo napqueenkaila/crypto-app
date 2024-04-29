@@ -1,7 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useGetConverterCoinsDataQuery } from "../redux/features/api";
+import { useAppSelector } from "../redux/hooks";
+import { selectCurrency } from "../redux/features/currencySlice";
+import { selectConverterCoins } from "../redux/features/converterCoinsSlice";
+import {
+  TableData,
+  useGetTableDataQuery,
+} from "../redux/features/api";
 import CoinsContainer from "../components/Converter/CoinsContainer";
 
 const Container = styled.div`
@@ -11,20 +17,27 @@ const Container = styled.div`
 `;
 
 export default function Converter() {
-  const [fromCoin, setFromCoin] = useState("bitcoin");
-  const [toCoin, setToCoin] = useState("ethereum");
+  const { currency } = useAppSelector(selectCurrency);
+  const page = 1;
+  const { isSuccess } = useGetTableDataQuery({ page, currency });
+  const converterData = useAppSelector(selectConverterCoins);
 
-  const { data: fromCoinData, isSuccess: fromIsSuccess } =
-    useGetConverterCoinsDataQuery(fromCoin);
-  const { data: toCoinData, isSuccess: toIsSuccess } =
-    useGetConverterCoinsDataQuery(toCoin);
+  const [fromCoin, setFromCoin] = useState<TableData>(converterData[0]);
+  const [toCoin, setToCoin] = useState<TableData>(converterData[1]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setFromCoin(converterData[0]);
+      setToCoin(converterData[1]);
+    }
+  }, [isSuccess, converterData]);
 
   return (
     <Container>
-      {fromIsSuccess && toIsSuccess ? (
+      {isSuccess ? (
         <CoinsContainer
-          fromCoinData={fromCoinData}
-          toCoinData={toCoinData}
+          fromCoin={fromCoin}
+          toCoin={toCoin}
           setFromCoin={setFromCoin}
           setToCoin={setToCoin}
         />
