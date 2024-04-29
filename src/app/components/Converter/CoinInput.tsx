@@ -2,26 +2,18 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import Search from "./Search";
 import { DownArrow } from "../SVGs/DownArrow";
-
-interface Coin {
-  id: string;
-  name: string;
-  image: string;
-  currentPrice: Record<string, number>;
-}
+import { TableData } from "@/app/redux/features/api";
 
 const CoinInput = ({
-  type,
   coinData,
   setCoin,
   quantity,
   handleQuantityChange,
 }: {
-  type: string;
-  coinData: Coin;
-  setCoin: Dispatch<SetStateAction<string>>;
+  coinData: TableData;
+  setCoin: Dispatch<SetStateAction<TableData>>;
   quantity: number | undefined;
-  handleQuantityChange: (e: any, type: any) => void;
+  handleQuantityChange: (e: any) => void;
 }) => {
   const [isSearching, setIsSearching] = useState(false);
 
@@ -48,7 +40,7 @@ const CoinInput = ({
         <input
           type="number"
           value={quantity}
-          onChange={(e) => handleQuantityChange(e, type)}
+          onChange={handleQuantityChange}
         />
       </div>
     </div>
