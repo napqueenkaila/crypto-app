@@ -1,21 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface CurrencyState {
-    currency: string;
-}
+import { CurrencyState } from "@/app/types/interfaces/sliceState.interfaces";
 
 const initialState: CurrencyState = {
-    currency: "usd"
+  currency: "usd",
 };
 
 const currencySlice = createSlice({
-    name: "currency",
-    initialState,
-    reducers: {
-        setCurrency: (state, action) => {
-            state.currency = action.payload;
-        }
-    }
+  name: "currency",
+  initialState,
+  reducers: {
+    setCurrency: (state, action) => {
+      state.currency = action.payload;
+    },
+  },
 });
 
 export const { setCurrency } = currencySlice.actions;
