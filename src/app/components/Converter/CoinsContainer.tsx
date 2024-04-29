@@ -1,17 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
+import { TableData } from "@/app/redux/features/api";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
-
-interface Coin {
-  id: string;
-  name: string;
-  image: string;
-  symbol: string;
-  currentPrice: Record<string, number>;
-}
 
 const ConverterValueDiv = styled.div`
   background-color: #191932;
@@ -20,23 +11,18 @@ const ConverterValueDiv = styled.div`
 `;
 
 const CoinsContainer = ({
-  fromCoinData,
-  toCoinData,
+  fromCoin,
+  toCoin,
   setFromCoin,
   setToCoin,
 }: {
-  fromCoinData: Coin;
-  toCoinData: Coin;
-  setFromCoin: Dispatch<SetStateAction<string>>;
-  setToCoin: Dispatch<SetStateAction<string>>;
+  fromCoin: TableData;
+  toCoin: TableData;
+  setFromCoin: Dispatch<SetStateAction<TableData>>;
+  setToCoin: Dispatch<SetStateAction<TableData>>;
 }) => {
-  const { currency } = useAppSelector(selectCurrency);
-  const fromPrice = fromCoinData.currentPrice[currency];
-  const toPrice = toCoinData.currentPrice[currency];
-  const [fromQuantity, setFromQuantity] = useState(1);
-  const [toQuantity, setToQuantity] = useState(
-    Number((fromQuantity * (fromPrice / toPrice)).toFixed(2))
-  );
+  const [fromQuantity, setFromQuantity] = useState(0);
+  const [toQuantity, setToQuantity] = useState(0);
 
   const calculateQuantity = (
     priceOne: number,
@@ -69,23 +55,21 @@ const CoinsContainer = ({
     <>
       <ConverterValueDiv>
         <CoinInput
-          type="from"
-          coinData={fromCoinData}
+          coinData={fromCoin}
           setCoin={setFromCoin}
           quantity={fromQuantity}
           handleQuantityChange={handleQuantityChange}
         />
-        <CoinOutput coinData={fromCoinData} />
+        <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
       <ConverterValueDiv>
         <CoinInput
-          type="to"
-          coinData={toCoinData}
+          coinData={toCoin}
           setCoin={setToCoin}
           quantity={toQuantity}
           handleQuantityChange={handleQuantityChange}
         />
-        <CoinOutput coinData={toCoinData} />
+        <CoinOutput coinData={toCoin} />
       </ConverterValueDiv>
     </>
   );
