@@ -1,10 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
-import { useGetCarouselDataQuery } from "../redux/features/api";
-import SelectWithSearch from "../components/Converter/SelectWithSearch";
+import { selectConverterCoins } from "../redux/features/converterCoinsSlice";
+import {
+  TableData,
+  useGetTableDataQuery,
+} from "../redux/features/api";
+import CoinsContainer from "../components/Converter/CoinsContainer";
 
 const Container = styled.div`
   width: 100%;
@@ -12,39 +16,32 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
-const ConverterValueDiv = styled.div`
-  background-color: #191932;
-  padding: 24px;
-`;
-
 export default function Converter() {
   const { currency } = useAppSelector(selectCurrency);
-  const [fromCoin, setfromCoin] = useState("bitcoin");
-  const [toCoin, setToCoin] = useState("ethereum");
-  const { data: options } = useGetCarouselDataQuery(currency);
+  const page = 1;
+  const { isSuccess } = useGetTableDataQuery({ page, currency });
+  const converterData = useAppSelector(selectConverterCoins);
 
-  const mappedOptions = options?.map((option) => ({
-    name: option.name,
-    value: option.id,
-    image: option.image,
-  }));
+  const [fromCoin, setFromCoin] = useState<TableData>(converterData[0]);
+  const [toCoin, setToCoin] = useState<TableData>(converterData[1]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setFromCoin(converterData[0]);
+      setToCoin(converterData[1]);
+    }
+  }, [isSuccess, converterData]);
 
   return (
     <Container>
-      <ConverterValueDiv>
-        <SelectWithSearch
-          options={mappedOptions}
-          coin={fromCoin}
-          setCoin={setfromCoin}
+      {isSuccess ? (
+        <CoinsContainer
+          fromCoin={fromCoin}
+          toCoin={toCoin}
+          setFromCoin={setFromCoin}
+          setToCoin={setToCoin}
         />
-      </ConverterValueDiv>
-      <ConverterValueDiv>
-        <SelectWithSearch
-          options={mappedOptions}
-          coin={toCoin}
-          setCoin={setToCoin}
-        />
-      </ConverterValueDiv>
+      ) : null}
     </Container>
   );
 }
