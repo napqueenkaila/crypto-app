@@ -24,7 +24,11 @@ const CoinInput = ({
   return (
     <div>
       {isSearching ? (
-        <Search setCoin={setCoin} setIsSearching={setIsSearching} />
+        <Search
+          setCoin={setCoin}
+          isSearching={isSearching}
+          setIsSearching={setIsSearching}
+        />
       ) : (
         <div onClick={handleShowSearch}>
           {coinData && (
@@ -39,6 +43,7 @@ const CoinInput = ({
       <div>
         <input
           type="number"
+          placeholder="e.g. 10"
           value={quantity}
           onChange={handleQuantityChange}
         />
