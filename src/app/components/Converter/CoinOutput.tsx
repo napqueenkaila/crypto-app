@@ -1,19 +1,19 @@
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import { formatCurrencyWithCommas } from "@/app/utils";
+import { TableData } from "@/app/redux/features/api";
 
-interface Coin {
-  id: string;
-  name: string;
-  image: string;
-  symbol: string;
-  currentPrice: Record<string, number>;
-}
-const CoinOutput = ({ coinData }: { coinData: Coin }) => {
+const CoinOutput = ({ coinData }: { coinData: TableData }) => {
   const { currency } = useAppSelector(selectCurrency);
+
   return (
     <div>
-      1 {coinData.symbol.toUpperCase()} = {formatCurrencyWithCommas(coinData.currentPrice[currency], currency)}
+      {coinData !== undefined
+        ? `1 ${coinData.symbol.toUpperCase()} = ${formatCurrencyWithCommas(
+            coinData.current_price,
+            currency
+          )}`
+        : ""}
     </div>
   );
 };
