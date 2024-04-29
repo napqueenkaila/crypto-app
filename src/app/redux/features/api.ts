@@ -9,7 +9,7 @@ interface MarketData {
   market_cap_percentage: { [key: string]: number };
 }
 
-interface TableData {
+export interface TableData {
   id: string;
   name: string;
   symbol: string;
@@ -203,6 +203,19 @@ export const api = createApi({
         return carouselData;
       },
     }),
+    getConverterCoinsData: builder.query({
+      query: (coinId) =>
+        `coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`,
+      transformResponse: (response: CoinData) => {
+        return {
+          id: response.id,
+          name: `${response.name} (${response.symbol.toUpperCase()})`,
+          symbol: response.symbol,
+          image: response.image.thumb,
+          currentPrice: response.market_data.current_price
+        };
+      }
+    }),
   }),
 });
 
@@ -214,4 +227,5 @@ export const {
   useGetTableDataQuery,
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
+  useGetConverterCoinsDataQuery,
 } = api;
