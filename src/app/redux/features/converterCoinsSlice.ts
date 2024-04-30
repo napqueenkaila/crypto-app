@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TableData, api } from "./api";
-
-interface ConverterCoinsState {
-  value: TableData[];
-}
+import { api } from "./api";
+import { ConverterCoinsState } from "@/app/types/interfaces/sliceState.interfaces";
 
 const initialState: ConverterCoinsState = {
-  value: []
+  value: [],
 };
 
 const converterCoinsSlice = createSlice({

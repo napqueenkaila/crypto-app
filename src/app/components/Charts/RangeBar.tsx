@@ -5,14 +5,9 @@ import {
   StyledLabel,
 } from "@/app/styling/components/Charts/styled.RangeBar";
 import { getRangeValue } from "./utils";
+import { RangeBarProps } from "@/app/types/interfaces/charts.interfaces";
 
-const RangeBar = ({
-  handleChange,
-  selectedDays,
-}: {
-  handleChange: (e: any) => void;
-  selectedDays: number;
-}) => {
+const RangeBar = ({ handleChange, selectedDays }: RangeBarProps) => {
   const ranges = ["1D", "7D", "14D", "1M", "1Y"];
 
   return (

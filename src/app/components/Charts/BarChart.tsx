@@ -26,6 +26,7 @@ import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
+import { ChartProps } from "@/app/types/interfaces/charts.interfaces";
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +35,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Filler,
+  Filler
 );
 
 const BarChart = ({
@@ -42,12 +43,7 @@ const BarChart = ({
   coinTwo,
   chartDataOne,
   chartDataTwo,
-}: {
-  coinOne: { [key: string]: string };
-  coinTwo: { [key: string]: string };
-  chartDataOne: number[][];
-  chartDataTwo: number[][];
-}) => {
+}: ChartProps) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [volumeIndex, setVolumeIndex] = useState(chartDataOne?.length - 1);
   const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);

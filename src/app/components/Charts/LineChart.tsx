@@ -27,6 +27,7 @@ import {
   Wrapper,
   Container,
 } from "@/app/styling/components/Charts/styled.Charts";
+import { ChartProps } from "@/app/types/interfaces/charts.interfaces";
 
 ChartJS.register(
   CategoryScale,
@@ -44,12 +45,7 @@ const LineChart = ({
   coinTwo,
   chartDataOne,
   chartDataTwo,
-}: {
-  coinOne: { [key: string]: string };
-  coinTwo: { [key: string]: string };
-  chartDataOne: number[][];
-  chartDataTwo: number[][];
-}) => {
+}: ChartProps) => {
   const compareCoins = useAppSelector(selectCompareCoins);
   const [priceIndex, setPriceIndex] = useState(chartDataOne?.length - 1);
   const [dateIndex, setDateIndex] = useState(chartDataOne?.length - 1);

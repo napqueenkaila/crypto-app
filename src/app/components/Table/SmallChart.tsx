@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
+import { SmallChartProps } from "@/app/types/interfaces/table.interfaces";
 
 ChartJS.register(
   CategoryScale,
@@ -21,21 +22,16 @@ ChartJS.register(
   Filler
 );
 
-interface Props {
-  smallChartData: number[]
-}
-
 const Wrapper = styled.div`
   height: 37px;
 `;
 
-const SmallChart = ({ smallChartData }: Props) => {
-
+const SmallChart = ({ smallChartData }: SmallChartProps) => {
   const getDateTimeArray = () => {
     const currentDate = new Date();
     const dateTimeArray = [];
     for (let i = 0; i < 168; i++) {
-      const dateTime = new Date(currentDate.getTime() - (i * 60 * 60 * 1000));
+      const dateTime = new Date(currentDate.getTime() - i * 60 * 60 * 1000);
       dateTimeArray.push(dateTime);
     }
     return dateTimeArray;

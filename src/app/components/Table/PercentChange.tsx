@@ -1,11 +1,8 @@
 import { PercentChangeDiv } from "@/app/styling/components/Table/styled.PercentChange";
 import { ArrowIcon } from "../SVGs/index";
+import { PercentChangeProps } from "@/app/types/interfaces/table.interfaces";
 
-interface Props {
-  percentChange: number;
-}
-
-const PercentChange = ({ percentChange }: Props) => {
+const PercentChange = ({ percentChange }: PercentChangeProps) => {
   const $isPositive = percentChange >= 0 ? true : false;
 
   return (

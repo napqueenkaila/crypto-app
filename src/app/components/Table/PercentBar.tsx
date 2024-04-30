@@ -7,13 +7,9 @@ import {
   ValuesDiv,
 } from "@/app/styling/components/Table/styled.PercentBar";
 import { formatCompactCurrency } from "@/app/utils";
+import { PercentBarProps } from "@/app/types/interfaces/table.interfaces";
 
-interface Props {
-  value1: number;
-  value2: number;
-}
-
-const PercentBar = ({ value1, value2 }: Props) => {
+const PercentBar = ({ value1, value2 }: PercentBarProps) => {
   const { currency } = useAppSelector(selectCurrency);
 
   return (
