@@ -24,8 +24,7 @@
     "react-select-search": "^4.1.7",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.8",
-    "usehooks-ts": "^3.1.0"
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "@types/chartjs-plugin-crosshair": "^1.1.4",
