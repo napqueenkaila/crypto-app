@@ -9,9 +9,10 @@ import CoinsContainer from "../components/Converter/CoinsContainer";
 import ChartContainer from "../components/Converter/ChartContainer";
 
 const Container = styled.div`
-  width: 100%;
+  width: 90vw;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 `;
 
 export default function Converter() {
