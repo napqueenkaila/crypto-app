@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { TableData } from "@/app/redux/features/api";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
+import { SwapIcon } from "../SVGs";
 
 const ConverterValueDiv = styled.div`
   background-color: #191932;
@@ -61,6 +62,13 @@ const CoinsContainer = ({
     setFromQuantity(0);
   };
 
+  const handleSwapCoins = () => {
+    setFromCoin(toCoin);
+    setToCoin(fromCoin);
+    setFromQuantity(toQuantity);
+    setToQuantity(fromQuantity);
+  };
+
   return (
     <>
       <ConverterValueDiv>
@@ -73,6 +81,7 @@ const CoinsContainer = ({
         />
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
+      <SwapIcon onClick={handleSwapCoins} />
       <ConverterValueDiv>
         <CoinInput
           coinData={toCoin}
