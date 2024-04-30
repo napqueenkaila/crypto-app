@@ -2,6 +2,7 @@ import { SetStateAction, useState } from "react";
 import styled from "styled-components";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
+import { SwapIcon } from "../SVGs";
 import { CoinsContainerProps } from "@/app/types/interfaces/converter.interfaces";
 
 const ConverterValueDiv = styled.div`
@@ -56,6 +57,13 @@ const CoinsContainer = ({
     setFromQuantity(0);
   };
 
+  const handleSwapCoins = () => {
+    setFromCoin(toCoin);
+    setToCoin(fromCoin);
+    setFromQuantity(toQuantity);
+    setToQuantity(fromQuantity);
+  };
+
   return (
     <>
       <ConverterValueDiv>
@@ -68,6 +76,7 @@ const CoinsContainer = ({
         />
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
+      <SwapIcon onClick={handleSwapCoins} />
       <ConverterValueDiv>
         <CoinInput
           coinData={toCoin}
