@@ -6,11 +6,12 @@ import { selectCurrency } from "../redux/features/currencySlice";
 import { selectConverterCoins } from "../redux/features/converterCoinsSlice";
 import { TableData, useGetTableDataQuery } from "../redux/features/api";
 import CoinsContainer from "../components/Converter/CoinsContainer";
+import ChartContainer from "../components/Converter/ChartContainer";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
 `;
 
 export default function Converter() {
@@ -43,13 +44,16 @@ export default function Converter() {
         <div>Online currency converter</div>
         <div>{getTodaysDate()}</div>
       </div>
-      {isSuccess ? (
-        <CoinsContainer
-          fromCoin={fromCoin}
-          toCoin={toCoin}
-          setFromCoin={setFromCoin}
-          setToCoin={setToCoin}
-        />
+      {isSuccess && fromCoin !== undefined && toCoin !== undefined ? (
+        <>
+          <CoinsContainer
+            fromCoin={fromCoin}
+            toCoin={toCoin}
+            setFromCoin={setFromCoin}
+            setToCoin={setToCoin}
+          />
+          <ChartContainer fromCoin={fromCoin} toCoin={toCoin} />
+        </>
       ) : null}
     </Container>
   );
