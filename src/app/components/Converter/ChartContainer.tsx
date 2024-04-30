@@ -14,12 +14,12 @@ const ChartContainer = ({
 }) => {
   const { currency } = useAppSelector(selectCurrency);
   const [selectedRange, setSelectedRange] = useState(7);
-  const { data: fromCoinData, isSuccess } = useGetChartDataQuery({
+  const { data: fromCoinData, isSuccess: fromIsSuccess } = useGetChartDataQuery({
     currency,
     selectedCoinId: fromCoin.id,
     selectedDays: selectedRange,
   });
-  const { data: toCoinData } = useGetChartDataQuery({
+  const { data: toCoinData, isSuccess: toIsSuccess } = useGetChartDataQuery({
     currency,
     selectedCoinId: toCoin.id,
     selectedDays: selectedRange,
@@ -32,7 +32,7 @@ const ChartContainer = ({
 
   return (
     <div>
-      {isSuccess && (
+      {fromIsSuccess && toIsSuccess && (
         <Chart
           fromCoin={fromCoin}
           fromCoinData={fromCoinData.prices}
