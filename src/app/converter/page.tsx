@@ -4,17 +4,27 @@ import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
 import { selectConverterCoins } from "../redux/features/converterCoinsSlice";
-import { useGetTableDataQuery } from "../redux/features/api";
 import CoinsContainer from "../components/Converter/CoinsContainer";
+import ChartContainer from "../components/Converter/ChartContainer";
+import { useGetTableDataQuery } from "../redux/features/api";
 import { TableData } from "../types/interfaces/api.interfaces";
 
 const Container = styled.div`
-  width: 100%;
+  width: 90vw;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  margin: 0 auto;
 `;
 
 export default function Converter() {
+  const getTodaysDate = () => {
+    const date = Date.now();
+    return new Intl.DateTimeFormat("en-US", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(date);
+  };
+
   const { currency } = useAppSelector(selectCurrency);
   const page = 1;
   const { isSuccess } = useGetTableDataQuery({ page, currency });
@@ -32,13 +42,20 @@ export default function Converter() {
 
   return (
     <Container>
-      {isSuccess ? (
-        <CoinsContainer
-          fromCoin={fromCoin}
-          toCoin={toCoin}
-          setFromCoin={setFromCoin}
-          setToCoin={setToCoin}
-        />
+      <div>
+        <div>Online currency converter</div>
+        <div>{getTodaysDate()}</div>
+      </div>
+      {isSuccess && fromCoin !== undefined && toCoin !== undefined ? (
+        <>
+          <CoinsContainer
+            fromCoin={fromCoin}
+            toCoin={toCoin}
+            setFromCoin={setFromCoin}
+            setToCoin={setToCoin}
+          />
+          <ChartContainer fromCoin={fromCoin} toCoin={toCoin} />
+        </>
       ) : null}
     </Container>
   );
