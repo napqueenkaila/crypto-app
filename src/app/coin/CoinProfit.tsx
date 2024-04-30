@@ -10,16 +10,9 @@ import {
   StyledArrow,
   StyledSpan,
 } from "../styling/components/CoinPage/styled.CoinProfit";
+import { CoinProfitProps } from "../types/interfaces/coinPage.interfaces";
 
-interface Props {
-  current_price: Record<string, number>;
-  ath: Record<string, number>;
-  ath_date: Record<string, string>;
-  atl: Record<string, number>;
-  atl_date: Record<string, string>;
-}
-
-const CoinProfit = ({ marketData }: { marketData: Props }) => {
+const CoinProfit = ({ marketData }: { marketData: CoinProfitProps }) => {
   const { currency } = useAppSelector(selectCurrency);
 
   return (

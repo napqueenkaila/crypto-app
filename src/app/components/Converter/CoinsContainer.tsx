@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { TableData } from "@/app/redux/features/api";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
 import { SwapIcon } from "../SVGs";
+import { CoinsContainerProps } from "@/app/types/interfaces/converter.interfaces";
 
 const ConverterValueDiv = styled.div`
   background-color: #191932;
@@ -16,12 +16,7 @@ const CoinsContainer = ({
   toCoin,
   setFromCoin,
   setToCoin,
-}: {
-  fromCoin: TableData;
-  toCoin: TableData;
-  setFromCoin: Dispatch<SetStateAction<TableData>>;
-  setToCoin: Dispatch<SetStateAction<TableData>>;
-}) => {
+}: CoinsContainerProps) => {
   const [fromQuantity, setFromQuantity] = useState(0);
   const [toQuantity, setToQuantity] = useState(0);
 

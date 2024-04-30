@@ -5,8 +5,8 @@ import {
 } from "@/app/styling/components/Navbar/styled.navbar";
 import { HomeIcon, PortfolioIcon } from "../SVGs";
 
-const NavLinks = ({darkMode}:{darkMode:boolean}) => {
-    const pathname = usePathname();
+const NavLinks = ({ darkMode }: { darkMode: boolean }) => {
+  const pathname = usePathname();
 
   return (
     <LinkContainer>

@@ -1,19 +1,15 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectConverterCoins } from "@/app/redux/features/converterCoinsSlice";
-import { TableData } from "@/app/redux/features/api";
+import { TableData } from "@/app/types/interfaces/api.interfaces";
+import { SearchProps } from "@/app/types/interfaces/converter.interfaces";
 
 const Search = ({
   setCoin,
   resetQuantities,
   isSearching,
   setIsSearching,
-}: {
-  setCoin: Dispatch<SetStateAction<TableData>>;
-  resetQuantities: () => void;
-  isSearching: boolean;
-  setIsSearching: Dispatch<SetStateAction<boolean>>;
-}) => {
+}: SearchProps) => {
   const [converterSearchQuery, setConverterSearchQuery] = useState("");
   const converterData = useAppSelector(selectConverterCoins);
   const searchResults = converterData.filter((coin: TableData) =>

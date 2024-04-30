@@ -4,9 +4,10 @@ import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySlice";
 import { selectConverterCoins } from "../redux/features/converterCoinsSlice";
-import { TableData, useGetTableDataQuery } from "../redux/features/api";
 import CoinsContainer from "../components/Converter/CoinsContainer";
 import ChartContainer from "../components/Converter/ChartContainer";
+import { useGetTableDataQuery } from "../redux/features/api";
+import { TableData } from "../types/interfaces/api.interfaces";
 
 const Container = styled.div`
   width: 90vw;

@@ -15,15 +15,7 @@ import {
 } from "@/app/styling/components/Carousel/styled.CoinCard";
 import { ArrowIcon } from "../SVGs";
 import { formatNumberWithCommas } from "@/app/utils";
-
-interface CarouselData {
-  id: string;
-  name: string;
-  symbol: string;
-  image: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-}
+import { CarouselData } from "@/app/types/interfaces/api.interfaces";
 
 const CoinCard = ({ coinData }: { coinData: CarouselData }) => {
   const coinOneSelected = useAppSelector(selectCoinOne);

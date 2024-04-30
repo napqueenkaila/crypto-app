@@ -11,15 +11,7 @@ import {
   ValuesDiv,
   StyledValues,
 } from "../styling/components/CoinPage/styled.CoinStats";
-
-interface CoinStatsProps {
-  market_cap: Record<string, number>;
-  fully_diluted_valuation: Record<string, number>;
-  total_volume: Record<string, number>;
-  circulating_supply: number;
-  max_supply: number;
-  total_supply: number;
-}
+import { CoinStatsProps } from "../types/interfaces/coinPage.interfaces";
 
 const CoinStats = ({
   marketData,

@@ -1,4 +1,4 @@
-export const LinkIcon = ({darkMode}:{darkMode: boolean}) => {
+export const LinkIcon = ({ darkMode }: { darkMode: boolean }) => {
   return (
     <svg
       width="21"
@@ -29,7 +29,7 @@ export const CopyIcon = ({
   darkMode,
   copyToClipboard,
 }: {
-  darkMode: boolean,
+  darkMode: boolean;
   copyToClipboard: () => void;
 }) => {
   return (
