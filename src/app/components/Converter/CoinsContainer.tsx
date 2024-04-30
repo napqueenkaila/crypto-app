@@ -4,10 +4,24 @@ import { TableData } from "@/app/redux/features/api";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 10px 50px;
+  gap: 35px;
+`;
+
 const ConverterValueDiv = styled.div`
   background-color: #191932;
   padding: 24px;
-  border: 1px red solid;
+  width: 50%;
+  border-radius: 16px;
+`;
+
+const StyledBreak = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: #fffFFF;
 `;
 
 const CoinsContainer = ({
@@ -29,7 +43,7 @@ const CoinsContainer = ({
     priceTwo: number,
     quantity: number
   ) => {
-    return quantity * (priceOne / priceTwo);
+    return Number((quantity * (priceOne / priceTwo)).toFixed(2));
   };
 
   const handleFromQuantityChange = (e: {
@@ -62,28 +76,32 @@ const CoinsContainer = ({
   };
 
   return (
-    <>
+    <Container>
       <ConverterValueDiv>
         <CoinInput
+          text="You sell"
           coinData={fromCoin}
           setCoin={setFromCoin}
           quantity={fromQuantity}
           resetQuantities={resetQuantities}
           handleQuantityChange={handleFromQuantityChange}
         />
+        <StyledBreak/>
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
       <ConverterValueDiv>
         <CoinInput
+          text="You buy"
           coinData={toCoin}
           setCoin={setToCoin}
           quantity={toQuantity}
           resetQuantities={resetQuantities}
           handleQuantityChange={handleToQuantityChange}
         />
+        <StyledBreak/>
         <CoinOutput coinData={toCoin} />
       </ConverterValueDiv>
-    </>
+    </Container>
   );
 };
 export default CoinsContainer;
