@@ -30,20 +30,23 @@ const AddAssetModal = ({
     selectedDate: "",
   });
   const [assets, setAssets] = useLocalStorage("assets", []);
-  // handleSave fn check to make sure values are there and close modal;
+
+  const handleSaveAsset = (e) => {
+    e.preventDefault();
+    setAssets([...assets, formData]);
+    setTimeout(() => setShowModal(false)); // allow setAssets to complete running
+  };
+
   return (
     <Modal>
       <ModalHeader setShowModal={setShowModal} />
-      {/* <div>{formData.selectedCoin.name}</div> */}
       <div>
         <AssetSearch setFormData={setFormData} />
         <AssetAmount setFormData={setFormData} />
         <AssetDate setFormData={setFormData} />
       </div>
       <button onClick={() => setShowModal(false)}>Cancel</button>
-      <button onClick={() => setAssets([...assets, { formData }])}>
-        Save & Continue
-      </button>
+      <button onClick={handleSaveAsset}>Save & Continue</button>
     </Modal>
   );
 };
