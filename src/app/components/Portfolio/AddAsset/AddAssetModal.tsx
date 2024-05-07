@@ -13,9 +13,12 @@ const Modal = styled.div`
   width: 50vw;
   height: 400px;
 `;
+export interface SelectedCoin {
+  [key: string]: string;
+}
 
 export interface FormDataState {
-  selectedCoin: { [key: string]: string | number };
+  selectedCoin: SelectedCoin;
   selectedAmount: string;
   selectedDate: string;
 }
