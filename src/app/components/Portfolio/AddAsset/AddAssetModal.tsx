@@ -5,6 +5,7 @@ import ModalHeader from "./ModalHeader";
 import AssetSearch from "./AssetSearch";
 import AssetAmount from "./AssetAmount";
 import AssetDate from "./AssetDate";
+import SelectedAsset from "./SelectedAsset";
 
 const Modal = styled.div`
   background-color: #13121a;
@@ -40,6 +41,7 @@ const AddAssetModal = ({
   return (
     <Modal>
       <ModalHeader setShowModal={setShowModal} />
+      <SelectedAsset selectedCoin={formData.selectedCoin} />
       <div>
         <AssetSearch setFormData={setFormData} />
         <AssetAmount setFormData={setFormData} selectedAmount={formData.selectedAmount} />
