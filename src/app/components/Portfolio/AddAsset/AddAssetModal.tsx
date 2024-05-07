@@ -15,7 +15,7 @@ const Modal = styled.div`
 
 export interface FormDataState {
   selectedCoin: { [key: string]: string | number };
-  selectedAmount: number;
+  selectedAmount: string;
   selectedDate: string;
 }
 
@@ -26,12 +26,12 @@ const AddAssetModal = ({
 }) => {
   const [formData, setFormData] = useState<FormDataState>({
     selectedCoin: {},
-    selectedAmount: 0,
+    selectedAmount: "",
     selectedDate: "",
   });
   const [assets, setAssets] = useLocalStorage("assets", []);
 
-  const handleSaveAsset = (e) => {
+  const handleSaveAsset = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setAssets([...assets, formData]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
@@ -42,11 +42,13 @@ const AddAssetModal = ({
       <ModalHeader setShowModal={setShowModal} />
       <div>
         <AssetSearch setFormData={setFormData} />
-        <AssetAmount setFormData={setFormData} />
-        <AssetDate setFormData={setFormData} />
+        <AssetAmount setFormData={setFormData} selectedAmount={formData.selectedAmount} />
+        <AssetDate setFormData={setFormData} selectedDate={ formData.selectedDate} />
       </div>
       <button onClick={() => setShowModal(false)}>Cancel</button>
-      <button onClick={handleSaveAsset}>Save & Continue</button>
+      <button onClick={handleSaveAsset}>
+        Save & Continue
+      </button>
     </Modal>
   );
 };

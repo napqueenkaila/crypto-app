@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { FormDataState } from "./AddAssetModal";
 
 interface SearchResult {
-  [key: string]: string | number;
+  [key: string]: string;
 }
 
 const AssetSearch = ({
@@ -16,13 +16,14 @@ const AssetSearch = ({
   const { data } = useGetSearchDataQuery(assetQuery);
   const results = data?.coins.slice(0, 10);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => {
     setIsSearching(true);
     setAssetQuery(e.target.value);
   };
 
-  const handleSetCoin = (coin) => {
+  const handleSetCoin = (coin: SearchResult) => {
     setIsSearching(false);
+    setAssetQuery(coin.name);
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -33,7 +34,7 @@ const AssetSearch = ({
 
   return (
     <div>
-      <input type="text" placeholder="Select coins" onChange={handleSearch} />
+      <input type="text" value={assetQuery} placeholder="Select coins" onChange={handleSearch} />
       {isSearching &&
         results.map((coin: SearchResult) => {
           return (
