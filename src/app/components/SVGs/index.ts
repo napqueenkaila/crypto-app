@@ -8,5 +8,6 @@ import { PortfolioIcon } from "./NavIcons/PortfolioIcon";
 import { ArrowIcon } from "./ArrowIcon";
 import { CopyIcon, LinkIcon } from "./LinkIcons";
 import { SwapIcon } from "./SwapIcon";
+import { CloseCircle } from "./CloseCircle";
 
-export { BtcIcon, EthIcon, DarkModeIcon, DollarIcon, HomeIcon, Logo, ExchangeIcon, FlashIcon, PortfolioIcon, ArrowIcon, CopyIcon, LinkIcon, SwapIcon };
+export { BtcIcon, EthIcon, DarkModeIcon, DollarIcon, HomeIcon, Logo, ExchangeIcon, FlashIcon, PortfolioIcon, ArrowIcon, CopyIcon, LinkIcon, SwapIcon, CloseCircle };
