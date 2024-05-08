@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import AddAssetModal from "../components/Portfolio/AddAsset/AddAssetModal";
 import { useState } from "react";
+import AssetCard from "../components/Portfolio/PortfolioAssets/AssetCard";
 
 const PageWrapper = styled.div`
   width: 90vw;
@@ -16,6 +17,7 @@ export default function Portfolio() {
         <div>Portfolio</div>
         <button onClick={() => setShowModal(true)}>Add Asset</button>
       </div>
+      <AssetCard />
       {showModal && <AddAssetModal setShowModal={setShowModal} />}
     </PageWrapper>
   );
