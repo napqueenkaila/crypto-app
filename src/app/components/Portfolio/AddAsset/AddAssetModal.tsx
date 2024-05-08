@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { useLocalStorage } from "@/app/useLocalStorage";
 import ModalHeader from "./ModalHeader";
 import AssetSearch from "./AssetSearch";
 import AssetAmount from "./AssetAmount";
@@ -25,15 +24,20 @@ export interface FormDataState {
 
 const AddAssetModal = ({
   setShowModal,
+  handleUpdateAssets,
+  assets,
+  setAssets,
 }: {
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  handleUpdateAssets: () => void;
+  assets: [];
+  setAssets: Dispatch<SetStateAction<FormDataState[]>>;
 }) => {
   const [formData, setFormData] = useState<FormDataState>({
     selectedCoin: {},
     selectedAmount: "",
     selectedDate: "",
   });
-  const [assets, setAssets] = useLocalStorage("assets", []);
   const isDisabled =
     formData.selectedAmount === "" ||
     formData.selectedDate === "" ||
@@ -43,6 +47,7 @@ const AddAssetModal = ({
     e.preventDefault();
     setAssets([...assets, formData]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
+    handleUpdateAssets();
   };
 
   return (
