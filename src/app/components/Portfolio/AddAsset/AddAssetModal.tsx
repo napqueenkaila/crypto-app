@@ -34,8 +34,12 @@ const AddAssetModal = ({
     selectedDate: "",
   });
   const [assets, setAssets] = useLocalStorage("assets", []);
+  const isDisabled =
+    formData.selectedAmount === "" ||
+    formData.selectedDate === "" ||
+    formData.selectedCoin.id === undefined;
 
-  const handleSaveAsset = (e: { preventDefault: () => void; }) => {
+  const handleSaveAsset = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setAssets([...assets, formData]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
@@ -47,11 +51,17 @@ const AddAssetModal = ({
       <SelectedAsset selectedCoin={formData.selectedCoin} />
       <div>
         <AssetSearch setFormData={setFormData} />
-        <AssetAmount setFormData={setFormData} selectedAmount={formData.selectedAmount} />
-        <AssetDate setFormData={setFormData} selectedDate={ formData.selectedDate} />
+        <AssetAmount
+          setFormData={setFormData}
+          selectedAmount={formData.selectedAmount}
+        />
+        <AssetDate
+          setFormData={setFormData}
+          selectedDate={formData.selectedDate}
+        />
       </div>
       <button onClick={() => setShowModal(false)}>Cancel</button>
-      <button onClick={handleSaveAsset}>
+      <button onClick={handleSaveAsset} disabled={isDisabled}>
         Save & Continue
       </button>
     </Modal>
