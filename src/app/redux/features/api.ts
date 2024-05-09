@@ -117,6 +117,7 @@ export const api = createApi({
             circulating_supply,
             max_supply,
             current_price,
+            price_change_percentage_24h,
           },
         } = response;
         return {
@@ -138,6 +139,7 @@ export const api = createApi({
             circulating_supply,
             max_supply,
             current_price,
+            price_change_percentage_24h,
           },
         };
       },
@@ -174,6 +176,9 @@ export const api = createApi({
         };
       }
     }),
+    getCoinHistoryData: builder.query({
+      query: ({coinId, date}) => `coins/${coinId}/history?date=${date}`
+    })
   }),
 });
 
@@ -186,4 +191,5 @@ export const {
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
   useGetConverterCoinsDataQuery,
+  useGetCoinHistoryDataQuery,
 } = api;

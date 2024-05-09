@@ -42,6 +42,7 @@ export interface CoinData {
     circulating_supply: number;
     max_supply: number;
     current_price: Record<string, number>;
+    price_change_percentage_24h: Record<string, number>;
   };
 }
 
