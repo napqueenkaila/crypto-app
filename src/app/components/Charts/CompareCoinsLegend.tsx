@@ -6,18 +6,14 @@ import {
   ColorBox,
 } from "@/app/styling/components/Charts/styled.CompareCoinsLegend";
 import { formatCompactCurrency } from "@/app/utils";
+import { CompareCoinsProps } from "@/app/types/interfaces/charts.interfaces";
 
 const CompareCoinsLegend = ({
   coinOne,
   coinTwo,
   legendValueOne,
   legendValueTwo,
-}: {
-  coinOne: string;
-  coinTwo: string;
-  legendValueOne: number;
-  legendValueTwo: number;
-}) => {
+}: CompareCoinsProps) => {
   const { currency } = useAppSelector(selectCurrency);
   return (
     <Container>

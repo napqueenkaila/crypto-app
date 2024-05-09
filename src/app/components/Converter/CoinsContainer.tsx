@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { TableData } from "@/app/redux/features/api";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
+import { SwapIcon } from "../SVGs";
+import { CoinsContainerProps } from "@/app/types/interfaces/converter.interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -29,12 +30,7 @@ const CoinsContainer = ({
   toCoin,
   setFromCoin,
   setToCoin,
-}: {
-  fromCoin: TableData;
-  toCoin: TableData;
-  setFromCoin: Dispatch<SetStateAction<TableData>>;
-  setToCoin: Dispatch<SetStateAction<TableData>>;
-}) => {
+}: CoinsContainerProps) => {
   const [fromQuantity, setFromQuantity] = useState(0);
   const [toQuantity, setToQuantity] = useState(0);
 
@@ -75,6 +71,13 @@ const CoinsContainer = ({
     setFromQuantity(0);
   };
 
+  const handleSwapCoins = () => {
+    setFromCoin(toCoin);
+    setToCoin(fromCoin);
+    setFromQuantity(toQuantity);
+    setToQuantity(fromQuantity);
+  };
+
   return (
     <Container>
       <ConverterValueDiv>
@@ -89,6 +92,7 @@ const CoinsContainer = ({
         <StyledBreak/>
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
+      <SwapIcon onClick={handleSwapCoins} />
       <ConverterValueDiv>
         <CoinInput
           text="You buy"

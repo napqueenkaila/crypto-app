@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
 import { formatCurrencyWithCommas } from "@/app/utils";
-import { TableData } from "@/app/redux/features/api";
+import { TableData } from "@/app/types/interfaces/api.interfaces";
 import styled from "styled-components";
 
 const OutputDiv = styled.div`

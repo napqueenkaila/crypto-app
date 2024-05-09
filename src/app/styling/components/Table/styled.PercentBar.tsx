@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PercentProps } from "@/app/types/styled";
 
 export const PercentageBarDiv = styled.div`
   max-width: 200px;
@@ -6,10 +7,6 @@ export const PercentageBarDiv = styled.div`
   border-radius: 2px;
   background-color: #c2772180;
 `;
-
-interface PercentProps {
-  $percent?: number | string;
-}
 
 export const Percent = styled.div<PercentProps>`
   height: 100%;

@@ -1,4 +1,5 @@
 import { formatCompactCurrency, formatCurrencyWithCommas } from "@/app/utils";
+import { ChartColors } from "@/app/types/interfaces/charts.interfaces";
 
 export const getChartLabels = (data: number[][]) => {
   return data.map((el: number[]) => {
@@ -12,11 +13,6 @@ export const getChartLabels = (data: number[][]) => {
 export const formatChartData = (data: number[][]) => {
   return data?.map((el) => el[1]);
 };
-
-interface ChartColors {
-  one: { [key: string]: string };
-  two: { [key: string]: string };
-}
 
 const chartColors: ChartColors = {
   one: { start: "rgba(116,116,242,0.6) ", end: "rgba(116,116,242,0.01)" },

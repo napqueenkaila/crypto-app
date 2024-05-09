@@ -8,20 +8,14 @@ import {
   Date,
 } from "@/app/styling/components/Charts/styled.Legend";
 import { formatCompactCurrency } from "@/app/utils";
-
-type Props = {
-  chartType: string;
-  coinOne: { [key: string]: string };
-  legendValue: number;
-  legendDate: string;
-};
+import { LegendProps } from "@/app/types/interfaces/charts.interfaces";
 
 const Legend = ({
   chartType,
   coinOne,
   legendValue,
   legendDate,
-}: Props): JSX.Element => {
+}: LegendProps): JSX.Element => {
   const { currency } = useAppSelector(selectCurrency);
   const compareCoins = useAppSelector(selectCompareCoins);
   const titleText = `${coinOne.name} (${coinOne.symbol.toUpperCase()})`;

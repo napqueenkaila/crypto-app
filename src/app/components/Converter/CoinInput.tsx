@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import Search from "./Search";
 import { DownArrow } from "../SVGs/DownArrow";
-import { TableData } from "@/app/redux/features/api";
+import { CoinInputProps } from "@/app/types/interfaces/converter.interfaces";
 import styled from "styled-components";
 import { Space_Grotesk } from "next/font/google";
 
@@ -53,14 +53,7 @@ const CoinInput = ({
   quantity,
   resetQuantities,
   handleQuantityChange,
-}: {
-  text: string;
-  coinData: TableData;
-  setCoin: Dispatch<SetStateAction<TableData>>;
-  quantity: number;
-  resetQuantities: () => void;
-  handleQuantityChange: (e: any) => void;
-}) => {
+}: CoinInputProps) => {
   const [isSearching, setIsSearching] = useState(false);
 
   const handleShowSearch = () => {

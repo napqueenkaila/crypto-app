@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface HasMoreState {
-  hasMore: boolean;
-}
+import { HasMoreState } from "@/app/types/interfaces/sliceState.interfaces";
 
 const initialState: HasMoreState = { hasMore: true };
 
@@ -10,8 +7,8 @@ const hasMoreSlice = createSlice({
   name: "hasMore",
   initialState,
   reducers: {
-    toggleHasMore: state => {
-      return state = {hasMore: !state};
+    toggleHasMore: (state) => {
+      return (state = { hasMore: !state });
     },
   },
 });
