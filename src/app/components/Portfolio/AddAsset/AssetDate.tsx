@@ -5,10 +5,15 @@ const AssetDate = ({
   selectedDate,
   setFormData,
 }: {
-    selectedDate: string;
+  selectedDate: string;
   setFormData: Dispatch<SetStateAction<FormDataState>>;
 }) => {
   const today = new Date().toISOString().split("T")[0];
+
+  const formatDate = (dateString: string) => {
+    const dateParts = dateString.split("-");
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  };
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -16,10 +21,11 @@ const AssetDate = ({
       alert("Please select a date in the past or today.");
       return;
     } else {
+      const formattedDate = formatDate(value);
       setFormData((prevFormData) => {
         return {
           ...prevFormData,
-          selectedDate: value,
+          selectedDate: formattedDate,
         };
       });
     }
