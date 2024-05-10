@@ -7,6 +7,7 @@ import { useAppSelector } from "@/app/redux/hooks";
 import Image from "next/image";
 import { FormDataState } from "../AddAsset/AddAssetModal";
 import { useEffect, useState } from "react";
+import { formatCurrencyWithCommas } from "@/app/utils";
 
 interface CombinedCoinData {
   id: string;
@@ -118,7 +119,12 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
           </div>
           <div>
             <div>
-              <div>{combinedCoinData.marketData.currentPrice[currency]}</div>
+              <div>
+                {formatCurrencyWithCommas(
+                  combinedCoinData.marketData.currentPrice[currency],
+                  currency
+                )}
+              </div>
               <div>Current Price</div>
             </div>
             <div>
@@ -133,10 +139,7 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
             </div>
             <div>
               <div>
-                {(combinedCoinData.marketData.priceChangePercent * 100).toFixed(
-                  0
-                )}
-                %
+                {combinedCoinData.marketData.priceChangePercent.toFixed(0)}%
               </div>
               <div>24h%</div>
             </div>
