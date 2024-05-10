@@ -56,6 +56,5 @@ export interface CarouselData {
 }
 
 export interface HistoricalData {
-  // [key: string]: string;
   [key: string]: Record<string, number>;
 }
