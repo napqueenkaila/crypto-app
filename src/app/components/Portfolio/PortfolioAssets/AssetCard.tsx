@@ -33,7 +33,13 @@ export interface CombinedCoinData {
   };
 }
 
-const AssetCard = ({ asset }: { asset: FormDataState }) => {
+const AssetCard = ({
+  asset,
+  removeAsset,
+}: {
+  asset: FormDataState;
+  removeAsset: (id: string) => void;
+}) => {
   const { currency } = useAppSelector(selectCurrency);
   const { data: coinData, isSuccess: coinIsSuccess } = useGetCoinDataQuery(
     asset.selectedCoin.id
@@ -109,7 +115,7 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
     <div>
       {doubleSuccess && (
         <>
-          <UserData coinData={combinedCoinData} />
+          <UserData coinData={combinedCoinData} removeAsset={removeAsset} />
           <DataBlock
             coinData={formatCurrencyWithCommas(
               combinedCoinData.marketData.currentPrice[currency],

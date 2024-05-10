@@ -2,12 +2,19 @@ import Image from "next/image";
 import { CombinedCoinData } from "./AssetCard";
 import styled from "styled-components";
 import { ArrowIcon } from "../../SVGs";
+import Button from "./Button";
 
 const PricePercent = styled.div<{ $isPositive: boolean }>`
   color: ${(props) => (props.$isPositive ? "#01F1E3" : "#FE2264")};
 `;
 
-const UserData = ({ coinData }: { coinData: CombinedCoinData }) => {
+const UserData = ({
+  coinData,
+  removeAsset,
+}: {
+  coinData: CombinedCoinData;
+  removeAsset: (id: string) => void;
+}) => {
   const isPositive = coinData.marketData.priceChangePercent > 0 ? true : false;
   return (
     <>
@@ -16,6 +23,7 @@ const UserData = ({ coinData }: { coinData: CombinedCoinData }) => {
         <div>
           {coinData.name} ({coinData.symbol.toUpperCase()})
         </div>
+        <Button handleClick={removeAsset} id={coinData.id} />
       </div>
       <div>
         <div>Total Value</div>
