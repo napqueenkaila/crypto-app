@@ -38,10 +38,15 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
   const { data: coinData, isSuccess: coinIsSuccess } = useGetCoinDataQuery(
     asset.selectedCoin.id
   );
+
+  const formatDate = (dateString: string) => {
+    const dateParts = dateString.split("-");
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  };
   const { data: historicalData, isSuccess: historicalIsSuccess } =
     useGetCoinHistoryDataQuery({
       coinId: asset.selectedCoin.id,
-      date: asset.selectedDate,
+      date: formatDate(asset.selectedDate),
     });
   const [doubleSuccess, setDoubleSuccess] = useState(false);
   const [combinedCoinData, setCombinedCoinData] = useState<CombinedCoinData>({
