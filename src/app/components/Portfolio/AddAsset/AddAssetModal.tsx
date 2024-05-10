@@ -43,7 +43,7 @@ const AddAssetModal = ({
     formData.selectedDate === "" ||
     formData.selectedCoin.id === undefined;
 
-  const handleSaveAsset = (e: { preventDefault: () => void }) => {
+  const handleSaveAsset = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setAssets([...assets, formData]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
