@@ -42,6 +42,7 @@ export interface CoinData {
     circulating_supply: number;
     max_supply: number;
     current_price: Record<string, number>;
+    price_change_percentage_24h: Record<string, number>;
   };
 }
 
@@ -52,4 +53,8 @@ export interface CarouselData {
   image: string;
   current_price: number;
   price_change_percentage_24h: number;
+}
+
+export interface HistoricalData {
+  [key: string]: Record<string, number>;
 }

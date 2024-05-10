@@ -5,6 +5,7 @@ import {
   TableData,
   CoinData,
   CarouselData,
+  HistoricalData,
 } from "@/app/types/interfaces/api.interfaces";
 
 const apiKey: string = process.env.NEXT_PUBLIC_API_KEY!;
@@ -117,6 +118,7 @@ export const api = createApi({
             circulating_supply,
             max_supply,
             current_price,
+            price_change_percentage_24h,
           },
         } = response;
         return {
@@ -138,6 +140,7 @@ export const api = createApi({
             circulating_supply,
             max_supply,
             current_price,
+            price_change_percentage_24h,
           },
         };
       },
@@ -170,9 +173,17 @@ export const api = createApi({
           name: `${response.name} (${response.symbol.toUpperCase()})`,
           symbol: response.symbol,
           image: response.image.thumb,
-          currentPrice: response.market_data.current_price
+          currentPrice: response.market_data.current_price,
         };
-      }
+      },
+    }),
+    getCoinHistoryData: builder.query({
+      query: ({ coinId, date }) => `coins/${coinId}/history?date=${date}`,
+      transformResponse: (response: HistoricalData) => {
+        return {
+          historicalData: response.market_data,
+        };
+      },
     }),
   }),
 });
@@ -186,4 +197,5 @@ export const {
   useGetCoinDataQuery,
   useGetCarouselDataQuery,
   useGetConverterCoinsDataQuery,
+  useGetCoinHistoryDataQuery,
 } = api;

@@ -2,8 +2,10 @@ import { Dispatch, SetStateAction } from "react";
 import { FormDataState } from "./AddAssetModal";
 
 const AssetAmount = ({
+  selectedAmount,
   setFormData,
 }: {
+  selectedAmount: string;
   setFormData: Dispatch<SetStateAction<FormDataState>>;
 }) => {
   const handleAmountChange = (e: { target: { value: any } }) => {
@@ -24,6 +26,7 @@ const AssetAmount = ({
     <input
       type="number"
       placeholder="Purchased amount"
+      value={selectedAmount}
       min="0"
       onChange={handleAmountChange}
     />
