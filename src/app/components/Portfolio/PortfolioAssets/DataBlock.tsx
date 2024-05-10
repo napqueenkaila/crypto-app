@@ -11,6 +11,7 @@ const PercentageBar = styled.div`
 const Percent = styled.div<{ $percent: number }>`
   height: 100%;
   width: ${(props) => `${props.$percent}%`};
+  background-color: #01f1e3;
 `;
 
 const DataBlock = ({
@@ -23,7 +24,8 @@ const DataBlock = ({
   title: string;
   isPercent: boolean;
   hasPercentBar: boolean;
-}) => {
+  }) => {
+
   return (
     <div>
       <div>
