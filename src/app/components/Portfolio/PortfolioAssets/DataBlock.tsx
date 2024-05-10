@@ -20,12 +20,11 @@ const DataBlock = ({
   isPercent,
   hasPercentBar,
 }: {
-  coinData: number;
+  coinData: number | string;
   title: string;
   isPercent: boolean;
   hasPercentBar: boolean;
 }) => {
-
   return (
     <div>
       <div>

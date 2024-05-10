@@ -111,11 +111,9 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
         <>
           <UserData coinData={combinedCoinData} />
           <DataBlock
-            coinData={Number(
-              formatCurrencyWithCommas(
-                combinedCoinData.marketData.currentPrice[currency],
-                currency
-              )
+            coinData={formatCurrencyWithCommas(
+              combinedCoinData.marketData.currentPrice[currency],
+              currency
             )}
             title="Current Price"
             isPercent={false}
