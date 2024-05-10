@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
 import StoreProvider from "./StoreProvider";
 import SliderButton from "./components/Converter/SliderButton";
+import { usePathname } from "next/navigation";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
@@ -26,7 +28,9 @@ export default function RootLayout({
           <Providers>
             <MarketDataBar />
             <Navbar />
-            <SliderButton />
+            {pathname === "/" || pathname === "/converter" ? (
+              <SliderButton />
+            ) : null}
             {children}
           </Providers>
         </StoreProvider>
