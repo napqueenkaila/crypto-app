@@ -1,8 +1,8 @@
 export const DownArrow = () => {
   return (
     <svg
-      width="8"
-      height="4"
+      width="10"
+      height="10"
       viewBox="0 0 8 4"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
