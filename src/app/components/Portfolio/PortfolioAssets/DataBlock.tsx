@@ -20,11 +20,11 @@ const DataBlock = ({
   isPercent,
   hasPercentBar,
 }: {
-  coinData: string;
+  coinData: number;
   title: string;
   isPercent: boolean;
   hasPercentBar: boolean;
-  }) => {
+}) => {
 
   return (
     <div>
@@ -33,7 +33,7 @@ const DataBlock = ({
           {isPercent && !hasPercentBar && (
             <ArrowIcon isPositive={Number(coinData) > 0 ? true : false} />
           )}
-          {coinData}
+          {Number(coinData) < 0 ? Number(coinData) * -1 : coinData}
           {isPercent && "%"}
         </div>
         {hasPercentBar && (

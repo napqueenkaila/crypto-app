@@ -106,35 +106,43 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
         <>
           <UserData coinData={combinedCoinData} />
           <DataBlock
-            coinData={formatCurrencyWithCommas(
-              combinedCoinData.marketData.currentPrice[currency],
-              currency
+            coinData={Number(
+              formatCurrencyWithCommas(
+                combinedCoinData.marketData.currentPrice[currency],
+                currency
+              )
             )}
             title="Current Price"
             isPercent={false}
             hasPercentBar={false}
           />
           <DataBlock
-            coinData={(
-              combinedCoinData.marketData.marketCap[currency] /
-              combinedCoinData.marketData.totalVolume[currency]
-            ).toFixed(0)}
+            coinData={Number(
+              (
+                combinedCoinData.marketData.marketCap[currency] /
+                combinedCoinData.marketData.totalVolume[currency]
+              ).toFixed(0)
+            )}
             title="Market cap vs Volume"
             isPercent={true}
             hasPercentBar={true}
           />
           <DataBlock
-            coinData={combinedCoinData.marketData.priceChangePercent.toFixed(0)}
+            coinData={Number(
+              combinedCoinData.marketData.priceChangePercent.toFixed(0)
+            )}
             title="24h%"
             isPercent={true}
             hasPercentBar={false}
           />
           <DataBlock
-            coinData={(
-              (combinedCoinData.marketData.circulatingSupply /
-                combinedCoinData.marketData.totalSupply) *
-              100
-            ).toFixed(0)}
+            coinData={Number(
+              (
+                (combinedCoinData.marketData.circulatingSupply /
+                  combinedCoinData.marketData.totalSupply) *
+                100
+              ).toFixed(0)
+            )}
             title="Circ supply vs max supply"
             isPercent={true}
             hasPercentBar={false}
