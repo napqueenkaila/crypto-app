@@ -12,7 +12,7 @@ const AssetDate = ({
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value < today) {
+    if (value <= today) {
       setFormData((prevFormData) => {
         return {
           ...prevFormData,
