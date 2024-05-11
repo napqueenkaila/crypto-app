@@ -23,9 +23,15 @@ export default function Portfolio() {
 
   const removeAsset = (id: string) => {
     const updatedAssets = assets.filter(
-      (asset: Asset) => asset.selectedCoin.id !== id
+      (asset: FormDataState) => asset.selectedCoin.id !== id
     );
     setAssets(updatedAssets);
+  };
+
+  const editAsset = (id: string) => {
+    setShowModal(true);
+    const selectedAsset = assets.find((asset: FormDataState) => asset.selectedCoin.id === id);
+    setAssetToEdit(selectedAsset);
   };
 
   return (
