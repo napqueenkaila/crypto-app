@@ -12,10 +12,7 @@ const AssetDate = ({
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value > today) {
-      alert("Please select a date in the past or today.");
-      return;
-    } else {
+    if (value < today) {
       setFormData((prevFormData) => {
         return {
           ...prevFormData,

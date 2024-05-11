@@ -10,10 +10,7 @@ const AssetAmount = ({
 }) => {
   const handleAmountChange = (e: { target: { value: any } }) => {
     const { value } = e.target;
-    if (value < 1) {
-      alert("Please select an amount greater than 0");
-      return;
-    } else {
+    if (value >= 0) {
       setFormData((prevFormData) => {
         return {
           ...prevFormData,
@@ -22,6 +19,7 @@ const AssetAmount = ({
       });
     }
   };
+
   return (
     <input
       type="number"
