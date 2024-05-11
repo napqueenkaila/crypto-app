@@ -12,12 +12,6 @@ const PageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-interface Asset {
-  selectedAmount: string;
-  selectedDate: string;
-  selectedCoin: Record<string, number | string>;
-}
-
 export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
   const [assets, setAssets] = useLocalStorage("assets", []);
