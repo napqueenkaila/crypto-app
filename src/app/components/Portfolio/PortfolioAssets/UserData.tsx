@@ -14,9 +14,11 @@ const PricePercent = styled.div<{ $isPositive: boolean }>`
 const UserData = ({
   coinData,
   removeAsset,
+  editAsset,
 }: {
   coinData: CombinedCoinData;
   removeAsset: (id: string) => void;
+  editAsset: (id: string) => void;
 }) => {
   const { currency } = useAppSelector(selectCurrency);
   const isPositive = coinData.marketData.priceChangePercent > 0 ? true : false;
@@ -27,7 +29,8 @@ const UserData = ({
         <div>
           {coinData.name} ({coinData.symbol.toUpperCase()})
         </div>
-        <Button handleClick={removeAsset} id={coinData.id} />
+        <Button handleClick={editAsset} id={coinData.id} type="edit" />
+        <Button handleClick={removeAsset} id={coinData.id} type="trash" />
       </div>
       <div>
         <div>Total Value</div>

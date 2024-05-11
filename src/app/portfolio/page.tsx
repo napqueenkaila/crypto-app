@@ -16,6 +16,11 @@ export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
   const [assets, setAssets] = useLocalStorage("assets", []);
   const [hasAssets, setHasAssets] = useState(assets.length >= 1 ? true : false);
+  const [assetToEdit, setAssetToEdit] = useState({
+    selectedCoin: {},
+    selectedAmount: "",
+    selectedDate: "",
+  });
 
   const handleUpdateAssets = () => {
     setHasAssets(true);
@@ -46,6 +51,7 @@ export default function Portfolio() {
             key={asset.selectedCoin.id}
             asset={asset}
             removeAsset={removeAsset}
+            editAsset={editAsset}
           />
         ))
       ) : (
@@ -57,6 +63,8 @@ export default function Portfolio() {
           assets={assets}
           setAssets={setAssets}
           setShowModal={setShowModal}
+          assetToEdit={assetToEdit}
+          setAssetToEdit={setAssetToEdit}
         />
       )}
     </PageWrapper>
