@@ -1,15 +1,16 @@
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 import {
   useGetCoinDataQuery,
   useGetCoinHistoryDataQuery,
 } from "@/app/redux/features/api";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
-import { useAppSelector } from "@/app/redux/hooks";
-import Image from "next/image";
 import { FormDataState } from "../AddAsset/AddAssetModal";
-import { useEffect, useState } from "react";
-import { formatCurrencyWithCommas } from "@/app/utils";
+import UserData from "./UserData";
+import DataBlock from "./DataBlock";
+import { formatCurrencyWithCommas, formatDate } from "@/app/utils";
 
-interface CombinedCoinData {
+export interface CombinedCoinData {
   id: string;
   name: string;
   symbol: string;
@@ -32,15 +33,24 @@ interface CombinedCoinData {
   };
 }
 
-const AssetCard = ({ asset }: { asset: FormDataState }) => {
+const AssetCard = ({
+  asset,
+  removeAsset,
+  editAsset,
+}: {
+  asset: FormDataState;
+  removeAsset: (id: string) => void;
+  editAsset: (id: string) => void;
+}) => {
   const { currency } = useAppSelector(selectCurrency);
   const { data: coinData, isSuccess: coinIsSuccess } = useGetCoinDataQuery(
     asset.selectedCoin.id
   );
+
   const { data: historicalData, isSuccess: historicalIsSuccess } =
     useGetCoinHistoryDataQuery({
       coinId: asset.selectedCoin.id,
-      date: asset.selectedDate,
+      date: formatDate(asset.selectedDate),
     });
   const [doubleSuccess, setDoubleSuccess] = useState(false);
   const [combinedCoinData, setCombinedCoinData] = useState<CombinedCoinData>({
@@ -103,58 +113,51 @@ const AssetCard = ({ asset }: { asset: FormDataState }) => {
     <div>
       {doubleSuccess && (
         <>
-          <div>
-            <Image src={combinedCoinData.image} alt="" height={25} width={25} />
-            <div>
-              {combinedCoinData.name} ({combinedCoinData.symbol.toUpperCase()})
-            </div>
-          </div>
-          <div>
-            <div>Total Value</div>
-            <div>{combinedCoinData.totalValue}</div>
-            <div>
-              {combinedCoinData.marketData.priceChangePercent.toString()}
-            </div>
-            <div>Purchased {combinedCoinData.selectedDate}</div>
-          </div>
-          <div>
-            <div>
-              <div>
-                {formatCurrencyWithCommas(
-                  combinedCoinData.marketData.currentPrice[currency],
-                  currency
-                )}
-              </div>
-              <div>Current Price</div>
-            </div>
-            <div>
-              <div>
-                {(
-                  combinedCoinData.marketData.marketCap[currency] /
-                  combinedCoinData.marketData.totalVolume[currency]
-                ).toFixed(0)}
-                %
-              </div>
-              <div>Market cap vs Volume</div>
-            </div>
-            <div>
-              <div>
-                {combinedCoinData.marketData.priceChangePercent.toFixed(0)}%
-              </div>
-              <div>24h%</div>
-            </div>
-            <div>
-              <div>
-                {(
-                  (combinedCoinData.marketData.circulatingSupply /
-                    combinedCoinData.marketData.totalSupply) *
-                  100
-                ).toFixed(0)}
-                %
-              </div>
-              <div>Circ supply vs max supply</div>
-            </div>
-          </div>
+          <UserData
+            coinData={combinedCoinData}
+            removeAsset={removeAsset}
+            editAsset={editAsset}
+          />
+          <DataBlock
+            coinData={formatCurrencyWithCommas(
+              combinedCoinData.marketData.currentPrice[currency],
+              currency
+            )}
+            title="Current Price"
+            isPercent={false}
+            hasPercentBar={false}
+          />
+          <DataBlock
+            coinData={Number(
+              (
+                combinedCoinData.marketData.marketCap[currency] /
+                combinedCoinData.marketData.totalVolume[currency]
+              ).toFixed(0)
+            )}
+            title="Market cap vs Volume"
+            isPercent={true}
+            hasPercentBar={true}
+          />
+          <DataBlock
+            coinData={Number(
+              combinedCoinData.marketData.priceChangePercent.toFixed(0)
+            )}
+            title="24h%"
+            isPercent={true}
+            hasPercentBar={false}
+          />
+          <DataBlock
+            coinData={Number(
+              (
+                (combinedCoinData.marketData.circulatingSupply /
+                  combinedCoinData.marketData.totalSupply) *
+                100
+              ).toFixed(0)
+            )}
+            title="Circ supply vs max supply"
+            isPercent={true}
+            hasPercentBar={false}
+          />
         </>
       )}
     </div>

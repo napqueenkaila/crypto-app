@@ -1,4 +1,4 @@
-const EditIcon = () => {
+export const EditIcon = () => {
   return (
     <svg
       width="24"
@@ -34,4 +34,3 @@ const EditIcon = () => {
     </svg>
   );
 };
-export default EditIcon;

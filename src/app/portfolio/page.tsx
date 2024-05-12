@@ -1,6 +1,8 @@
 "use client";
 import styled from "styled-components";
-import AddAssetModal, { FormDataState } from "../components/Portfolio/AddAsset/AddAssetModal";
+import AddAssetModal, {
+  FormDataState,
+} from "../components/Portfolio/AddAsset/AddAssetModal";
 import { useState } from "react";
 import AssetCard from "../components/Portfolio/PortfolioAssets/AssetCard";
 import { useLocalStorage } from "../useLocalStorage";
@@ -14,9 +16,27 @@ export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
   const [assets, setAssets] = useLocalStorage("assets", []);
   const [hasAssets, setHasAssets] = useState(assets.length >= 1 ? true : false);
+  const [assetToEdit, setAssetToEdit] = useState({
+    selectedCoin: {},
+    selectedAmount: "",
+    selectedDate: "",
+  });
 
   const handleUpdateAssets = () => {
     setHasAssets(true);
+  };
+
+  const removeAsset = (id: string) => {
+    const updatedAssets = assets.filter(
+      (asset: FormDataState) => asset.selectedCoin.id !== id
+    );
+    setAssets(updatedAssets);
+  };
+
+  const editAsset = (id: string) => {
+    setShowModal(true);
+    const selectedAsset = assets.find((asset: FormDataState) => asset.selectedCoin.id === id);
+    setAssetToEdit(selectedAsset);
   };
 
   return (
@@ -27,7 +47,12 @@ export default function Portfolio() {
       </div>
       {hasAssets ? (
         assets.map((asset: FormDataState) => (
-          <AssetCard key={asset.selectedCoin.id} asset={asset} />
+          <AssetCard
+            key={asset.selectedCoin.id}
+            asset={asset}
+            removeAsset={removeAsset}
+            editAsset={editAsset}
+          />
         ))
       ) : (
         <div>Add Assets to Your Portfolio</div>
@@ -38,6 +63,8 @@ export default function Portfolio() {
           assets={assets}
           setAssets={setAssets}
           setShowModal={setShowModal}
+          assetToEdit={assetToEdit}
+          setAssetToEdit={setAssetToEdit}
         />
       )}
     </PageWrapper>

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import ModalHeader from "./ModalHeader";
 import AssetSearch from "./AssetSearch";
@@ -27,25 +27,25 @@ const AddAssetModal = ({
   handleUpdateAssets,
   assets,
   setAssets,
+  assetToEdit,
+  setAssetToEdit,
 }: {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   handleUpdateAssets: () => void;
   assets: [];
   setAssets: Dispatch<SetStateAction<FormDataState[]>>;
+  assetToEdit: FormDataState;
+  setAssetToEdit: Dispatch<SetStateAction<FormDataState>>;
 }) => {
-  const [formData, setFormData] = useState<FormDataState>({
-    selectedCoin: {},
-    selectedAmount: "",
-    selectedDate: "",
-  });
   const isDisabled =
-    formData.selectedAmount === "" ||
-    formData.selectedDate === "" ||
-    formData.selectedCoin.id === undefined;
+    assetToEdit.selectedAmount === "" ||
+    assetToEdit.selectedDate === "" ||
+    assetToEdit.selectedCoin.id === undefined;
 
   const handleSaveAsset = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setAssets([...assets, formData]);
+
+    setAssets([...assets, assetToEdit]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
     handleUpdateAssets();
   };
@@ -53,16 +53,16 @@ const AddAssetModal = ({
   return (
     <Modal>
       <ModalHeader setShowModal={setShowModal} />
-      <SelectedAsset selectedCoin={formData.selectedCoin} />
+      <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
       <div>
-        <AssetSearch setFormData={setFormData} />
+        <AssetSearch setFormData={setAssetToEdit} />
         <AssetAmount
-          setFormData={setFormData}
-          selectedAmount={formData.selectedAmount}
+          setFormData={setAssetToEdit}
+          selectedAmount={assetToEdit.selectedAmount}
         />
         <AssetDate
-          setFormData={setFormData}
-          selectedDate={formData.selectedDate}
+          setFormData={setAssetToEdit}
+          selectedDate={assetToEdit.selectedDate}
         />
       </div>
       <button onClick={() => setShowModal(false)}>Cancel</button>
