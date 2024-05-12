@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectCurrency } from "@/app/redux/features/currencySlice";
 import {
   useGetCoinDataQuery,
   useGetCoinHistoryDataQuery,
 } from "@/app/redux/features/api";
-import { selectCurrency } from "@/app/redux/features/currencySlice";
-import { useAppSelector } from "@/app/redux/hooks";
 import { FormDataState } from "../AddAsset/AddAssetModal";
-import { useEffect, useState } from "react";
-import { formatCurrencyWithCommas } from "@/app/utils";
 import UserData from "./UserData";
 import DataBlock from "./DataBlock";
+import { formatCurrencyWithCommas, formatDate } from "@/app/utils";
 
 export interface CombinedCoinData {
   id: string;
@@ -47,10 +47,6 @@ const AssetCard = ({
     asset.selectedCoin.id
   );
 
-  const formatDate = (dateString: string) => {
-    const dateParts = dateString.split("-");
-    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-  };
   const { data: historicalData, isSuccess: historicalIsSuccess } =
     useGetCoinHistoryDataQuery({
       coinId: asset.selectedCoin.id,

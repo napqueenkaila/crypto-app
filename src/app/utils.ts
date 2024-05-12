@@ -1,4 +1,7 @@
-export const formatCompactCurrency = (num: number | bigint, currency: string) => {
+export const formatCompactCurrency = (
+  num: number | bigint,
+  currency: string
+) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     notation: "compact",
@@ -7,7 +10,10 @@ export const formatCompactCurrency = (num: number | bigint, currency: string) =>
   return formatter.format(num);
 };
 
-export const formatCurrencyWithCommas = (num: number | bigint, currency: string) => {
+export const formatCurrencyWithCommas = (
+  num: number | bigint,
+  currency: string
+) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency,
@@ -34,4 +40,9 @@ export const formatAllTimeDate = (dateStr: string): string => {
   };
   const formatter = new Intl.DateTimeFormat("en-US", options);
   return formatter.format(date);
+};
+
+export const formatDate = (dateString: string) => {
+  const dateParts = dateString.split("-");
+  return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
 };
