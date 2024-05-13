@@ -12,6 +12,33 @@ const PageWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const HeaderDiv = styled.div`
+  margin: 35px auto;
+  font-weight: 500;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const AddButton = styled.button`
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: linear-gradient(360deg, #6161d6, #6161d680) border-box;
+`;
+
+const NoAssetsMessage = styled.div``;
+
+const AssetCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
   const [assets, setAssets] = useLocalStorage("assets", []);
@@ -35,28 +62,32 @@ export default function Portfolio() {
 
   const editAsset = (id: string) => {
     setShowModal(true);
-    const selectedAsset = assets.find((asset: FormDataState) => asset.selectedCoin.id === id);
+    const selectedAsset = assets.find(
+      (asset: FormDataState) => asset.selectedCoin.id === id
+    );
     setAssetToEdit(selectedAsset);
   };
 
   return (
     <PageWrapper>
-      <div>
+      <HeaderDiv>
         <div>Portfolio</div>
-        <button onClick={() => setShowModal(true)}>Add Asset</button>
-      </div>
-      {hasAssets ? (
-        assets.map((asset: FormDataState) => (
-          <AssetCard
-            key={asset.selectedCoin.id}
-            asset={asset}
-            removeAsset={removeAsset}
-            editAsset={editAsset}
-          />
-        ))
-      ) : (
-        <div>Add Assets to Your Portfolio</div>
-      )}
+        <AddButton onClick={() => setShowModal(true)}>Add Asset</AddButton>
+      </HeaderDiv>
+      <AssetCardContainer>
+        {hasAssets ? (
+          assets.map((asset: FormDataState) => (
+            <AssetCard
+              key={asset.selectedCoin.id}
+              asset={asset}
+              removeAsset={removeAsset}
+              editAsset={editAsset}
+            />
+          ))
+        ) : (
+          <NoAssetsMessage>Add Assets to Your Portfolio</NoAssetsMessage>
+        )}
+      </AssetCardContainer>
       {showModal && (
         <AddAssetModal
           handleUpdateAssets={handleUpdateAssets}
