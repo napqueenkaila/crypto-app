@@ -1,5 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
 import { FormDataState } from "./AddAssetModal";
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  background-color: #232336;
+  border: none;
+  width: 100%;
+  border-radius: 4px;
+  padding: 8px;
+  color: #ffffffb2;
+  font-size: 16px;
+`;
 
 const AssetAmount = ({
   selectedAmount,
@@ -21,7 +32,7 @@ const AssetAmount = ({
   };
 
   return (
-    <input
+    <StyledInput
       type="number"
       placeholder="Purchased amount"
       value={selectedAmount}

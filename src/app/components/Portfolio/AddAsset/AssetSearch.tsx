@@ -1,10 +1,21 @@
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FormDataState } from "./AddAssetModal";
+import styled from "styled-components";
 
 interface SearchResult {
   [key: string]: string;
 }
+
+const StyledInput = styled.input`
+  background-color: #232336;
+  border: none;
+  width: 100%;
+  border-radius: 4px;
+  padding: 8px;
+  color: #ffffffb2;
+  font-size: 16px;
+`;
 
 const AssetSearch = ({
   setFormData,
@@ -16,7 +27,7 @@ const AssetSearch = ({
   const { data } = useGetSearchDataQuery(assetQuery);
   const results = data?.coins.slice(0, 10);
 
-  const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setIsSearching(true);
     setAssetQuery(e.target.value);
   };
@@ -33,8 +44,13 @@ const AssetSearch = ({
   };
 
   return (
-    <div>
-      <input type="text" value={assetQuery} placeholder="Select coins" onChange={handleSearch} />
+    <>
+      <StyledInput
+        type="text"
+        value={assetQuery}
+        placeholder="Select coins"
+        onChange={handleSearch}
+      />
       {isSearching &&
         results.map((coin: SearchResult) => {
           return (
@@ -43,7 +59,7 @@ const AssetSearch = ({
             </div>
           );
         })}
-    </div>
+    </>
   );
 };
 export default AssetSearch;
