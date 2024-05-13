@@ -9,6 +9,7 @@ import { FormDataState } from "../AddAsset/AddAssetModal";
 import UserData from "./UserData";
 import DataBlock from "./DataBlock";
 import { formatCurrencyWithCommas, formatDate } from "@/app/utils";
+import styled from "styled-components";
 
 export interface CombinedCoinData {
   id: string;
@@ -32,6 +33,22 @@ export interface CombinedCoinData {
     totalVolume: Record<string, number>;
   };
 }
+
+const CardContainer = styled.div`
+  background-color: #191932;
+  border-radius: 12px;
+  border: 2px solid #191932;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+`;
+
+const DataBlockContainer = styled.div`
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  gap: 20px;
+  flex-grow: 1;
+`;
 
 const AssetCard = ({
   asset,
@@ -110,7 +127,7 @@ const AssetCard = ({
   ]);
 
   return (
-    <div>
+    <CardContainer>
       {doubleSuccess && (
         <>
           <UserData
@@ -118,49 +135,51 @@ const AssetCard = ({
             removeAsset={removeAsset}
             editAsset={editAsset}
           />
-          <DataBlock
-            coinData={formatCurrencyWithCommas(
-              combinedCoinData.marketData.currentPrice[currency],
-              currency
-            )}
-            title="Current Price"
-            isPercent={false}
-            hasPercentBar={false}
-          />
-          <DataBlock
-            coinData={Number(
-              (
-                combinedCoinData.marketData.marketCap[currency] /
-                combinedCoinData.marketData.totalVolume[currency]
-              ).toFixed(0)
-            )}
-            title="Market cap vs Volume"
-            isPercent={true}
-            hasPercentBar={true}
-          />
-          <DataBlock
-            coinData={Number(
-              combinedCoinData.marketData.priceChangePercent.toFixed(0)
-            )}
-            title="24h%"
-            isPercent={true}
-            hasPercentBar={false}
-          />
-          <DataBlock
-            coinData={Number(
-              (
-                (combinedCoinData.marketData.circulatingSupply /
-                  combinedCoinData.marketData.totalSupply) *
-                100
-              ).toFixed(0)
-            )}
-            title="Circ supply vs max supply"
-            isPercent={true}
-            hasPercentBar={false}
-          />
+          <DataBlockContainer>
+            <DataBlock
+              coinData={formatCurrencyWithCommas(
+                combinedCoinData.marketData.currentPrice[currency],
+                currency
+              )}
+              title="Current Price"
+              isPercent={false}
+              hasPercentBar={false}
+            />
+            <DataBlock
+              coinData={Number(
+                combinedCoinData.marketData.priceChangePercent.toFixed(0)
+              )}
+              title="24h%"
+              isPercent={true}
+              hasPercentBar={false}
+            />
+            <DataBlock
+              coinData={Number(
+                (
+                  combinedCoinData.marketData.marketCap[currency] /
+                  combinedCoinData.marketData.totalVolume[currency]
+                ).toFixed(0)
+              )}
+              title="Market cap vs Volume"
+              isPercent={true}
+              hasPercentBar={true}
+            />
+            <DataBlock
+              coinData={Number(
+                (
+                  (combinedCoinData.marketData.circulatingSupply /
+                    combinedCoinData.marketData.totalSupply) *
+                  100
+                ).toFixed(0)
+              )}
+              title="Circ supply vs max supply"
+              isPercent={true}
+              hasPercentBar={false}
+            />
+          </DataBlockContainer>
         </>
       )}
-    </div>
+    </CardContainer>
   );
 };
 export default AssetCard;
