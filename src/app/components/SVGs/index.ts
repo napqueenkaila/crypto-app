@@ -9,8 +9,9 @@ import { ArrowIcon } from "./ArrowIcon";
 import { CopyIcon, LinkIcon } from "./LinkIcons";
 import { SwapIcon } from "./SwapIcon";
 import { CloseCircle } from "./CloseCircle";
-import EditIcon from "./EditIcon";
 import { FilterIcon } from "./FilterIcon";
+import { EditIcon } from "./EditIcon";
+import { TrashIcon } from "./TrashIcon";
 
 export {
   BtcIcon,
@@ -30,4 +31,5 @@ export {
   CloseCircle,
   EditIcon,
   FilterIcon,
+  TrashIcon,
 };
