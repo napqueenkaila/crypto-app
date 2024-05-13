@@ -85,7 +85,7 @@ export default function Portfolio() {
             />
           ))
         ) : (
-          <NoAssetsMessage>Add Assets to Your Portfolio</NoAssetsMessage>
+          <NoAssetsMessage>No Assets Saved</NoAssetsMessage>
         )}
       </AssetCardContainer>
       {showModal && (
