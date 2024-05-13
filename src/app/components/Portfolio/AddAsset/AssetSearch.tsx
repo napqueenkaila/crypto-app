@@ -1,21 +1,11 @@
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FormDataState } from "./AddAssetModal";
-import styled from "styled-components";
+import { StyledInput } from "@/app/styling/components/Portfolio/AddAssetModal/styled.FormComponents";
 
 interface SearchResult {
   [key: string]: string;
 }
-
-const StyledInput = styled.input`
-  background-color: #232336;
-  border: none;
-  width: 100%;
-  border-radius: 4px;
-  padding: 8px;
-  color: #ffffffb2;
-  font-size: 16px;
-`;
 
 const AssetSearch = ({
   setFormData,

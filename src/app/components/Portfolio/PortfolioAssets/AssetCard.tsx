@@ -9,7 +9,10 @@ import { FormDataState } from "../AddAsset/AddAssetModal";
 import UserData from "./UserData";
 import DataBlock from "./DataBlock";
 import { formatCurrencyWithCommas, formatDate } from "@/app/utils";
-import styled from "styled-components";
+import {
+  DataBlockContainer,
+  CardContainer,
+} from "@/app/styling/components/Portfolio/PortfolioAssets/styled.AssetCard";
 
 export interface CombinedCoinData {
   id: string;
@@ -33,22 +36,6 @@ export interface CombinedCoinData {
     totalVolume: Record<string, number>;
   };
 }
-
-const CardContainer = styled.div`
-  background-color: #191932;
-  border-radius: 12px;
-  border: 2px solid #191932;
-  padding: 20px;
-  display: flex;
-  gap: 20px;
-`;
-
-const DataBlockContainer = styled.div`
-  display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
-  gap: 20px;
-  flex-grow: 1;
-`;
 
 const AssetCard = ({
   asset,

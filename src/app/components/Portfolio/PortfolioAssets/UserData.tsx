@@ -1,53 +1,20 @@
 import Image from "next/image";
-import { CombinedCoinData } from "./AssetCard";
-import styled from "styled-components";
-import { ArrowIcon } from "../../SVGs";
-import Button from "./Button";
-import { formatCurrencyWithCommas } from "@/app/utils";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectCurrency } from "@/app/redux/features/currencySlice";
-
-const UserDataContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-
-const AssetNameContainer = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const AssetName = styled.div`
-  font-size: 24px;
-  font-weight: 700;
-`;
-
-const TotalValueDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const PercentDiv = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-`;
-
-const TotalValue = styled.div`
-  font-size: 28px;
-  font-weight: 700;
-`;
-
-const PricePercent = styled.div<{ $isPositive: boolean }>`
-  color: ${(props) => (props.$isPositive ? "#01F1E3" : "#FE2264")};
-`;
-
-const PurchasedDate = styled.div`
-  color: #d1d1d1;
-  font-size: 14px;
-`;
+import { CombinedCoinData } from "./AssetCard";
+import Button from "./Button";
+import { ArrowIcon } from "../../SVGs";
+import { formatCurrencyWithCommas } from "@/app/utils";
+import {
+  UserDataContainer,
+  AssetNameContainer,
+  AssetName,
+  TotalValueDiv,
+  TotalValue,
+  PercentDiv,
+  PricePercent,
+  PurchasedDate,
+} from "@/app/styling/components/Portfolio/PortfolioAssets/styled.UserData";
 
 const UserData = ({
   coinData,

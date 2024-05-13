@@ -1,13 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { CloseCircle } from "../../SVGs";
-import styled from "styled-components";
-
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  grid-area: header;
-`;
+import { HeaderContainer } from "@/app/styling/components/Portfolio/AddAssetModal/styled.ModalHeader";
 
 const ModalHeader = ({
   setShowModal,
