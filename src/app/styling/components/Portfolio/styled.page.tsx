@@ -22,6 +22,9 @@ const AddButton = styled.button`
   border-radius: 6px;
   border: 1px solid transparent;
   background: linear-gradient(360deg, #6161d6, #6161d680) border-box;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const AssetCardContainer = styled.div`
@@ -30,9 +33,4 @@ const AssetCardContainer = styled.div`
   gap: 30px;
 `;
 
-export {
-  PageWrapper,
-  HeaderDiv,
-  AddButton,
-  AssetCardContainer,
-};
+export { PageWrapper, HeaderDiv, AddButton, AssetCardContainer };

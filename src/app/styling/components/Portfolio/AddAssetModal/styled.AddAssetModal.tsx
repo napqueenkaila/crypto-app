@@ -47,6 +47,9 @@ const StyledButton = styled.button`
   padding: 12px 32px;
   background-color: #232336;
   font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledSaveButton = styled(StyledButton)`

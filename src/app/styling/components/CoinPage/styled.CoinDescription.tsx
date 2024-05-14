@@ -12,9 +12,23 @@ const Title = styled.div`
 
 const StyledButton = styled.button`
   background: none;
-  color: ${({theme}) => theme.coinPage.buttonBackground};
+  color: ${({ theme }) => theme.coinPage.buttonBackground};
   border: none;
   display: inline;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export { DescriptionDiv, Title, StyledButton };
+const ClippedText = styled.div`
+  cursor: default;
+  a {
+    color: #ccccfa;
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export { DescriptionDiv, Title, StyledButton, ClippedText };

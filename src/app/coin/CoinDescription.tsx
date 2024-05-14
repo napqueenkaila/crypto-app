@@ -3,6 +3,7 @@ import {
   DescriptionDiv,
   Title,
   StyledButton,
+  ClippedText,
 } from "../styling/components/CoinPage/styled.CoinDescription";
 
 const CoinDescription = ({ description }: { description: string }) => {
@@ -19,7 +20,9 @@ const CoinDescription = ({ description }: { description: string }) => {
   return (
     <DescriptionDiv>
       <Title>Description</Title>
-      <div dangerouslySetInnerHTML={{ __html: clippedText }}></div>
+      <ClippedText
+        dangerouslySetInnerHTML={{ __html: clippedText }}
+      ></ClippedText>
       {!showFullText && (
         <StyledButton onClick={toggleDescription}>read more</StyledButton>
       )}

@@ -62,7 +62,10 @@ const CurrencyDiv = styled.div`
   border: 1px #ffffff0d solid;
   padding: 12px 16px;
   background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
-  &:hover{
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover > label {
     cursor: pointer;
   }
 `;
@@ -71,6 +74,9 @@ const StyledSelect = styled.select`
   background-color: ${({ theme }) => theme.navbar.inputBackgroundColor};
   color: ${({ theme }) => theme.navbar.selectTextColor};
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledModeBtn = styled.button`
@@ -83,7 +89,7 @@ const StyledModeBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 `;
