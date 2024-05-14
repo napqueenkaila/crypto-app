@@ -7,6 +7,7 @@ import StoreProvider from "./StoreProvider";
 import SliderButton from "./components/Converter/SliderButton";
 import { usePathname } from "next/navigation";
 import { spaceGrotesk } from "./styling/theme/font";
+import useWindowSize from "./useWindowSize";
 
 // export const metadata: Metadata = {
 //   title: "Crypto App",
@@ -19,13 +20,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
+  const { width } = useWindowSize();
+
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <StoreProvider>
           <Providers>
-            <MarketDataBar />
-            <Navbar />
+            {width >= 767 ? (
+              <>
+                <MarketDataBar />
+                <Navbar />
+              </>
+            ) : (
+              <>
+                <Navbar />
+                <MarketDataBar />
+              </>
+            )}
             {pathname === "/" || pathname === "/converter" ? (
               <SliderButton />
             ) : null}
