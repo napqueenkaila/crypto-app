@@ -1,3 +1,5 @@
+import { StyledSVGContainer } from "@/app/styling/components/SVGs/styled.SVG";
+
 export const LinkIcon = ({ darkMode }: { darkMode: boolean }) => {
   return (
     <svg
@@ -33,28 +35,30 @@ export const CopyIcon = ({
   copyToClipboard: () => void;
 }) => {
   return (
-    <svg
-      width="21"
-      height="20"
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      onClick={copyToClipboard}
-    >
-      <path
-        d="M13.987 10.7503V14.2503C13.987 17.167 12.8203 18.3337 9.90365 18.3337H6.40365C3.48698 18.3337 2.32031 17.167 2.32031 14.2503V10.7503C2.32031 7.83366 3.48698 6.66699 6.40365 6.66699H9.90365C12.8203 6.66699 13.987 7.83366 13.987 10.7503Z"
-        stroke={darkMode ? "#FFFFFF" : "#6161D680"}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M18.987 5.75033V9.25033C18.987 12.167 17.8203 13.3337 14.9036 13.3337H13.987V10.7503C13.987 7.83366 12.8203 6.66699 9.90365 6.66699H7.32031V5.75033C7.32031 2.83366 8.48698 1.66699 11.4036 1.66699H14.9036C17.8203 1.66699 18.987 2.83366 18.987 5.75033Z"
-        stroke={darkMode ? "#FFFFFF" : "#6161D680"}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <StyledSVGContainer>
+      <svg
+        width="21"
+        height="20"
+        viewBox="0 0 21 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        onClick={copyToClipboard}
+      >
+        <path
+          d="M13.987 10.7503V14.2503C13.987 17.167 12.8203 18.3337 9.90365 18.3337H6.40365C3.48698 18.3337 2.32031 17.167 2.32031 14.2503V10.7503C2.32031 7.83366 3.48698 6.66699 6.40365 6.66699H9.90365C12.8203 6.66699 13.987 7.83366 13.987 10.7503Z"
+          stroke={darkMode ? "#FFFFFF" : "#6161D680"}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M18.987 5.75033V9.25033C18.987 12.167 17.8203 13.3337 14.9036 13.3337H13.987V10.7503C13.987 7.83366 12.8203 6.66699 9.90365 6.66699H7.32031V5.75033C7.32031 2.83366 8.48698 1.66699 11.4036 1.66699H14.9036C17.8203 1.66699 18.987 2.83366 18.987 5.75033Z"
+          stroke={darkMode ? "#FFFFFF" : "#6161D680"}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </StyledSVGContainer>
   );
 };
