@@ -11,6 +11,7 @@ import {
   AddButton,
   AssetCardContainer,
 } from "../styling/components/Portfolio/styled.page";
+import { spaceGrotesk } from "../styling/theme/font";
 
 export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
@@ -45,7 +46,12 @@ export default function Portfolio() {
     <PageWrapper>
       <HeaderDiv>
         <div>Portfolio</div>
-        <AddButton onClick={() => setShowModal(true)}>Add Asset</AddButton>
+        <AddButton
+          className={spaceGrotesk.className}
+          onClick={() => setShowModal(true)}
+        >
+          Add Asset
+        </AddButton>
       </HeaderDiv>
       <AssetCardContainer>
         {hasAssets ? (
