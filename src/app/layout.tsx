@@ -1,14 +1,12 @@
 "use client";
 // import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
 import Providers from "./styling/theme/Providers";
 import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
 import StoreProvider from "./StoreProvider";
 import SliderButton from "./components/Converter/SliderButton";
 import { usePathname } from "next/navigation";
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+import { spaceGrotesk } from "./styling/theme/font";
 
 // export const metadata: Metadata = {
 //   title: "Crypto App",
