@@ -1,29 +1,13 @@
 import { SetStateAction, useState } from "react";
-import styled from "styled-components";
 import CoinInput from "./CoinInput";
 import CoinOutput from "./CoinOutput";
 import { SwapIcon } from "../SVGs";
 import { CoinsContainerProps } from "@/app/types/interfaces/converter.interfaces";
-
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  margin: 10px 50px;
-  gap: 35px;
-`;
-
-const ConverterValueDiv = styled.div`
-  background-color: #191932;
-  padding: 24px;
-  width: 50%;
-  border-radius: 16px;
-`;
-
-const StyledBreak = styled.div`
-  width: 100%;
-  height: 2px;
-  background-color: #fffFFF;
-`;
+import {
+  Container,
+  ConverterValueDiv,
+  StyledBreak,
+} from "@/app/styling/components/Converter/styled.CoinsContainer";
 
 const CoinsContainer = ({
   fromCoin,
@@ -89,7 +73,7 @@ const CoinsContainer = ({
           resetQuantities={resetQuantities}
           handleQuantityChange={handleFromQuantityChange}
         />
-        <StyledBreak/>
+        <StyledBreak />
         <CoinOutput coinData={fromCoin} />
       </ConverterValueDiv>
       <SwapIcon onClick={handleSwapCoins} />
@@ -102,7 +86,7 @@ const CoinsContainer = ({
           resetQuantities={resetQuantities}
           handleQuantityChange={handleToQuantityChange}
         />
-        <StyledBreak/>
+        <StyledBreak />
         <CoinOutput coinData={toCoin} />
       </ConverterValueDiv>
     </Container>
