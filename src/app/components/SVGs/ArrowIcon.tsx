@@ -1,8 +1,8 @@
 export const ArrowIcon = ({ isPositive }: { isPositive: boolean }) => {
   return (
     <svg
-      width="8"
-      height="4"
+      width="16"
+      height="16"
       viewBox="0 0 8 4"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
