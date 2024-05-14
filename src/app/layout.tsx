@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={spaceGrotesk.className}>
         <StoreProvider>
           <Providers>
-            {width >= 767 ? (
+            {width >= 425 ? (
               <>
                 <MarketDataBar />
                 <Navbar />
