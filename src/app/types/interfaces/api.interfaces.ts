@@ -21,6 +21,7 @@ export interface TableData {
   circulating_supply: number;
   total_supply: number;
   sparkline_in_7d: { price: number[] };
+  [key: string]: any;
 }
 
 export interface CoinData {
