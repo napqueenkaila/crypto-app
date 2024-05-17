@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HeaderText = styled.div`
   font-size: 14px;
-  color: #ffffffcc;
+  color: ${({theme}) => theme.converter.inputHeaderText};
   margin-bottom: 30px;
 `;
 
@@ -27,7 +27,7 @@ const CoinName = styled.div`
 `;
 
 const QuantityInput = styled.input`
-  background-color: #191932;
+  background-color: ${({theme}) => theme.converter.inputBackground};
   border: none;
   color: #ffffff;
   text-align: right;

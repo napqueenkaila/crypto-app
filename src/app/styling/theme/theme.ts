@@ -11,9 +11,11 @@ const colors = {
   raisinBlack: "#191925",
   oxfordBlue: "#14142b",
   delftBlue: "#353570",
+  halfDelftBlue: "#353570CC",
   transparentDelftBlue: "#35357080",
   darkPurple: "#1E1932",
   spaceCadet: "#232336",
+  spaceCadetDark: "#191932",
   transparentSlateBlue: "#6161D680",
   mediumSlateBlue: "#7878FA80",
   marianBlue: "#424286",
@@ -81,6 +83,14 @@ export const darkTheme = {
     rankTextColor: colors.gray,
     textColor: colors.white,
   },
+  converter: {
+    inputHeaderText: colors.transparentWhite,
+    inputDivBackground: colors.spaceCadetDark,
+    inputBackground: colors.spaceCadetDark,
+    outputText: colors.white,
+    spanColor: colors.halfWhite,
+    breakLine: colors.white,
+  }
 };
 
 export const lightTheme: ThemeType = {
@@ -139,6 +149,14 @@ export const lightTheme: ThemeType = {
     coinRowBackgroundColor: colors.white,
     rankTextColor: colors.marianBlue,
     textColor: colors.spaceCadet,
+  },
+  converter: {
+    inputHeaderText: colors.raisinBlack,
+    inputDivBackground: colors.white,
+    inputBackground: colors.white,
+    outputText: colors.delftBlue,
+    spanColor: colors.halfDelftBlue,
+    breakLine: colors.delftBlue,
   },
 };
 
