@@ -25,7 +25,15 @@ export default function Portfolio() {
 
   useEffect(() => {
     assets.length >= 1 ? setHasAssets(true) : setHasAssets(false);
-  }, [assets]);
+    showModal
+      ? setAssetToEdit({
+          id: "",
+          selectedCoin: {},
+          selectedAmount: "",
+          selectedDate: "",
+        })
+      : null;
+  }, [assets, showModal]);
 
   const removeAsset = (id: string) => {
     const updatedAssets = assets.filter(
