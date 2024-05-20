@@ -24,14 +24,12 @@ export interface FormDataState {
 
 const AddAssetModal = ({
   setShowModal,
-  handleUpdateAssets,
   assets,
   setAssets,
   assetToEdit,
   setAssetToEdit,
 }: {
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  handleUpdateAssets: () => void;
   assets: [];
   setAssets: Dispatch<SetStateAction<FormDataState[]>>;
   assetToEdit: FormDataState;
@@ -47,7 +45,6 @@ const AddAssetModal = ({
 
     setAssets([...assets, assetToEdit]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
-    handleUpdateAssets();
   };
 
   return (

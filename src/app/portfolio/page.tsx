@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AddAssetModal, {
   FormDataState,
 } from "../components/Portfolio/AddAsset/AddAssetModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AssetCard from "../components/Portfolio/PortfolioAssets/AssetCard";
 import { useLocalStorage } from "../useLocalStorage";
 
@@ -22,9 +22,9 @@ export default function Portfolio() {
     selectedDate: "",
   });
 
-  const handleUpdateAssets = () => {
-    setHasAssets(true);
-  };
+  useEffect(() => {
+    assets.length >= 1 ? setHasAssets(true) : setHasAssets(false);
+  }, [assets]);
 
   const removeAsset = (id: string) => {
     const updatedAssets = assets.filter(
@@ -35,7 +35,9 @@ export default function Portfolio() {
 
   const editAsset = (id: string) => {
     setShowModal(true);
-    const selectedAsset = assets.find((asset: FormDataState) => asset.selectedCoin.id === id);
+    const selectedAsset = assets.find(
+      (asset: FormDataState) => asset.selectedCoin.id === id
+    );
     setAssetToEdit(selectedAsset);
   };
 
@@ -59,7 +61,6 @@ export default function Portfolio() {
       )}
       {showModal && (
         <AddAssetModal
-          handleUpdateAssets={handleUpdateAssets}
           assets={assets}
           setAssets={setAssets}
           setShowModal={setShowModal}
