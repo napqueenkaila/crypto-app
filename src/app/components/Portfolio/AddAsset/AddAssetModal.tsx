@@ -17,6 +17,7 @@ export interface SelectedCoin {
 }
 
 export interface FormDataState {
+  id: string;
   selectedCoin: SelectedCoin;
   selectedAmount: string;
   selectedDate: string;
@@ -42,8 +43,8 @@ const AddAssetModal = ({
 
   const handleSaveAsset = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
-    setAssets([...assets, assetToEdit]);
+    const newAsset = { ...assetToEdit, id: self.crypto.randomUUID() };
+    setAssets([...assets, newAsset]);
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
   };
 
