@@ -45,6 +45,12 @@ const AddAssetModal = ({
     e.preventDefault();
     const newAsset = { ...assetToEdit, id: self.crypto.randomUUID() };
     setAssets([...assets, newAsset]);
+    setAssetToEdit({
+      id: "",
+      selectedCoin: {},
+      selectedAmount: "",
+      selectedDate: "",
+    });
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
   };
 
