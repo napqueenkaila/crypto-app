@@ -38,7 +38,7 @@ const PricePercent = styled.div<{ $isPositive: boolean }>`
 `;
 
 const PurchasedDate = styled.div`
-  color: #d1d1d1;
+  color: ${({ theme }) => theme.portfolio.assets.purchaseDate};
   font-size: 14px;
 `;
 

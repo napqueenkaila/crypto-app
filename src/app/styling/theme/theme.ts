@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const colors = {
   white: "#FFFFFF",
+  halfWhite: "#FFFFFFCC",
   transparentWhite: "#FFFFFF80",
   gray: "#D1D1D1",
   lightGray: "#EBEBEB",
@@ -90,7 +91,17 @@ export const darkTheme = {
     outputText: colors.white,
     spanColor: colors.halfWhite,
     breakLine: colors.white,
-  }
+  },
+  portfolio: {
+    assets: {
+      assetCardBackground: colors.spaceCadetDark,
+      buttonBackground: colors.delftBlue,
+      purchaseDate: colors.gray,
+      dataBlockTitle: colors.gray,
+      dataBlockBackground: colors.raisinBlack,
+      dataBlockBorder: colors.spaceCadet,
+    },
+  },
 };
 
 export const lightTheme: ThemeType = {
@@ -158,6 +169,16 @@ export const lightTheme: ThemeType = {
     spanColor: colors.halfDelftBlue,
     breakLine: colors.delftBlue,
   },
+  portfolio: {
+    assets: {
+      assetCardBackground: colors.white,
+      buttonBackground: colors.transparentSlateBlue,
+      purchaseDate: colors.spaceCadet,
+      dataBlockTitle: colors.spaceCadet,
+      dataBlockBackground: colors.lightGray,
+      dataBlockBorder: colors.transparentWhite,
+    },
+  },
 };
 
 export const GlobalStyles = createGlobalStyle`
@@ -166,10 +187,15 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  html{
+    width: 100vw;
+  }
 
   body{
+    margin: 0 auto;
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+    min-height: 100vh;
   }
 `;
 

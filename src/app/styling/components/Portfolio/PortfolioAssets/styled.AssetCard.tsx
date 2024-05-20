@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const CardContainer = styled.div`
-  background-color: #191932;
+  background-color: ${({ theme }) =>
+    theme.portfolio.assets.assetCardBackground};
   border-radius: 12px;
-  border: 2px solid #191932;
+  border: 2px solid ${({ theme }) => theme.portfolio.assets.assetCardBackground};
   padding: 20px;
   display: flex;
   gap: 20px;
