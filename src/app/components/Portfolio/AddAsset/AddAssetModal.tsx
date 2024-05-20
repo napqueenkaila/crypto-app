@@ -43,8 +43,15 @@ const AddAssetModal = ({
 
   const handleSaveAsset = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const newAsset = { ...assetToEdit, id: self.crypto.randomUUID() };
-    setAssets([...assets, newAsset]);
+    if (assetToEdit.id !== "") {
+      const updatedAssets = assets.map((asset: FormDataState) => {
+        return asset.id === assetToEdit.id ? assetToEdit : asset;
+      });
+      setAssets(updatedAssets);
+    } else {
+      const newAsset = { ...assetToEdit, id: self.crypto.randomUUID() };
+      setAssets([...assets, newAsset]);
+    }
     setAssetToEdit({
       id: "",
       selectedCoin: {},
@@ -56,7 +63,10 @@ const AddAssetModal = ({
 
   return (
     <Modal>
-      <ModalHeader setShowModal={setShowModal} />
+      <ModalHeader
+        setAssetToEdit={setAssetToEdit}
+        setShowModal={setShowModal}
+      />
       <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
       <div>
         <AssetSearch setFormData={setAssetToEdit} />
