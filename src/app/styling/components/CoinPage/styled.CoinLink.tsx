@@ -9,6 +9,7 @@ const LinkDiv = styled.div`
   background-color: ${({ theme }) => theme.coinPage.blockBackgroundColor};
   color: ${({ theme }) => theme.coinPage.textColor};
   padding: 16px 24px;
+  cursor: default;
 `;
 
 export { LinkDiv };

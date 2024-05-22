@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { CloseCircle } from "../../SVGs";
+import { HeaderContainer } from "@/app/styling/components/Portfolio/AddAssetModal/styled.ModalHeader";
 import { FormDataState } from "./AddAssetModal";
 
 const ModalHeader = ({
@@ -20,10 +21,10 @@ const ModalHeader = ({
   };
 
   return (
-    <>
+    <HeaderContainer>
       <div>Select coins</div>
       <CloseCircle handleCloseModal={handleCloseModal} />
-    </>
+    </HeaderContainer>
   );
 };
 export default ModalHeader;

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { TableData } from "./api.interfaces";
 
 export interface CoinInputProps {
+  text: string;
   coinData: TableData;
   setCoin: Dispatch<SetStateAction<TableData>>;
   quantity: number;

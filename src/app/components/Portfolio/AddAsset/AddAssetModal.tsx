@@ -1,17 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
 import ModalHeader from "./ModalHeader";
 import AssetSearch from "./AssetSearch";
 import AssetAmount from "./AssetAmount";
 import AssetDate from "./AssetDate";
 import SelectedAsset from "./SelectedAsset";
+import {
+  Wrapper,
+  Modal,
+  FormContainer,
+  ButtonContainer,
+  StyledButton,
+  StyledSaveButton,
+} from "@/app/styling/components/Portfolio/AddAssetModal/styled.AddAssetModal";
 
-const Modal = styled.div`
-  background-color: #13121a;
-  border: 3px red solid;
-  width: 50vw;
-  height: 400px;
-`;
 export interface SelectedCoin {
   [key: string]: string;
 }
@@ -62,31 +63,31 @@ const AddAssetModal = ({
   };
 
   return (
-    <Modal>
-      <ModalHeader
-        setAssetToEdit={setAssetToEdit}
-        setShowModal={setShowModal}
-      />
-      <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
-      <div>
-        <AssetSearch
-          setFormData={setAssetToEdit}
-          selectedCoin={assetToEdit.selectedCoin.name}
-        />
-        <AssetAmount
-          setFormData={setAssetToEdit}
-          selectedAmount={assetToEdit.selectedAmount}
-        />
-        <AssetDate
-          setFormData={setAssetToEdit}
-          selectedDate={assetToEdit.selectedDate}
-        />
-      </div>
-      <button onClick={() => setShowModal(false)}>Cancel</button>
-      <button onClick={handleSaveAsset} disabled={isDisabled}>
-        Save & Continue
-      </button>
-    </Modal>
+    <Wrapper>
+      <Modal>
+        <ModalHeader setShowModal={setShowModal} setAssetToEdit={setAssetToEdit} />
+        <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
+        <FormContainer>
+          <AssetSearch setFormData={setAssetToEdit} selectedCoin={assetToEdit.selectedCoin.name}/>
+          <AssetAmount
+            setFormData={setAssetToEdit}
+            selectedAmount={assetToEdit.selectedAmount}
+          />
+          <AssetDate
+            setFormData={setAssetToEdit}
+            selectedDate={assetToEdit.selectedDate}
+          />
+          <ButtonContainer>
+            <StyledButton onClick={() => setShowModal(false)}>
+              Cancel
+            </StyledButton>
+            <StyledSaveButton onClick={handleSaveAsset} disabled={isDisabled}>
+              Save & Continue
+            </StyledSaveButton>
+          </ButtonContainer>
+        </FormContainer>
+      </Modal>
+    </Wrapper>
   );
 };
 export default AddAssetModal;

@@ -1,5 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { FormDataState } from "./AddAssetModal";
+import { StyledInput } from "@/app/styling/components/Portfolio/AddAssetModal/styled.FormComponents";
 
 const AssetDate = ({
   selectedDate,
@@ -23,15 +24,15 @@ const AssetDate = ({
   };
 
   return (
-    <div>
-      <input
+    <>
+      <StyledInput
         type="date"
         max={today}
         value={selectedDate}
         placeholder="Purchased date"
         onChange={(e) => handleDateChange(e)}
       />
-    </div>
+    </>
   );
 };
 export default AssetDate;

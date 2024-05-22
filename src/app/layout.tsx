@@ -1,14 +1,13 @@
 "use client";
 // import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
 import Providers from "./styling/theme/Providers";
 import Navbar from "./components/Navbar/navbar";
 import MarketDataBar from "./components/Navbar/MarketDataBar";
 import StoreProvider from "./StoreProvider";
 import SliderButton from "./components/Converter/SliderButton";
 import { usePathname } from "next/navigation";
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+import { spaceGrotesk } from "./styling/theme/font";
+import useWindowSize from "./useWindowSize";
 
 // export const metadata: Metadata = {
 //   title: "Crypto App",
@@ -21,13 +20,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
+  const { width } = useWindowSize();
+
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <StoreProvider>
           <Providers>
-            <MarketDataBar />
-            <Navbar />
+            {width >= 425 ? (
+              <>
+                <MarketDataBar />
+                <Navbar />
+              </>
+            ) : (
+              <>
+                <Navbar />
+                <MarketDataBar />
+              </>
+            )}
             {pathname === "/" || pathname === "/converter" ? (
               <SliderButton />
             ) : null}

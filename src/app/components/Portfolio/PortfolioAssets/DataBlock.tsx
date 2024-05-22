@@ -1,18 +1,11 @@
-import styled from "styled-components";
 import { ArrowIcon } from "../../SVGs";
-
-const PercentageBar = styled.div`
-  width: 250px;
-  height: 6px;
-  border-radius: 2px;
-  background-color: #01f1e380;
-`;
-
-const Percent = styled.div<{ $percent: number }>`
-  height: 100%;
-  width: ${(props) => `${props.$percent}%`};
-  background-color: #01f1e3;
-`;
+import {
+  DataContainer,
+  DataBlockTitle,
+  Data,
+  PercentageBar,
+  Percent,
+} from "@/app/styling/components/Portfolio/PortfolioAssets/styled.DataBlock";
 
 const DataBlock = ({
   coinData,
@@ -25,24 +18,34 @@ const DataBlock = ({
   isPercent: boolean;
   hasPercentBar: boolean;
 }) => {
+  const getColor = () => {
+    if (!isPercent) {
+      return "#FFFFFF";
+    } else if (isPercent && Number(coinData) >= 0) {
+      return "#01f1e3";
+    } else {
+      return "#FE2264";
+    }
+  };
+
   return (
-    <div>
+    <DataContainer>
       <div>
-        <div>
+        <Data $color={getColor()}>
           {isPercent && !hasPercentBar && (
             <ArrowIcon isPositive={Number(coinData) > 0 ? true : false} />
           )}
           {Number(coinData) < 0 ? Number(coinData) * -1 : coinData}
           {isPercent && "%"}
-        </div>
+        </Data>
         {hasPercentBar && (
           <PercentageBar>
             <Percent $percent={Number(coinData)} />
           </PercentageBar>
         )}
       </div>
-      <div>{title}</div>
-    </div>
+      <DataBlockTitle>{title}</DataBlockTitle>
+    </DataContainer>
   );
 };
 export default DataBlock;

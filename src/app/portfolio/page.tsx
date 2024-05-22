@@ -1,16 +1,18 @@
 "use client";
-import styled from "styled-components";
+import { useState } from "react";
+import { useLocalStorage } from "../useLocalStorage";
 import AddAssetModal, {
   FormDataState,
 } from "../components/Portfolio/AddAsset/AddAssetModal";
 import { useEffect, useState } from "react";
 import AssetCard from "../components/Portfolio/PortfolioAssets/AssetCard";
-import { useLocalStorage } from "../useLocalStorage";
-
-const PageWrapper = styled.div`
-  width: 90vw;
-  margin: 0 auto;
-`;
+import {
+  PageWrapper,
+  HeaderDiv,
+  AddButton,
+  AssetCardContainer,
+} from "../styling/components/Portfolio/styled.page";
+import { spaceGrotesk } from "../styling/theme/font";
 
 export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
@@ -44,22 +46,30 @@ export default function Portfolio() {
 
   return (
     <PageWrapper>
-      <div>
+      <HeaderDiv>
         <div>Portfolio</div>
-        <button onClick={() => setShowModal(true)}>Add Asset</button>
-      </div>
-      {hasAssets ? (
-        assets.map((asset: FormDataState) => (
-          <AssetCard
-            key={asset.id}
-            asset={asset}
-            removeAsset={removeAsset}
-            editAsset={editAsset}
-          />
-        ))
-      ) : (
-        <div>Add Assets to Your Portfolio</div>
-      )}
+        <AddButton
+          className={spaceGrotesk.className}
+          onClick={() => setShowModal(true)}
+        >
+          Add Asset
+        </AddButton>
+      </HeaderDiv>
+      <AssetCardContainer>
+        {hasAssets ? (
+          assets.map((asset: FormDataState) => (
+            <AssetCard
+              key={asset.id}
+              asset={asset}
+              removeAsset={removeAsset}
+              editAsset={editAsset}
+            />
+          ))
+        ) : (
+          <div>Add Assets to Your Portfolio</div>
+        )}
+      </AssetCardContainer>
+
       {showModal && (
         <AddAssetModal
           assets={assets}

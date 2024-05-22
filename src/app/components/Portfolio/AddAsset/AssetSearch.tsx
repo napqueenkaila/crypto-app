@@ -1,6 +1,7 @@
 import { useGetSearchDataQuery } from "@/app/redux/features/api";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FormDataState } from "./AddAssetModal";
+import { StyledInput } from "@/app/styling/components/Portfolio/AddAssetModal/styled.FormComponents";
 
 interface SearchResult {
   [key: string]: string;
@@ -35,8 +36,8 @@ const AssetSearch = ({
   };
 
   return (
-    <div>
-      <input
+    <>
+      <StyledInput
         type="text"
         value={assetQuery || selectedCoin}
         placeholder="Select coins"
@@ -50,7 +51,7 @@ const AssetSearch = ({
             </div>
           );
         })}
-    </div>
+    </>
   );
 };
 export default AssetSearch;
