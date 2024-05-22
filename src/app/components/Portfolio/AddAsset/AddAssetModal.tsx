@@ -69,7 +69,10 @@ const AddAssetModal = ({
       />
       <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
       <div>
-        <AssetSearch setFormData={setAssetToEdit} />
+        <AssetSearch
+          setFormData={setAssetToEdit}
+          selectedCoin={assetToEdit.selectedCoin.name}
+        />
         <AssetAmount
           setFormData={setAssetToEdit}
           selectedAmount={assetToEdit.selectedAmount}
