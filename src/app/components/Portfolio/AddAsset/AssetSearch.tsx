@@ -9,8 +9,10 @@ interface SearchResult {
 
 const AssetSearch = ({
   setFormData,
+  selectedCoin,
 }: {
   setFormData: Dispatch<SetStateAction<FormDataState>>;
+  selectedCoin: string;
 }) => {
   const [assetQuery, setAssetQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -37,7 +39,7 @@ const AssetSearch = ({
     <>
       <StyledInput
         type="text"
-        value={assetQuery}
+        value={assetQuery || selectedCoin}
         placeholder="Select coins"
         onChange={handleSearch}
       />

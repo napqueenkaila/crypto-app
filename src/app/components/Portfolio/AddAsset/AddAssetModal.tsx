@@ -18,6 +18,7 @@ export interface SelectedCoin {
 }
 
 export interface FormDataState {
+  id: string;
   selectedCoin: SelectedCoin;
   selectedAmount: string;
   selectedDate: string;
@@ -25,14 +26,12 @@ export interface FormDataState {
 
 const AddAssetModal = ({
   setShowModal,
-  handleUpdateAssets,
   assets,
   setAssets,
   assetToEdit,
   setAssetToEdit,
 }: {
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  handleUpdateAssets: () => void;
   assets: [];
   setAssets: Dispatch<SetStateAction<FormDataState[]>>;
   assetToEdit: FormDataState;
@@ -45,19 +44,31 @@ const AddAssetModal = ({
 
   const handleSaveAsset = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
-    setAssets([...assets, assetToEdit]);
+    if (assetToEdit.id !== "") {
+      const updatedAssets = assets.map((asset: FormDataState) => {
+        return asset.id === assetToEdit.id ? assetToEdit : asset;
+      });
+      setAssets(updatedAssets);
+    } else {
+      const newAsset = { ...assetToEdit, id: self.crypto.randomUUID() };
+      setAssets([...assets, newAsset]);
+    }
+    setAssetToEdit({
+      id: "",
+      selectedCoin: {},
+      selectedAmount: "",
+      selectedDate: "",
+    });
     setTimeout(() => setShowModal(false)); // allow setAssets to complete running
-    handleUpdateAssets();
   };
 
   return (
     <Wrapper>
       <Modal>
-        <ModalHeader setShowModal={setShowModal} />
+        <ModalHeader setShowModal={setShowModal} setAssetToEdit={setAssetToEdit} />
         <SelectedAsset selectedCoin={assetToEdit.selectedCoin} />
         <FormContainer>
-          <AssetSearch setFormData={setAssetToEdit} />
+          <AssetSearch setFormData={setAssetToEdit} selectedCoin={assetToEdit.selectedCoin.name}/>
           <AssetAmount
             setFormData={setAssetToEdit}
             selectedAmount={assetToEdit.selectedAmount}

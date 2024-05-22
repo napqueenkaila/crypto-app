@@ -4,6 +4,7 @@ import { useLocalStorage } from "../useLocalStorage";
 import AddAssetModal, {
   FormDataState,
 } from "../components/Portfolio/AddAsset/AddAssetModal";
+import { useEffect, useState } from "react";
 import AssetCard from "../components/Portfolio/PortfolioAssets/AssetCard";
 import {
   PageWrapper,
@@ -18,18 +19,19 @@ export default function Portfolio() {
   const [assets, setAssets] = useLocalStorage("assets", []);
   const [hasAssets, setHasAssets] = useState(assets.length >= 1 ? true : false);
   const [assetToEdit, setAssetToEdit] = useState({
+    id: "",
     selectedCoin: {},
     selectedAmount: "",
     selectedDate: "",
   });
 
-  const handleUpdateAssets = () => {
-    setHasAssets(true);
-  };
+  useEffect(() => {
+    assets.length >= 1 ? setHasAssets(true) : setHasAssets(false);
+  }, [assets]);
 
   const removeAsset = (id: string) => {
     const updatedAssets = assets.filter(
-      (asset: FormDataState) => asset.selectedCoin.id !== id
+      (asset: FormDataState) => asset.id !== id
     );
     setAssets(updatedAssets);
   };
@@ -37,7 +39,7 @@ export default function Portfolio() {
   const editAsset = (id: string) => {
     setShowModal(true);
     const selectedAsset = assets.find(
-      (asset: FormDataState) => asset.selectedCoin.id === id
+      (asset: FormDataState) => asset.id === id
     );
     setAssetToEdit(selectedAsset);
   };
@@ -57,19 +59,19 @@ export default function Portfolio() {
         {hasAssets ? (
           assets.map((asset: FormDataState) => (
             <AssetCard
-              key={asset.selectedCoin.id}
+              key={asset.id}
               asset={asset}
               removeAsset={removeAsset}
               editAsset={editAsset}
             />
           ))
         ) : (
-          <div>No Assets Saved</div>
+          <div>Add Assets to Your Portfolio</div>
         )}
       </AssetCardContainer>
+
       {showModal && (
         <AddAssetModal
-          handleUpdateAssets={handleUpdateAssets}
           assets={assets}
           setAssets={setAssets}
           setShowModal={setShowModal}

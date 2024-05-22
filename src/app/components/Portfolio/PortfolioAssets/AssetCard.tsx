@@ -16,6 +16,7 @@ import {
 
 export interface CombinedCoinData {
   id: string;
+  apiSymbol: string;
   name: string;
   symbol: string;
   image: string;
@@ -59,6 +60,7 @@ const AssetCard = ({
   const [doubleSuccess, setDoubleSuccess] = useState(false);
   const [combinedCoinData, setCombinedCoinData] = useState<CombinedCoinData>({
     id: "",
+    apiSymbol: "",
     name: "",
     symbol: "",
     image: "",
@@ -80,7 +82,8 @@ const AssetCard = ({
     if (coinIsSuccess && historicalIsSuccess) {
       setDoubleSuccess(true);
       setCombinedCoinData({
-        id: asset.selectedCoin.id,
+        id: asset.id,
+        apiSymbol: asset.selectedCoin.id,
         name: asset.selectedCoin.name,
         symbol: asset.selectedCoin.symbol,
         image: asset.selectedCoin.large,
