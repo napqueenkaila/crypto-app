@@ -8,15 +8,17 @@ interface SearchResult {
 
 const AssetSearch = ({
   setFormData,
+  selectedCoin,
 }: {
   setFormData: Dispatch<SetStateAction<FormDataState>>;
+  selectedCoin: string;
 }) => {
   const [assetQuery, setAssetQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const { data } = useGetSearchDataQuery(assetQuery);
   const results = data?.coins.slice(0, 10);
 
-  const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setIsSearching(true);
     setAssetQuery(e.target.value);
   };
@@ -34,7 +36,12 @@ const AssetSearch = ({
 
   return (
     <div>
-      <input type="text" value={assetQuery} placeholder="Select coins" onChange={handleSearch} />
+      <input
+        type="text"
+        value={assetQuery || selectedCoin}
+        placeholder="Select coins"
+        onChange={handleSearch}
+      />
       {isSearching &&
         results.map((coin: SearchResult) => {
           return (
