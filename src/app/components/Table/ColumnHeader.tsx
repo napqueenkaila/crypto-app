@@ -3,7 +3,6 @@ import { FilterIcon } from "../SVGs";
 interface PropType {
   text: string;
   value?: string;
-  canSort: boolean;
 }
 
 const ColumnHeader = ({
