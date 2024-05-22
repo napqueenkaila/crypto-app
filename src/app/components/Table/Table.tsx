@@ -54,27 +54,24 @@ const Table = () => {
   };
 
   const columnHeaderText = [
-    { text: "#", value: "rank", canSort: false },
-    { text: "Name", value: "name", canSort: true },
-    { text: "Price", value: "current_price", canSort: true },
+    { text: "#", value: "rank" },
+    { text: "Name", value: "name" },
+    { text: "Price", value: "current_price" },
     {
       text: "1h%",
       value: "price_change_percentage_1h_in_currency",
-      canSort: true,
     },
     {
       text: "24h%",
       value: "price_change_percentage_24h_in_currency",
-      canSort: true,
     },
     {
       text: "7d%",
       value: "price_change_percentage_7d_in_currency",
-      canSort: true,
     },
-    { text: "24h Volume / Market Cap", canSort: false },
-    { text: "Circulating / Total Supply", canSort: false },
-    { text: "Last 7d", canSort: false },
+    { text: "24h Volume / Market Cap" },
+    { text: "Circulating / Total Supply" },
+    { text: "Last 7d" },
   ];
   return (
     <TableWrapper>
